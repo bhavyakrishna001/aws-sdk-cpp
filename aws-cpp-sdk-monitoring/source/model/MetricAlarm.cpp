@@ -118,19 +118,19 @@ MetricAlarm& MetricAlarm::operator =(const XmlNode& xmlNode)
     XmlNode alarmNameNode = resultNode.FirstChild("AlarmName");
     if(!alarmNameNode.IsNull())
     {
-      m_alarmName = StringUtils::Trim(alarmNameNode.GetText().c_str());
+      m_alarmName = alarmNameNode.GetText();
       m_alarmNameHasBeenSet = true;
     }
     XmlNode alarmArnNode = resultNode.FirstChild("AlarmArn");
     if(!alarmArnNode.IsNull())
     {
-      m_alarmArn = StringUtils::Trim(alarmArnNode.GetText().c_str());
+      m_alarmArn = alarmArnNode.GetText();
       m_alarmArnHasBeenSet = true;
     }
     XmlNode alarmDescriptionNode = resultNode.FirstChild("AlarmDescription");
     if(!alarmDescriptionNode.IsNull())
     {
-      m_alarmDescription = StringUtils::Trim(alarmDescriptionNode.GetText().c_str());
+      m_alarmDescription = alarmDescriptionNode.GetText();
       m_alarmDescriptionHasBeenSet = true;
     }
     XmlNode alarmConfigurationUpdatedTimestampNode = resultNode.FirstChild("AlarmConfigurationUpdatedTimestamp");
@@ -151,7 +151,7 @@ MetricAlarm& MetricAlarm::operator =(const XmlNode& xmlNode)
       XmlNode oKActionsMember = oKActionsNode.FirstChild("member");
       while(!oKActionsMember.IsNull())
       {
-        m_oKActions.push_back(StringUtils::Trim(oKActionsMember.GetText().c_str()));
+        m_oKActions.push_back(oKActionsMember.GetText());
         oKActionsMember = oKActionsMember.NextNode("member");
       }
 
@@ -163,7 +163,7 @@ MetricAlarm& MetricAlarm::operator =(const XmlNode& xmlNode)
       XmlNode alarmActionsMember = alarmActionsNode.FirstChild("member");
       while(!alarmActionsMember.IsNull())
       {
-        m_alarmActions.push_back(StringUtils::Trim(alarmActionsMember.GetText().c_str()));
+        m_alarmActions.push_back(alarmActionsMember.GetText());
         alarmActionsMember = alarmActionsMember.NextNode("member");
       }
 
@@ -175,7 +175,7 @@ MetricAlarm& MetricAlarm::operator =(const XmlNode& xmlNode)
       XmlNode insufficientDataActionsMember = insufficientDataActionsNode.FirstChild("member");
       while(!insufficientDataActionsMember.IsNull())
       {
-        m_insufficientDataActions.push_back(StringUtils::Trim(insufficientDataActionsMember.GetText().c_str()));
+        m_insufficientDataActions.push_back(insufficientDataActionsMember.GetText());
         insufficientDataActionsMember = insufficientDataActionsMember.NextNode("member");
       }
 
@@ -190,13 +190,13 @@ MetricAlarm& MetricAlarm::operator =(const XmlNode& xmlNode)
     XmlNode stateReasonNode = resultNode.FirstChild("StateReason");
     if(!stateReasonNode.IsNull())
     {
-      m_stateReason = StringUtils::Trim(stateReasonNode.GetText().c_str());
+      m_stateReason = stateReasonNode.GetText();
       m_stateReasonHasBeenSet = true;
     }
     XmlNode stateReasonDataNode = resultNode.FirstChild("StateReasonData");
     if(!stateReasonDataNode.IsNull())
     {
-      m_stateReasonData = StringUtils::Trim(stateReasonDataNode.GetText().c_str());
+      m_stateReasonData = stateReasonDataNode.GetText();
       m_stateReasonDataHasBeenSet = true;
     }
     XmlNode stateUpdatedTimestampNode = resultNode.FirstChild("StateUpdatedTimestamp");
@@ -208,13 +208,13 @@ MetricAlarm& MetricAlarm::operator =(const XmlNode& xmlNode)
     XmlNode metricNameNode = resultNode.FirstChild("MetricName");
     if(!metricNameNode.IsNull())
     {
-      m_metricName = StringUtils::Trim(metricNameNode.GetText().c_str());
+      m_metricName = metricNameNode.GetText();
       m_metricNameHasBeenSet = true;
     }
     XmlNode namespaceNode = resultNode.FirstChild("Namespace");
     if(!namespaceNode.IsNull())
     {
-      m_namespace = StringUtils::Trim(namespaceNode.GetText().c_str());
+      m_namespace = namespaceNode.GetText();
       m_namespaceHasBeenSet = true;
     }
     XmlNode statisticNode = resultNode.FirstChild("Statistic");
@@ -226,7 +226,7 @@ MetricAlarm& MetricAlarm::operator =(const XmlNode& xmlNode)
     XmlNode extendedStatisticNode = resultNode.FirstChild("ExtendedStatistic");
     if(!extendedStatisticNode.IsNull())
     {
-      m_extendedStatistic = StringUtils::Trim(extendedStatisticNode.GetText().c_str());
+      m_extendedStatistic = extendedStatisticNode.GetText();
       m_extendedStatisticHasBeenSet = true;
     }
     XmlNode dimensionsNode = resultNode.FirstChild("Dimensions");
@@ -280,13 +280,13 @@ MetricAlarm& MetricAlarm::operator =(const XmlNode& xmlNode)
     XmlNode treatMissingDataNode = resultNode.FirstChild("TreatMissingData");
     if(!treatMissingDataNode.IsNull())
     {
-      m_treatMissingData = StringUtils::Trim(treatMissingDataNode.GetText().c_str());
+      m_treatMissingData = treatMissingDataNode.GetText();
       m_treatMissingDataHasBeenSet = true;
     }
     XmlNode evaluateLowSampleCountPercentileNode = resultNode.FirstChild("EvaluateLowSampleCountPercentile");
     if(!evaluateLowSampleCountPercentileNode.IsNull())
     {
-      m_evaluateLowSampleCountPercentile = StringUtils::Trim(evaluateLowSampleCountPercentileNode.GetText().c_str());
+      m_evaluateLowSampleCountPercentile = evaluateLowSampleCountPercentileNode.GetText();
       m_evaluateLowSampleCountPercentileHasBeenSet = true;
     }
     XmlNode metricsNode = resultNode.FirstChild("Metrics");
