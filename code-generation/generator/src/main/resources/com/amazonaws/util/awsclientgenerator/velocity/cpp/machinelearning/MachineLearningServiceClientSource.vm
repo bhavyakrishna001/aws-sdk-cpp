@@ -36,7 +36,9 @@ ${operation.name}Outcome ${className}::${operation.name}(const ${operation.reque
 #parse("com/amazonaws/util/awsclientgenerator/velocity/cpp/ServiceClientOperationRequestRequiredMemberValidate.vm")
 #if($operation.name != "Predict")
 #parse("com/amazonaws/util/awsclientgenerator/velocity/cpp/ServiceClientOperationEndpointPrepareCommonBody.vm")
+#if($operation.http.requestUri.contains("?"))
   Aws::StringStream ss;
+#end
 #set($uriParts = $operation.http.requestUriParts)
 #set($uriVars = $operation.http.requestParameters)
 #set($partIndex = 1)
@@ -46,20 +48,24 @@ ${operation.name}Outcome ${className}::${operation.name}(const ${operation.reque
 #set($queryStart = true)
 #set($pathAndQuery = $operation.http.splitUriPartIntoPathAndQuery($uriPartString))
 #if(!$pathAndQuery.get(0).isEmpty())
-  ss << "${pathAndQuery.get(0)}";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegment("${pathAndQuery.get(0)}");
 #end
   ss.str("${pathAndQuery.get(1)}");
-#else
-  ss << "$uriPartString";
+#elseif(!$uriPartString.equals("/"))
+  uri.AddPathSegment("$uriPartString");
 #end
 #foreach($var in $uriVars)
 #set($varIndex = $partIndex - 1)
 #set($partShapeMember = $operation.request.shape.getMemberByLocationName($uriVars.get($varIndex)))
 #if($partShapeMember.shape.enum)
-  ss << ${partShapeMember.shape.name}Mapper::GetNameFor${partShapeMember.shape.name}(request.Get${CppViewHelper.convertToUpperCamel($operation.request.shape.getMemberNameByLocationName($uriVars.get($varIndex)))}());
+#set($parameter = "${partShapeMember.shape.name}Mapper::GetNameFor${partShapeMember.shape.name}(request.Get${CppViewHelper.convertToUpperCamel($operation.request.shape.getMemberNameByLocationName($uriVars.get($varIndex)))}())")
 #else
-  ss << request.Get${CppViewHelper.convertToUpperCamel($operation.request.shape.getMemberNameByLocationName($uriVars.get($varIndex)))}();
+#set($parameter = "request.Get${CppViewHelper.convertToUpperCamel($operation.request.shape.getMemberNameByLocationName($uriVars.get($varIndex)))}()")
+#end
+#if($queryStart)
+  ss << $parameter;
+#else
+  uri.AddPathSegment($parameter);
 #end
 #if($uriParts.size() > $partIndex)
 #set($uriPartString = "${uriParts.get($partIndex)}")
@@ -67,19 +73,16 @@ ${operation.name}Outcome ${className}::${operation.name}(const ${operation.reque
 #set($queryStart = true)
 #set($pathAndQuery = $operation.http.splitUriPartIntoPathAndQuery($uriPartString))
 #if(!$pathAndQuery.get(0).isEmpty())
-  ss << "${pathAndQuery.get(0)}";
+  uri.AddPathSegment("${pathAndQuery.get(0)}");
 #end
-  uri.SetPath(uri.GetPath() + ss.str());
   ss.str("${pathAndQuery.get(1)}");
-#else
-  ss << "$uriPartString";
+#elseif(!$uriPartString.equals("/"))
+  uri.AddPathSegment("$uriPartString");
 #end
 #end
 #set($partIndex = $partIndex + 1)
 #end
-#if(!$queryStart)
-  uri.SetPath(uri.GetPath() + ss.str());
-#else
+#if($queryStart)
   uri.SetQueryString(ss.str());
 #end
   return ${operation.name}Outcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_${operation.http.method}));

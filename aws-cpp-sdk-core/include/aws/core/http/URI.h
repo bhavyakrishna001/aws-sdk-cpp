@@ -10,6 +10,7 @@
 #include <aws/core/http/Scheme.h>
 #include <aws/core/utils/memory/stl/AWSMap.h>
 #include <aws/core/utils/memory/stl/AWSString.h>
+#include <aws/core/utils/memory/stl/AWSVector.h>
 
 #include <stdint.h>
 
@@ -89,17 +90,27 @@ namespace Aws
             * Gets the path portion of the uri e.g. the portion after the first slash after the authority and prior to the
             * query string. This is not url encoded.
             */
-            inline const Aws::String& GetPath() const { return m_path; }
+            Aws::String GetPath() const;
 
             /**
             * Gets the path portion of the uri, url encodes it and returns it
             */
-            inline Aws::String GetURLEncodedPath() const { return URLEncodePath(m_path); }
+            Aws::String GetURLEncodedPath() const;
+
+            /**
+             * Gets the path portion of the uri, url encodes it according to RFC3986 and returns it.
+             */
+            Aws::String GetURLEncodedPathRFC3986() const;
 
             /**
             * Sets the path portion of the uri. URL encodes it if needed
             */
             void SetPath(const Aws::String& value);
+
+            /**
+             * Add a path segment to the uri.
+             */
+            void AddPathSegment(const Aws::String& pathSegment);
 
             /**
             * Gets the raw query string including the ?
@@ -162,7 +173,7 @@ namespace Aws
             Scheme m_scheme;
             Aws::String m_authority;
             uint16_t m_port;
-            Aws::String m_path;
+            Aws::Vector<Aws::String> m_pathSegments;
             Aws::String m_queryString;
         };
 

@@ -46,9 +46,9 @@ TEST(URITest, TestSetPath)
     uri.SetPath(path);
     EXPECT_EQ(path, uri.GetPath());
 
-    path = "path/to/resource/";
+    path = "path/to/resource";
     uri.SetPath(path);
-    EXPECT_EQ("/path/to/resource/", uri.GetPath());
+    EXPECT_EQ("/path/to/resource", uri.GetPath());
 
     path = "//path/to//resource";
     uri.SetPath(path);
@@ -173,8 +173,8 @@ TEST(URITest, TestParse)
     EXPECT_EQ(Scheme::HTTP, uriThatBrokeTheOtherDay.GetScheme());
     EXPECT_EQ("sqs.us-east-1.amazonaws.com", uriThatBrokeTheOtherDay.GetAuthority());
     EXPECT_EQ(80, uriThatBrokeTheOtherDay.GetPort());
-    EXPECT_EQ("/686094048/testQueueName/", uriThatBrokeTheOtherDay.GetPath());
-    EXPECT_EQ("http://sqs.us-east-1.amazonaws.com/686094048/testQueueName/", uriThatBrokeTheOtherDay.GetURIString());
+    EXPECT_EQ("/686094048/testQueueName", uriThatBrokeTheOtherDay.GetPath());
+    EXPECT_EQ("http://sqs.us-east-1.amazonaws.com/686094048/testQueueName", uriThatBrokeTheOtherDay.GetURIString());
 }
 
 TEST(URITest, TestParseWithColon)
@@ -232,7 +232,7 @@ TEST(URITest, TestGetURLEncodedPath)
 TEST(URITest, TestGetRFC3986URLEncodedPath)
 {
     URI uri = "https://test.com/path/1234/";
-    EXPECT_STREQ("/path/1234/", URI::URLEncodePathRFC3986(uri.GetPath()).c_str());
+    EXPECT_STREQ("/path/1234", URI::URLEncodePathRFC3986(uri.GetPath()).c_str());
 
     uri = "https://test.com/path/$omething";
     EXPECT_STREQ("/path/$omething", URI::URLEncodePathRFC3986(uri.GetPath()).c_str());

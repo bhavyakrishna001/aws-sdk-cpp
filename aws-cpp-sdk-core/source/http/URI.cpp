@@ -176,23 +176,96 @@ Aws::String URI::URLEncodePath(const Aws::String& path)
     }
 }
 
-void URI::SetPath(const Aws::String& value)
+Aws::String URI::GetPath() const
 {
-    const Aws::Vector<Aws::String> pathParts = StringUtils::Split(value, '/');
-    Aws::String path;
-    path.reserve(value.length() + 1/* in case we have to append slash before the path. */);
+    Aws::String path = "";
 
-    for (const auto& segment : pathParts)
+    for (auto const& segment : m_pathSegments)
     {
         path.push_back('/');
         path.append(segment);
     }
 
-    if (value.back() == '/')
+    if (m_pathSegments.empty())
     {
         path.push_back('/');
     }
-    m_path = std::move(path);
+
+    return path;
+}
+
+Aws::String URI::GetURLEncodedPath() const
+{
+    Aws::StringStream ss;
+
+    for (auto const& segment : m_pathSegments)
+    {
+        ss << '/' << StringUtils::URLEncode(segment.c_str());
+    }
+
+    if (m_pathSegments.empty())
+    {
+        ss << '/';
+    }
+
+    return ss.str();
+}
+
+Aws::String URI::GetURLEncodedPathRFC3986() const
+{
+    Aws::StringStream ss;
+    ss << std::hex << std::uppercase;
+
+    // escape characters appearing in a URL path according to RFC 3986
+    for (const auto& segment : m_pathSegments)
+    {
+        ss << '/';
+        for(unsigned char c : segment) // alnum results in UB if the value of c is not unsigned char & is not EOF
+        {
+            // §2.3 unreserved characters
+            if (StringUtils::IsAlnum(c))
+            {
+                ss << c;
+                continue;
+            }
+            switch(c)
+            {
+                // §2.3 unreserved characters
+                case '-': case '_': case '.': case '~':
+                // The path section of the URL allow reserved characters to appear unescaped
+                // RFC 3986 §2.2 Reserved characters
+                // NOTE: this implementation does not accurately implement the RFC on purpose to accommodate for
+                // discrepancies in the implementations of URL encoding between AWS services for legacy reasons.
+                case '$': case '&': case ',':
+                case ':': case '=': case '@':
+                    ss << c;
+                    break;
+                default:
+                    ss << '%' << std::setfill('0') << std::setw(2) << (int)((unsigned char)c) << std::setw(0);
+            }
+        }
+    }
+
+    if (m_pathSegments.empty())
+    {
+        ss << '/';
+    }
+
+    return ss.str();
+}
+
+void URI::SetPath(const Aws::String& value)
+{
+    const Aws::Vector<Aws::String> pathParts = StringUtils::Split(value, '/');
+    m_pathSegments = std::move(pathParts);
+}
+
+void URI::AddPathSegment(const Aws::String& pathSegment)
+{
+    Aws::String segment = pathSegment;
+    segment.erase(0, segment.find_first_not_of('/'));
+    segment.erase(segment.find_last_not_of('/') + 1);
+    m_pathSegments.push_back(segment);
 }
 
 //ugh, this isn't even part of the canonicalization spec. It is part of how our services have implemented their signers though....
@@ -347,9 +420,9 @@ Aws::String URI::GetURIString(bool includeQueryString) const
         ss << ":" << m_port;
     }
 
-    if(m_path != "/")
+    if (!m_pathSegments.empty())
     {
-        ss << URLEncodePathRFC3986(m_path);
+        ss << GetURLEncodedPathRFC3986();
     }
 
     if(includeQueryString)
@@ -506,5 +579,5 @@ Aws::String URI::GetFormParameters() const
 
 bool URI::CompareURIParts(const URI& other) const
 {
-    return m_scheme == other.m_scheme && m_authority == other.m_authority && m_path == other.m_path && m_queryString == other.m_queryString;
+    return m_scheme == other.m_scheme && m_authority == other.m_authority && GetPath() == other.GetPath() && m_queryString == other.m_queryString;
 }
