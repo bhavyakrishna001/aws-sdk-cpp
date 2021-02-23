@@ -130,11 +130,9 @@ AssociateLensesOutcome WellArchitectedClient::AssociateLenses(const AssociateLen
     return AssociateLensesOutcome(Aws::Client::AWSError<WellArchitectedErrors>(WellArchitectedErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [WorkloadId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/workloads/";
-  ss << request.GetWorkloadId();
-  ss << "/associateLenses";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/workloads/");
+  uri.AddPathSegment(request.GetWorkloadId());
+  uri.AddPathSegments("/associateLenses");
   return AssociateLensesOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PATCH, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -164,11 +162,9 @@ CreateMilestoneOutcome WellArchitectedClient::CreateMilestone(const CreateMilest
     return CreateMilestoneOutcome(Aws::Client::AWSError<WellArchitectedErrors>(WellArchitectedErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [WorkloadId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/workloads/";
-  ss << request.GetWorkloadId();
-  ss << "/milestones";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/workloads/");
+  uri.AddPathSegment(request.GetWorkloadId());
+  uri.AddPathSegments("/milestones");
   return CreateMilestoneOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -193,9 +189,7 @@ void WellArchitectedClient::CreateMilestoneAsyncHelper(const CreateMilestoneRequ
 CreateWorkloadOutcome WellArchitectedClient::CreateWorkload(const CreateWorkloadRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/workloads";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/workloads");
   return CreateWorkloadOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -225,11 +219,9 @@ CreateWorkloadShareOutcome WellArchitectedClient::CreateWorkloadShare(const Crea
     return CreateWorkloadShareOutcome(Aws::Client::AWSError<WellArchitectedErrors>(WellArchitectedErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [WorkloadId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/workloads/";
-  ss << request.GetWorkloadId();
-  ss << "/shares";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/workloads/");
+  uri.AddPathSegment(request.GetWorkloadId());
+  uri.AddPathSegments("/shares");
   return CreateWorkloadShareOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -264,10 +256,8 @@ DeleteWorkloadOutcome WellArchitectedClient::DeleteWorkload(const DeleteWorkload
     return DeleteWorkloadOutcome(Aws::Client::AWSError<WellArchitectedErrors>(WellArchitectedErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [ClientRequestToken]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/workloads/";
-  ss << request.GetWorkloadId();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/workloads/");
+  uri.AddPathSegment(request.GetWorkloadId());
   return DeleteWorkloadOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_DELETE, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -307,12 +297,10 @@ DeleteWorkloadShareOutcome WellArchitectedClient::DeleteWorkloadShare(const Dele
     return DeleteWorkloadShareOutcome(Aws::Client::AWSError<WellArchitectedErrors>(WellArchitectedErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [ClientRequestToken]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/workloads/";
-  ss << request.GetWorkloadId();
-  ss << "/shares/";
-  ss << request.GetShareId();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/workloads/");
+  uri.AddPathSegment(request.GetWorkloadId());
+  uri.AddPathSegments("/shares/");
+  uri.AddPathSegment(request.GetShareId());
   return DeleteWorkloadShareOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_DELETE, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -342,11 +330,9 @@ DisassociateLensesOutcome WellArchitectedClient::DisassociateLenses(const Disass
     return DisassociateLensesOutcome(Aws::Client::AWSError<WellArchitectedErrors>(WellArchitectedErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [WorkloadId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/workloads/";
-  ss << request.GetWorkloadId();
-  ss << "/disassociateLenses";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/workloads/");
+  uri.AddPathSegment(request.GetWorkloadId());
+  uri.AddPathSegments("/disassociateLenses");
   return DisassociateLensesOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PATCH, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -386,14 +372,12 @@ GetAnswerOutcome WellArchitectedClient::GetAnswer(const GetAnswerRequest& reques
     return GetAnswerOutcome(Aws::Client::AWSError<WellArchitectedErrors>(WellArchitectedErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [QuestionId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/workloads/";
-  ss << request.GetWorkloadId();
-  ss << "/lensReviews/";
-  ss << request.GetLensAlias();
-  ss << "/answers/";
-  ss << request.GetQuestionId();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/workloads/");
+  uri.AddPathSegment(request.GetWorkloadId());
+  uri.AddPathSegments("/lensReviews/");
+  uri.AddPathSegment(request.GetLensAlias());
+  uri.AddPathSegments("/answers/");
+  uri.AddPathSegment(request.GetQuestionId());
   return GetAnswerOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -428,12 +412,10 @@ GetLensReviewOutcome WellArchitectedClient::GetLensReview(const GetLensReviewReq
     return GetLensReviewOutcome(Aws::Client::AWSError<WellArchitectedErrors>(WellArchitectedErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [LensAlias]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/workloads/";
-  ss << request.GetWorkloadId();
-  ss << "/lensReviews/";
-  ss << request.GetLensAlias();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/workloads/");
+  uri.AddPathSegment(request.GetWorkloadId());
+  uri.AddPathSegments("/lensReviews/");
+  uri.AddPathSegment(request.GetLensAlias());
   return GetLensReviewOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -468,13 +450,11 @@ GetLensReviewReportOutcome WellArchitectedClient::GetLensReviewReport(const GetL
     return GetLensReviewReportOutcome(Aws::Client::AWSError<WellArchitectedErrors>(WellArchitectedErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [LensAlias]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/workloads/";
-  ss << request.GetWorkloadId();
-  ss << "/lensReviews/";
-  ss << request.GetLensAlias();
-  ss << "/report";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/workloads/");
+  uri.AddPathSegment(request.GetWorkloadId());
+  uri.AddPathSegments("/lensReviews/");
+  uri.AddPathSegment(request.GetLensAlias());
+  uri.AddPathSegments("/report");
   return GetLensReviewReportOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -509,11 +489,9 @@ GetLensVersionDifferenceOutcome WellArchitectedClient::GetLensVersionDifference(
     return GetLensVersionDifferenceOutcome(Aws::Client::AWSError<WellArchitectedErrors>(WellArchitectedErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [BaseLensVersion]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/lenses/";
-  ss << request.GetLensAlias();
-  ss << "/versionDifference";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/lenses/");
+  uri.AddPathSegment(request.GetLensAlias());
+  uri.AddPathSegments("/versionDifference");
   return GetLensVersionDifferenceOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -548,12 +526,10 @@ GetMilestoneOutcome WellArchitectedClient::GetMilestone(const GetMilestoneReques
     return GetMilestoneOutcome(Aws::Client::AWSError<WellArchitectedErrors>(WellArchitectedErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [MilestoneNumber]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/workloads/";
-  ss << request.GetWorkloadId();
-  ss << "/milestones/";
-  ss << request.GetMilestoneNumber();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/workloads/");
+  uri.AddPathSegment(request.GetWorkloadId());
+  uri.AddPathSegments("/milestones/");
+  uri.AddPathSegment(request.GetMilestoneNumber());
   return GetMilestoneOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -583,10 +559,8 @@ GetWorkloadOutcome WellArchitectedClient::GetWorkload(const GetWorkloadRequest& 
     return GetWorkloadOutcome(Aws::Client::AWSError<WellArchitectedErrors>(WellArchitectedErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [WorkloadId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/workloads/";
-  ss << request.GetWorkloadId();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/workloads/");
+  uri.AddPathSegment(request.GetWorkloadId());
   return GetWorkloadOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -621,13 +595,11 @@ ListAnswersOutcome WellArchitectedClient::ListAnswers(const ListAnswersRequest& 
     return ListAnswersOutcome(Aws::Client::AWSError<WellArchitectedErrors>(WellArchitectedErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [LensAlias]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/workloads/";
-  ss << request.GetWorkloadId();
-  ss << "/lensReviews/";
-  ss << request.GetLensAlias();
-  ss << "/answers";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/workloads/");
+  uri.AddPathSegment(request.GetWorkloadId());
+  uri.AddPathSegments("/lensReviews/");
+  uri.AddPathSegment(request.GetLensAlias());
+  uri.AddPathSegments("/answers");
   return ListAnswersOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -662,13 +634,11 @@ ListLensReviewImprovementsOutcome WellArchitectedClient::ListLensReviewImproveme
     return ListLensReviewImprovementsOutcome(Aws::Client::AWSError<WellArchitectedErrors>(WellArchitectedErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [LensAlias]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/workloads/";
-  ss << request.GetWorkloadId();
-  ss << "/lensReviews/";
-  ss << request.GetLensAlias();
-  ss << "/improvements";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/workloads/");
+  uri.AddPathSegment(request.GetWorkloadId());
+  uri.AddPathSegments("/lensReviews/");
+  uri.AddPathSegment(request.GetLensAlias());
+  uri.AddPathSegments("/improvements");
   return ListLensReviewImprovementsOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -698,11 +668,9 @@ ListLensReviewsOutcome WellArchitectedClient::ListLensReviews(const ListLensRevi
     return ListLensReviewsOutcome(Aws::Client::AWSError<WellArchitectedErrors>(WellArchitectedErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [WorkloadId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/workloads/";
-  ss << request.GetWorkloadId();
-  ss << "/lensReviews";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/workloads/");
+  uri.AddPathSegment(request.GetWorkloadId());
+  uri.AddPathSegments("/lensReviews");
   return ListLensReviewsOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -727,9 +695,7 @@ void WellArchitectedClient::ListLensReviewsAsyncHelper(const ListLensReviewsRequ
 ListLensesOutcome WellArchitectedClient::ListLenses(const ListLensesRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/lenses";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/lenses");
   return ListLensesOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -759,11 +725,9 @@ ListMilestonesOutcome WellArchitectedClient::ListMilestones(const ListMilestones
     return ListMilestonesOutcome(Aws::Client::AWSError<WellArchitectedErrors>(WellArchitectedErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [WorkloadId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/workloads/";
-  ss << request.GetWorkloadId();
-  ss << "/milestonesSummaries";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/workloads/");
+  uri.AddPathSegment(request.GetWorkloadId());
+  uri.AddPathSegments("/milestonesSummaries");
   return ListMilestonesOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -788,9 +752,7 @@ void WellArchitectedClient::ListMilestonesAsyncHelper(const ListMilestonesReques
 ListNotificationsOutcome WellArchitectedClient::ListNotifications(const ListNotificationsRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/notifications";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/notifications");
   return ListNotificationsOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -815,9 +777,7 @@ void WellArchitectedClient::ListNotificationsAsyncHelper(const ListNotifications
 ListShareInvitationsOutcome WellArchitectedClient::ListShareInvitations(const ListShareInvitationsRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/shareInvitations";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/shareInvitations");
   return ListShareInvitationsOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -847,11 +807,9 @@ ListWorkloadSharesOutcome WellArchitectedClient::ListWorkloadShares(const ListWo
     return ListWorkloadSharesOutcome(Aws::Client::AWSError<WellArchitectedErrors>(WellArchitectedErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [WorkloadId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/workloads/";
-  ss << request.GetWorkloadId();
-  ss << "/shares";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/workloads/");
+  uri.AddPathSegment(request.GetWorkloadId());
+  uri.AddPathSegments("/shares");
   return ListWorkloadSharesOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -876,9 +834,7 @@ void WellArchitectedClient::ListWorkloadSharesAsyncHelper(const ListWorkloadShar
 ListWorkloadsOutcome WellArchitectedClient::ListWorkloads(const ListWorkloadsRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/workloadsSummaries";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/workloadsSummaries");
   return ListWorkloadsOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -918,14 +874,12 @@ UpdateAnswerOutcome WellArchitectedClient::UpdateAnswer(const UpdateAnswerReques
     return UpdateAnswerOutcome(Aws::Client::AWSError<WellArchitectedErrors>(WellArchitectedErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [QuestionId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/workloads/";
-  ss << request.GetWorkloadId();
-  ss << "/lensReviews/";
-  ss << request.GetLensAlias();
-  ss << "/answers/";
-  ss << request.GetQuestionId();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/workloads/");
+  uri.AddPathSegment(request.GetWorkloadId());
+  uri.AddPathSegments("/lensReviews/");
+  uri.AddPathSegment(request.GetLensAlias());
+  uri.AddPathSegments("/answers/");
+  uri.AddPathSegment(request.GetQuestionId());
   return UpdateAnswerOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PATCH, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -960,12 +914,10 @@ UpdateLensReviewOutcome WellArchitectedClient::UpdateLensReview(const UpdateLens
     return UpdateLensReviewOutcome(Aws::Client::AWSError<WellArchitectedErrors>(WellArchitectedErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [LensAlias]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/workloads/";
-  ss << request.GetWorkloadId();
-  ss << "/lensReviews/";
-  ss << request.GetLensAlias();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/workloads/");
+  uri.AddPathSegment(request.GetWorkloadId());
+  uri.AddPathSegments("/lensReviews/");
+  uri.AddPathSegment(request.GetLensAlias());
   return UpdateLensReviewOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PATCH, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -995,10 +947,8 @@ UpdateShareInvitationOutcome WellArchitectedClient::UpdateShareInvitation(const 
     return UpdateShareInvitationOutcome(Aws::Client::AWSError<WellArchitectedErrors>(WellArchitectedErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [ShareInvitationId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/shareInvitations/";
-  ss << request.GetShareInvitationId();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/shareInvitations/");
+  uri.AddPathSegment(request.GetShareInvitationId());
   return UpdateShareInvitationOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PATCH, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1028,10 +978,8 @@ UpdateWorkloadOutcome WellArchitectedClient::UpdateWorkload(const UpdateWorkload
     return UpdateWorkloadOutcome(Aws::Client::AWSError<WellArchitectedErrors>(WellArchitectedErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [WorkloadId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/workloads/";
-  ss << request.GetWorkloadId();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/workloads/");
+  uri.AddPathSegment(request.GetWorkloadId());
   return UpdateWorkloadOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PATCH, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1066,12 +1014,10 @@ UpdateWorkloadShareOutcome WellArchitectedClient::UpdateWorkloadShare(const Upda
     return UpdateWorkloadShareOutcome(Aws::Client::AWSError<WellArchitectedErrors>(WellArchitectedErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [WorkloadId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/workloads/";
-  ss << request.GetWorkloadId();
-  ss << "/shares/";
-  ss << request.GetShareId();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/workloads/");
+  uri.AddPathSegment(request.GetWorkloadId());
+  uri.AddPathSegments("/shares/");
+  uri.AddPathSegment(request.GetShareId());
   return UpdateWorkloadShareOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PATCH, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1106,13 +1052,11 @@ UpgradeLensReviewOutcome WellArchitectedClient::UpgradeLensReview(const UpgradeL
     return UpgradeLensReviewOutcome(Aws::Client::AWSError<WellArchitectedErrors>(WellArchitectedErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [LensAlias]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/workloads/";
-  ss << request.GetWorkloadId();
-  ss << "/lensReviews/";
-  ss << request.GetLensAlias();
-  ss << "/upgrade";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/workloads/");
+  uri.AddPathSegment(request.GetWorkloadId());
+  uri.AddPathSegments("/lensReviews/");
+  uri.AddPathSegment(request.GetLensAlias());
+  uri.AddPathSegments("/upgrade");
   return UpgradeLensReviewOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PUT, Aws::Auth::SIGV4_SIGNER));
 }
 

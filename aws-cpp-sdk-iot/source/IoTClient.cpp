@@ -321,10 +321,8 @@ AcceptCertificateTransferOutcome IoTClient::AcceptCertificateTransfer(const Acce
     return AcceptCertificateTransferOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [CertificateId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/accept-certificate-transfer/";
-  ss << request.GetCertificateId();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/accept-certificate-transfer/");
+  uri.AddPathSegment(request.GetCertificateId());
   return AcceptCertificateTransferOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PATCH, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -349,9 +347,7 @@ void IoTClient::AcceptCertificateTransferAsyncHelper(const AcceptCertificateTran
 AddThingToBillingGroupOutcome IoTClient::AddThingToBillingGroup(const AddThingToBillingGroupRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/billing-groups/addThingToBillingGroup";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/billing-groups/addThingToBillingGroup");
   return AddThingToBillingGroupOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PUT, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -376,9 +372,7 @@ void IoTClient::AddThingToBillingGroupAsyncHelper(const AddThingToBillingGroupRe
 AddThingToThingGroupOutcome IoTClient::AddThingToThingGroup(const AddThingToThingGroupRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/thing-groups/addThingToThingGroup";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/thing-groups/addThingToThingGroup");
   return AddThingToThingGroupOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PUT, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -408,11 +402,9 @@ AssociateTargetsWithJobOutcome IoTClient::AssociateTargetsWithJob(const Associat
     return AssociateTargetsWithJobOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [JobId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/jobs/";
-  ss << request.GetJobId();
-  ss << "/targets";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/jobs/");
+  uri.AddPathSegment(request.GetJobId());
+  uri.AddPathSegments("/targets");
   return AssociateTargetsWithJobOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -442,10 +434,8 @@ AttachPolicyOutcome IoTClient::AttachPolicy(const AttachPolicyRequest& request) 
     return AttachPolicyOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [PolicyName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/target-policies/";
-  ss << request.GetPolicyName();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/target-policies/");
+  uri.AddPathSegment(request.GetPolicyName());
   return AttachPolicyOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PUT, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -480,11 +470,9 @@ AttachSecurityProfileOutcome IoTClient::AttachSecurityProfile(const AttachSecuri
     return AttachSecurityProfileOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [SecurityProfileTargetArn]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/security-profiles/";
-  ss << request.GetSecurityProfileName();
-  ss << "/targets";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/security-profiles/");
+  uri.AddPathSegment(request.GetSecurityProfileName());
+  uri.AddPathSegments("/targets");
   return AttachSecurityProfileOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PUT, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -519,11 +507,9 @@ AttachThingPrincipalOutcome IoTClient::AttachThingPrincipal(const AttachThingPri
     return AttachThingPrincipalOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [Principal]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/things/";
-  ss << request.GetThingName();
-  ss << "/principals";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/things/");
+  uri.AddPathSegment(request.GetThingName());
+  uri.AddPathSegments("/principals");
   return AttachThingPrincipalOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PUT, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -553,11 +539,9 @@ CancelAuditMitigationActionsTaskOutcome IoTClient::CancelAuditMitigationActionsT
     return CancelAuditMitigationActionsTaskOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [TaskId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/audit/mitigationactions/tasks/";
-  ss << request.GetTaskId();
-  ss << "/cancel";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/audit/mitigationactions/tasks/");
+  uri.AddPathSegment(request.GetTaskId());
+  uri.AddPathSegments("/cancel");
   return CancelAuditMitigationActionsTaskOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PUT, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -587,11 +571,9 @@ CancelAuditTaskOutcome IoTClient::CancelAuditTask(const CancelAuditTaskRequest& 
     return CancelAuditTaskOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [TaskId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/audit/tasks/";
-  ss << request.GetTaskId();
-  ss << "/cancel";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/audit/tasks/");
+  uri.AddPathSegment(request.GetTaskId());
+  uri.AddPathSegments("/cancel");
   return CancelAuditTaskOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PUT, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -621,10 +603,8 @@ CancelCertificateTransferOutcome IoTClient::CancelCertificateTransfer(const Canc
     return CancelCertificateTransferOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [CertificateId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/cancel-certificate-transfer/";
-  ss << request.GetCertificateId();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/cancel-certificate-transfer/");
+  uri.AddPathSegment(request.GetCertificateId());
   return CancelCertificateTransferOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PATCH, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -654,11 +634,9 @@ CancelDetectMitigationActionsTaskOutcome IoTClient::CancelDetectMitigationAction
     return CancelDetectMitigationActionsTaskOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [TaskId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/detect/mitigationactions/tasks/";
-  ss << request.GetTaskId();
-  ss << "/cancel";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/detect/mitigationactions/tasks/");
+  uri.AddPathSegment(request.GetTaskId());
+  uri.AddPathSegments("/cancel");
   return CancelDetectMitigationActionsTaskOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PUT, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -688,11 +666,9 @@ CancelJobOutcome IoTClient::CancelJob(const CancelJobRequest& request) const
     return CancelJobOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [JobId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/jobs/";
-  ss << request.GetJobId();
-  ss << "/cancel";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/jobs/");
+  uri.AddPathSegment(request.GetJobId());
+  uri.AddPathSegments("/cancel");
   return CancelJobOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PUT, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -727,13 +703,11 @@ CancelJobExecutionOutcome IoTClient::CancelJobExecution(const CancelJobExecution
     return CancelJobExecutionOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [ThingName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/things/";
-  ss << request.GetThingName();
-  ss << "/jobs/";
-  ss << request.GetJobId();
-  ss << "/cancel";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/things/");
+  uri.AddPathSegment(request.GetThingName());
+  uri.AddPathSegments("/jobs/");
+  uri.AddPathSegment(request.GetJobId());
+  uri.AddPathSegments("/cancel");
   return CancelJobExecutionOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PUT, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -758,9 +732,7 @@ void IoTClient::CancelJobExecutionAsyncHelper(const CancelJobExecutionRequest& r
 ClearDefaultAuthorizerOutcome IoTClient::ClearDefaultAuthorizer(const ClearDefaultAuthorizerRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/default-authorizer";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/default-authorizer");
   return ClearDefaultAuthorizerOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_DELETE, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -790,10 +762,8 @@ ConfirmTopicRuleDestinationOutcome IoTClient::ConfirmTopicRuleDestination(const 
     return ConfirmTopicRuleDestinationOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [ConfirmationToken]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/confirmdestination/";
-  ss << request.GetConfirmationToken();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/confirmdestination/");
+  uri.AddPathSegment(request.GetConfirmationToken());
   return ConfirmTopicRuleDestinationOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -818,9 +788,7 @@ void IoTClient::ConfirmTopicRuleDestinationAsyncHelper(const ConfirmTopicRuleDes
 CreateAuditSuppressionOutcome IoTClient::CreateAuditSuppression(const CreateAuditSuppressionRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/audit/suppressions/create";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/audit/suppressions/create");
   return CreateAuditSuppressionOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -850,10 +818,8 @@ CreateAuthorizerOutcome IoTClient::CreateAuthorizer(const CreateAuthorizerReques
     return CreateAuthorizerOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [AuthorizerName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/authorizer/";
-  ss << request.GetAuthorizerName();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/authorizer/");
+  uri.AddPathSegment(request.GetAuthorizerName());
   return CreateAuthorizerOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -883,10 +849,8 @@ CreateBillingGroupOutcome IoTClient::CreateBillingGroup(const CreateBillingGroup
     return CreateBillingGroupOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [BillingGroupName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/billing-groups/";
-  ss << request.GetBillingGroupName();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/billing-groups/");
+  uri.AddPathSegment(request.GetBillingGroupName());
   return CreateBillingGroupOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -911,9 +875,7 @@ void IoTClient::CreateBillingGroupAsyncHelper(const CreateBillingGroupRequest& r
 CreateCertificateFromCsrOutcome IoTClient::CreateCertificateFromCsr(const CreateCertificateFromCsrRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/certificates";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/certificates");
   return CreateCertificateFromCsrOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -943,10 +905,8 @@ CreateCustomMetricOutcome IoTClient::CreateCustomMetric(const CreateCustomMetric
     return CreateCustomMetricOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [MetricName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/custom-metric/";
-  ss << request.GetMetricName();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/custom-metric/");
+  uri.AddPathSegment(request.GetMetricName());
   return CreateCustomMetricOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -976,10 +936,8 @@ CreateDimensionOutcome IoTClient::CreateDimension(const CreateDimensionRequest& 
     return CreateDimensionOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [Name]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/dimensions/";
-  ss << request.GetName();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/dimensions/");
+  uri.AddPathSegment(request.GetName());
   return CreateDimensionOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1009,10 +967,8 @@ CreateDomainConfigurationOutcome IoTClient::CreateDomainConfiguration(const Crea
     return CreateDomainConfigurationOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [DomainConfigurationName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/domainConfigurations/";
-  ss << request.GetDomainConfigurationName();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/domainConfigurations/");
+  uri.AddPathSegment(request.GetDomainConfigurationName());
   return CreateDomainConfigurationOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1042,10 +998,8 @@ CreateDynamicThingGroupOutcome IoTClient::CreateDynamicThingGroup(const CreateDy
     return CreateDynamicThingGroupOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [ThingGroupName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/dynamic-thing-groups/";
-  ss << request.GetThingGroupName();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/dynamic-thing-groups/");
+  uri.AddPathSegment(request.GetThingGroupName());
   return CreateDynamicThingGroupOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1075,10 +1029,8 @@ CreateJobOutcome IoTClient::CreateJob(const CreateJobRequest& request) const
     return CreateJobOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [JobId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/jobs/";
-  ss << request.GetJobId();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/jobs/");
+  uri.AddPathSegment(request.GetJobId());
   return CreateJobOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PUT, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1103,9 +1055,7 @@ void IoTClient::CreateJobAsyncHelper(const CreateJobRequest& request, const Crea
 CreateKeysAndCertificateOutcome IoTClient::CreateKeysAndCertificate(const CreateKeysAndCertificateRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/keys-and-certificate";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/keys-and-certificate");
   return CreateKeysAndCertificateOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1135,10 +1085,8 @@ CreateMitigationActionOutcome IoTClient::CreateMitigationAction(const CreateMiti
     return CreateMitigationActionOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [ActionName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/mitigationactions/actions/";
-  ss << request.GetActionName();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/mitigationactions/actions/");
+  uri.AddPathSegment(request.GetActionName());
   return CreateMitigationActionOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1168,10 +1116,8 @@ CreateOTAUpdateOutcome IoTClient::CreateOTAUpdate(const CreateOTAUpdateRequest& 
     return CreateOTAUpdateOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [OtaUpdateId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/otaUpdates/";
-  ss << request.GetOtaUpdateId();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/otaUpdates/");
+  uri.AddPathSegment(request.GetOtaUpdateId());
   return CreateOTAUpdateOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1201,10 +1147,8 @@ CreatePolicyOutcome IoTClient::CreatePolicy(const CreatePolicyRequest& request) 
     return CreatePolicyOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [PolicyName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/policies/";
-  ss << request.GetPolicyName();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/policies/");
+  uri.AddPathSegment(request.GetPolicyName());
   return CreatePolicyOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1234,11 +1178,9 @@ CreatePolicyVersionOutcome IoTClient::CreatePolicyVersion(const CreatePolicyVers
     return CreatePolicyVersionOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [PolicyName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/policies/";
-  ss << request.GetPolicyName();
-  ss << "/version";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/policies/");
+  uri.AddPathSegment(request.GetPolicyName());
+  uri.AddPathSegments("/version");
   return CreatePolicyVersionOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1268,11 +1210,9 @@ CreateProvisioningClaimOutcome IoTClient::CreateProvisioningClaim(const CreatePr
     return CreateProvisioningClaimOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [TemplateName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/provisioning-templates/";
-  ss << request.GetTemplateName();
-  ss << "/provisioning-claim";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/provisioning-templates/");
+  uri.AddPathSegment(request.GetTemplateName());
+  uri.AddPathSegments("/provisioning-claim");
   return CreateProvisioningClaimOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1297,9 +1237,7 @@ void IoTClient::CreateProvisioningClaimAsyncHelper(const CreateProvisioningClaim
 CreateProvisioningTemplateOutcome IoTClient::CreateProvisioningTemplate(const CreateProvisioningTemplateRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/provisioning-templates";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/provisioning-templates");
   return CreateProvisioningTemplateOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1329,11 +1267,9 @@ CreateProvisioningTemplateVersionOutcome IoTClient::CreateProvisioningTemplateVe
     return CreateProvisioningTemplateVersionOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [TemplateName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/provisioning-templates/";
-  ss << request.GetTemplateName();
-  ss << "/versions";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/provisioning-templates/");
+  uri.AddPathSegment(request.GetTemplateName());
+  uri.AddPathSegments("/versions");
   return CreateProvisioningTemplateVersionOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1363,10 +1299,8 @@ CreateRoleAliasOutcome IoTClient::CreateRoleAlias(const CreateRoleAliasRequest& 
     return CreateRoleAliasOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [RoleAlias]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/role-aliases/";
-  ss << request.GetRoleAlias();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/role-aliases/");
+  uri.AddPathSegment(request.GetRoleAlias());
   return CreateRoleAliasOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1396,10 +1330,8 @@ CreateScheduledAuditOutcome IoTClient::CreateScheduledAudit(const CreateSchedule
     return CreateScheduledAuditOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [ScheduledAuditName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/audit/scheduledaudits/";
-  ss << request.GetScheduledAuditName();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/audit/scheduledaudits/");
+  uri.AddPathSegment(request.GetScheduledAuditName());
   return CreateScheduledAuditOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1429,10 +1361,8 @@ CreateSecurityProfileOutcome IoTClient::CreateSecurityProfile(const CreateSecuri
     return CreateSecurityProfileOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [SecurityProfileName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/security-profiles/";
-  ss << request.GetSecurityProfileName();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/security-profiles/");
+  uri.AddPathSegment(request.GetSecurityProfileName());
   return CreateSecurityProfileOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1462,10 +1392,8 @@ CreateStreamOutcome IoTClient::CreateStream(const CreateStreamRequest& request) 
     return CreateStreamOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [StreamId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/streams/";
-  ss << request.GetStreamId();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/streams/");
+  uri.AddPathSegment(request.GetStreamId());
   return CreateStreamOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1495,10 +1423,8 @@ CreateThingOutcome IoTClient::CreateThing(const CreateThingRequest& request) con
     return CreateThingOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [ThingName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/things/";
-  ss << request.GetThingName();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/things/");
+  uri.AddPathSegment(request.GetThingName());
   return CreateThingOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1528,10 +1454,8 @@ CreateThingGroupOutcome IoTClient::CreateThingGroup(const CreateThingGroupReques
     return CreateThingGroupOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [ThingGroupName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/thing-groups/";
-  ss << request.GetThingGroupName();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/thing-groups/");
+  uri.AddPathSegment(request.GetThingGroupName());
   return CreateThingGroupOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1561,10 +1485,8 @@ CreateThingTypeOutcome IoTClient::CreateThingType(const CreateThingTypeRequest& 
     return CreateThingTypeOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [ThingTypeName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/thing-types/";
-  ss << request.GetThingTypeName();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/thing-types/");
+  uri.AddPathSegment(request.GetThingTypeName());
   return CreateThingTypeOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1594,10 +1516,8 @@ CreateTopicRuleOutcome IoTClient::CreateTopicRule(const CreateTopicRuleRequest& 
     return CreateTopicRuleOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [RuleName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/rules/";
-  ss << request.GetRuleName();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/rules/");
+  uri.AddPathSegment(request.GetRuleName());
   return CreateTopicRuleOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1622,9 +1542,7 @@ void IoTClient::CreateTopicRuleAsyncHelper(const CreateTopicRuleRequest& request
 CreateTopicRuleDestinationOutcome IoTClient::CreateTopicRuleDestination(const CreateTopicRuleDestinationRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/destinations";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/destinations");
   return CreateTopicRuleDestinationOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1649,9 +1567,7 @@ void IoTClient::CreateTopicRuleDestinationAsyncHelper(const CreateTopicRuleDesti
 DeleteAccountAuditConfigurationOutcome IoTClient::DeleteAccountAuditConfiguration(const DeleteAccountAuditConfigurationRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/audit/configuration";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/audit/configuration");
   return DeleteAccountAuditConfigurationOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_DELETE, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1676,9 +1592,7 @@ void IoTClient::DeleteAccountAuditConfigurationAsyncHelper(const DeleteAccountAu
 DeleteAuditSuppressionOutcome IoTClient::DeleteAuditSuppression(const DeleteAuditSuppressionRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/audit/suppressions/delete";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/audit/suppressions/delete");
   return DeleteAuditSuppressionOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1708,10 +1622,8 @@ DeleteAuthorizerOutcome IoTClient::DeleteAuthorizer(const DeleteAuthorizerReques
     return DeleteAuthorizerOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [AuthorizerName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/authorizer/";
-  ss << request.GetAuthorizerName();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/authorizer/");
+  uri.AddPathSegment(request.GetAuthorizerName());
   return DeleteAuthorizerOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_DELETE, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1741,10 +1653,8 @@ DeleteBillingGroupOutcome IoTClient::DeleteBillingGroup(const DeleteBillingGroup
     return DeleteBillingGroupOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [BillingGroupName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/billing-groups/";
-  ss << request.GetBillingGroupName();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/billing-groups/");
+  uri.AddPathSegment(request.GetBillingGroupName());
   return DeleteBillingGroupOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_DELETE, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1774,10 +1684,8 @@ DeleteCACertificateOutcome IoTClient::DeleteCACertificate(const DeleteCACertific
     return DeleteCACertificateOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [CertificateId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/cacertificate/";
-  ss << request.GetCertificateId();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/cacertificate/");
+  uri.AddPathSegment(request.GetCertificateId());
   return DeleteCACertificateOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_DELETE, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1807,10 +1715,8 @@ DeleteCertificateOutcome IoTClient::DeleteCertificate(const DeleteCertificateReq
     return DeleteCertificateOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [CertificateId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/certificates/";
-  ss << request.GetCertificateId();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/certificates/");
+  uri.AddPathSegment(request.GetCertificateId());
   return DeleteCertificateOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_DELETE, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1840,10 +1746,8 @@ DeleteCustomMetricOutcome IoTClient::DeleteCustomMetric(const DeleteCustomMetric
     return DeleteCustomMetricOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [MetricName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/custom-metric/";
-  ss << request.GetMetricName();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/custom-metric/");
+  uri.AddPathSegment(request.GetMetricName());
   return DeleteCustomMetricOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_DELETE, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1873,10 +1777,8 @@ DeleteDimensionOutcome IoTClient::DeleteDimension(const DeleteDimensionRequest& 
     return DeleteDimensionOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [Name]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/dimensions/";
-  ss << request.GetName();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/dimensions/");
+  uri.AddPathSegment(request.GetName());
   return DeleteDimensionOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_DELETE, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1906,10 +1808,8 @@ DeleteDomainConfigurationOutcome IoTClient::DeleteDomainConfiguration(const Dele
     return DeleteDomainConfigurationOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [DomainConfigurationName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/domainConfigurations/";
-  ss << request.GetDomainConfigurationName();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/domainConfigurations/");
+  uri.AddPathSegment(request.GetDomainConfigurationName());
   return DeleteDomainConfigurationOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_DELETE, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1939,10 +1839,8 @@ DeleteDynamicThingGroupOutcome IoTClient::DeleteDynamicThingGroup(const DeleteDy
     return DeleteDynamicThingGroupOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [ThingGroupName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/dynamic-thing-groups/";
-  ss << request.GetThingGroupName();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/dynamic-thing-groups/");
+  uri.AddPathSegment(request.GetThingGroupName());
   return DeleteDynamicThingGroupOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_DELETE, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1972,10 +1870,8 @@ DeleteJobOutcome IoTClient::DeleteJob(const DeleteJobRequest& request) const
     return DeleteJobOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [JobId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/jobs/";
-  ss << request.GetJobId();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/jobs/");
+  uri.AddPathSegment(request.GetJobId());
   return DeleteJobOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_DELETE, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -2015,14 +1911,12 @@ DeleteJobExecutionOutcome IoTClient::DeleteJobExecution(const DeleteJobExecution
     return DeleteJobExecutionOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [ExecutionNumber]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/things/";
-  ss << request.GetThingName();
-  ss << "/jobs/";
-  ss << request.GetJobId();
-  ss << "/executionNumber/";
-  ss << request.GetExecutionNumber();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/things/");
+  uri.AddPathSegment(request.GetThingName());
+  uri.AddPathSegments("/jobs/");
+  uri.AddPathSegment(request.GetJobId());
+  uri.AddPathSegments("/executionNumber/");
+  uri.AddPathSegment(request.GetExecutionNumber());
   return DeleteJobExecutionOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_DELETE, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -2052,10 +1946,8 @@ DeleteMitigationActionOutcome IoTClient::DeleteMitigationAction(const DeleteMiti
     return DeleteMitigationActionOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [ActionName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/mitigationactions/actions/";
-  ss << request.GetActionName();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/mitigationactions/actions/");
+  uri.AddPathSegment(request.GetActionName());
   return DeleteMitigationActionOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_DELETE, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -2085,10 +1977,8 @@ DeleteOTAUpdateOutcome IoTClient::DeleteOTAUpdate(const DeleteOTAUpdateRequest& 
     return DeleteOTAUpdateOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [OtaUpdateId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/otaUpdates/";
-  ss << request.GetOtaUpdateId();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/otaUpdates/");
+  uri.AddPathSegment(request.GetOtaUpdateId());
   return DeleteOTAUpdateOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_DELETE, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -2118,10 +2008,8 @@ DeletePolicyOutcome IoTClient::DeletePolicy(const DeletePolicyRequest& request) 
     return DeletePolicyOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [PolicyName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/policies/";
-  ss << request.GetPolicyName();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/policies/");
+  uri.AddPathSegment(request.GetPolicyName());
   return DeletePolicyOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_DELETE, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -2156,12 +2044,10 @@ DeletePolicyVersionOutcome IoTClient::DeletePolicyVersion(const DeletePolicyVers
     return DeletePolicyVersionOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [PolicyVersionId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/policies/";
-  ss << request.GetPolicyName();
-  ss << "/version/";
-  ss << request.GetPolicyVersionId();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/policies/");
+  uri.AddPathSegment(request.GetPolicyName());
+  uri.AddPathSegments("/version/");
+  uri.AddPathSegment(request.GetPolicyVersionId());
   return DeletePolicyVersionOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_DELETE, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -2191,10 +2077,8 @@ DeleteProvisioningTemplateOutcome IoTClient::DeleteProvisioningTemplate(const De
     return DeleteProvisioningTemplateOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [TemplateName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/provisioning-templates/";
-  ss << request.GetTemplateName();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/provisioning-templates/");
+  uri.AddPathSegment(request.GetTemplateName());
   return DeleteProvisioningTemplateOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_DELETE, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -2229,12 +2113,10 @@ DeleteProvisioningTemplateVersionOutcome IoTClient::DeleteProvisioningTemplateVe
     return DeleteProvisioningTemplateVersionOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [VersionId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/provisioning-templates/";
-  ss << request.GetTemplateName();
-  ss << "/versions/";
-  ss << request.GetVersionId();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/provisioning-templates/");
+  uri.AddPathSegment(request.GetTemplateName());
+  uri.AddPathSegments("/versions/");
+  uri.AddPathSegment(request.GetVersionId());
   return DeleteProvisioningTemplateVersionOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_DELETE, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -2259,9 +2141,7 @@ void IoTClient::DeleteProvisioningTemplateVersionAsyncHelper(const DeleteProvisi
 DeleteRegistrationCodeOutcome IoTClient::DeleteRegistrationCode(const DeleteRegistrationCodeRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/registrationcode";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/registrationcode");
   return DeleteRegistrationCodeOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_DELETE, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -2291,10 +2171,8 @@ DeleteRoleAliasOutcome IoTClient::DeleteRoleAlias(const DeleteRoleAliasRequest& 
     return DeleteRoleAliasOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [RoleAlias]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/role-aliases/";
-  ss << request.GetRoleAlias();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/role-aliases/");
+  uri.AddPathSegment(request.GetRoleAlias());
   return DeleteRoleAliasOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_DELETE, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -2324,10 +2202,8 @@ DeleteScheduledAuditOutcome IoTClient::DeleteScheduledAudit(const DeleteSchedule
     return DeleteScheduledAuditOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [ScheduledAuditName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/audit/scheduledaudits/";
-  ss << request.GetScheduledAuditName();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/audit/scheduledaudits/");
+  uri.AddPathSegment(request.GetScheduledAuditName());
   return DeleteScheduledAuditOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_DELETE, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -2357,10 +2233,8 @@ DeleteSecurityProfileOutcome IoTClient::DeleteSecurityProfile(const DeleteSecuri
     return DeleteSecurityProfileOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [SecurityProfileName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/security-profiles/";
-  ss << request.GetSecurityProfileName();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/security-profiles/");
+  uri.AddPathSegment(request.GetSecurityProfileName());
   return DeleteSecurityProfileOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_DELETE, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -2390,10 +2264,8 @@ DeleteStreamOutcome IoTClient::DeleteStream(const DeleteStreamRequest& request) 
     return DeleteStreamOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [StreamId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/streams/";
-  ss << request.GetStreamId();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/streams/");
+  uri.AddPathSegment(request.GetStreamId());
   return DeleteStreamOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_DELETE, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -2423,10 +2295,8 @@ DeleteThingOutcome IoTClient::DeleteThing(const DeleteThingRequest& request) con
     return DeleteThingOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [ThingName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/things/";
-  ss << request.GetThingName();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/things/");
+  uri.AddPathSegment(request.GetThingName());
   return DeleteThingOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_DELETE, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -2456,10 +2326,8 @@ DeleteThingGroupOutcome IoTClient::DeleteThingGroup(const DeleteThingGroupReques
     return DeleteThingGroupOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [ThingGroupName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/thing-groups/";
-  ss << request.GetThingGroupName();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/thing-groups/");
+  uri.AddPathSegment(request.GetThingGroupName());
   return DeleteThingGroupOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_DELETE, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -2489,10 +2357,8 @@ DeleteThingTypeOutcome IoTClient::DeleteThingType(const DeleteThingTypeRequest& 
     return DeleteThingTypeOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [ThingTypeName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/thing-types/";
-  ss << request.GetThingTypeName();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/thing-types/");
+  uri.AddPathSegment(request.GetThingTypeName());
   return DeleteThingTypeOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_DELETE, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -2522,10 +2388,8 @@ DeleteTopicRuleOutcome IoTClient::DeleteTopicRule(const DeleteTopicRuleRequest& 
     return DeleteTopicRuleOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [RuleName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/rules/";
-  ss << request.GetRuleName();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/rules/");
+  uri.AddPathSegment(request.GetRuleName());
   return DeleteTopicRuleOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_DELETE, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -2555,10 +2419,8 @@ DeleteTopicRuleDestinationOutcome IoTClient::DeleteTopicRuleDestination(const De
     return DeleteTopicRuleDestinationOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [Arn]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/destinations/";
-  ss << request.GetArn();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/destinations/");
+  uri.AddPathSegment(request.GetArn());
   return DeleteTopicRuleDestinationOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_DELETE, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -2593,9 +2455,7 @@ DeleteV2LoggingLevelOutcome IoTClient::DeleteV2LoggingLevel(const DeleteV2Loggin
     return DeleteV2LoggingLevelOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [TargetName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/v2LoggingLevel";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/v2LoggingLevel");
   return DeleteV2LoggingLevelOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_DELETE, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -2625,11 +2485,9 @@ DeprecateThingTypeOutcome IoTClient::DeprecateThingType(const DeprecateThingType
     return DeprecateThingTypeOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [ThingTypeName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/thing-types/";
-  ss << request.GetThingTypeName();
-  ss << "/deprecate";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/thing-types/");
+  uri.AddPathSegment(request.GetThingTypeName());
+  uri.AddPathSegments("/deprecate");
   return DeprecateThingTypeOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -2654,9 +2512,7 @@ void IoTClient::DeprecateThingTypeAsyncHelper(const DeprecateThingTypeRequest& r
 DescribeAccountAuditConfigurationOutcome IoTClient::DescribeAccountAuditConfiguration(const DescribeAccountAuditConfigurationRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/audit/configuration";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/audit/configuration");
   return DescribeAccountAuditConfigurationOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -2686,10 +2542,8 @@ DescribeAuditFindingOutcome IoTClient::DescribeAuditFinding(const DescribeAuditF
     return DescribeAuditFindingOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [FindingId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/audit/findings/";
-  ss << request.GetFindingId();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/audit/findings/");
+  uri.AddPathSegment(request.GetFindingId());
   return DescribeAuditFindingOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -2719,10 +2573,8 @@ DescribeAuditMitigationActionsTaskOutcome IoTClient::DescribeAuditMitigationActi
     return DescribeAuditMitigationActionsTaskOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [TaskId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/audit/mitigationactions/tasks/";
-  ss << request.GetTaskId();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/audit/mitigationactions/tasks/");
+  uri.AddPathSegment(request.GetTaskId());
   return DescribeAuditMitigationActionsTaskOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -2747,9 +2599,7 @@ void IoTClient::DescribeAuditMitigationActionsTaskAsyncHelper(const DescribeAudi
 DescribeAuditSuppressionOutcome IoTClient::DescribeAuditSuppression(const DescribeAuditSuppressionRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/audit/suppressions/describe";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/audit/suppressions/describe");
   return DescribeAuditSuppressionOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -2779,10 +2629,8 @@ DescribeAuditTaskOutcome IoTClient::DescribeAuditTask(const DescribeAuditTaskReq
     return DescribeAuditTaskOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [TaskId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/audit/tasks/";
-  ss << request.GetTaskId();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/audit/tasks/");
+  uri.AddPathSegment(request.GetTaskId());
   return DescribeAuditTaskOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -2812,10 +2660,8 @@ DescribeAuthorizerOutcome IoTClient::DescribeAuthorizer(const DescribeAuthorizer
     return DescribeAuthorizerOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [AuthorizerName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/authorizer/";
-  ss << request.GetAuthorizerName();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/authorizer/");
+  uri.AddPathSegment(request.GetAuthorizerName());
   return DescribeAuthorizerOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -2845,10 +2691,8 @@ DescribeBillingGroupOutcome IoTClient::DescribeBillingGroup(const DescribeBillin
     return DescribeBillingGroupOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [BillingGroupName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/billing-groups/";
-  ss << request.GetBillingGroupName();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/billing-groups/");
+  uri.AddPathSegment(request.GetBillingGroupName());
   return DescribeBillingGroupOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -2878,10 +2722,8 @@ DescribeCACertificateOutcome IoTClient::DescribeCACertificate(const DescribeCACe
     return DescribeCACertificateOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [CertificateId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/cacertificate/";
-  ss << request.GetCertificateId();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/cacertificate/");
+  uri.AddPathSegment(request.GetCertificateId());
   return DescribeCACertificateOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -2911,10 +2753,8 @@ DescribeCertificateOutcome IoTClient::DescribeCertificate(const DescribeCertific
     return DescribeCertificateOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [CertificateId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/certificates/";
-  ss << request.GetCertificateId();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/certificates/");
+  uri.AddPathSegment(request.GetCertificateId());
   return DescribeCertificateOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -2944,10 +2784,8 @@ DescribeCustomMetricOutcome IoTClient::DescribeCustomMetric(const DescribeCustom
     return DescribeCustomMetricOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [MetricName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/custom-metric/";
-  ss << request.GetMetricName();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/custom-metric/");
+  uri.AddPathSegment(request.GetMetricName());
   return DescribeCustomMetricOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -2972,9 +2810,7 @@ void IoTClient::DescribeCustomMetricAsyncHelper(const DescribeCustomMetricReques
 DescribeDefaultAuthorizerOutcome IoTClient::DescribeDefaultAuthorizer(const DescribeDefaultAuthorizerRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/default-authorizer";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/default-authorizer");
   return DescribeDefaultAuthorizerOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -3004,10 +2840,8 @@ DescribeDetectMitigationActionsTaskOutcome IoTClient::DescribeDetectMitigationAc
     return DescribeDetectMitigationActionsTaskOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [TaskId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/detect/mitigationactions/tasks/";
-  ss << request.GetTaskId();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/detect/mitigationactions/tasks/");
+  uri.AddPathSegment(request.GetTaskId());
   return DescribeDetectMitigationActionsTaskOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -3037,10 +2871,8 @@ DescribeDimensionOutcome IoTClient::DescribeDimension(const DescribeDimensionReq
     return DescribeDimensionOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [Name]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/dimensions/";
-  ss << request.GetName();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/dimensions/");
+  uri.AddPathSegment(request.GetName());
   return DescribeDimensionOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -3070,10 +2902,8 @@ DescribeDomainConfigurationOutcome IoTClient::DescribeDomainConfiguration(const 
     return DescribeDomainConfigurationOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [DomainConfigurationName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/domainConfigurations/";
-  ss << request.GetDomainConfigurationName();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/domainConfigurations/");
+  uri.AddPathSegment(request.GetDomainConfigurationName());
   return DescribeDomainConfigurationOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -3098,9 +2928,7 @@ void IoTClient::DescribeDomainConfigurationAsyncHelper(const DescribeDomainConfi
 DescribeEndpointOutcome IoTClient::DescribeEndpoint(const DescribeEndpointRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/endpoint";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/endpoint");
   return DescribeEndpointOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -3125,9 +2953,7 @@ void IoTClient::DescribeEndpointAsyncHelper(const DescribeEndpointRequest& reque
 DescribeEventConfigurationsOutcome IoTClient::DescribeEventConfigurations(const DescribeEventConfigurationsRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/event-configurations";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/event-configurations");
   return DescribeEventConfigurationsOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -3157,10 +2983,8 @@ DescribeIndexOutcome IoTClient::DescribeIndex(const DescribeIndexRequest& reques
     return DescribeIndexOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [IndexName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/indices/";
-  ss << request.GetIndexName();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/indices/");
+  uri.AddPathSegment(request.GetIndexName());
   return DescribeIndexOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -3190,10 +3014,8 @@ DescribeJobOutcome IoTClient::DescribeJob(const DescribeJobRequest& request) con
     return DescribeJobOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [JobId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/jobs/";
-  ss << request.GetJobId();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/jobs/");
+  uri.AddPathSegment(request.GetJobId());
   return DescribeJobOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -3228,12 +3050,10 @@ DescribeJobExecutionOutcome IoTClient::DescribeJobExecution(const DescribeJobExe
     return DescribeJobExecutionOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [ThingName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/things/";
-  ss << request.GetThingName();
-  ss << "/jobs/";
-  ss << request.GetJobId();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/things/");
+  uri.AddPathSegment(request.GetThingName());
+  uri.AddPathSegments("/jobs/");
+  uri.AddPathSegment(request.GetJobId());
   return DescribeJobExecutionOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -3263,10 +3083,8 @@ DescribeMitigationActionOutcome IoTClient::DescribeMitigationAction(const Descri
     return DescribeMitigationActionOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [ActionName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/mitigationactions/actions/";
-  ss << request.GetActionName();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/mitigationactions/actions/");
+  uri.AddPathSegment(request.GetActionName());
   return DescribeMitigationActionOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -3296,10 +3114,8 @@ DescribeProvisioningTemplateOutcome IoTClient::DescribeProvisioningTemplate(cons
     return DescribeProvisioningTemplateOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [TemplateName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/provisioning-templates/";
-  ss << request.GetTemplateName();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/provisioning-templates/");
+  uri.AddPathSegment(request.GetTemplateName());
   return DescribeProvisioningTemplateOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -3334,12 +3150,10 @@ DescribeProvisioningTemplateVersionOutcome IoTClient::DescribeProvisioningTempla
     return DescribeProvisioningTemplateVersionOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [VersionId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/provisioning-templates/";
-  ss << request.GetTemplateName();
-  ss << "/versions/";
-  ss << request.GetVersionId();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/provisioning-templates/");
+  uri.AddPathSegment(request.GetTemplateName());
+  uri.AddPathSegments("/versions/");
+  uri.AddPathSegment(request.GetVersionId());
   return DescribeProvisioningTemplateVersionOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -3369,10 +3183,8 @@ DescribeRoleAliasOutcome IoTClient::DescribeRoleAlias(const DescribeRoleAliasReq
     return DescribeRoleAliasOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [RoleAlias]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/role-aliases/";
-  ss << request.GetRoleAlias();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/role-aliases/");
+  uri.AddPathSegment(request.GetRoleAlias());
   return DescribeRoleAliasOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -3402,10 +3214,8 @@ DescribeScheduledAuditOutcome IoTClient::DescribeScheduledAudit(const DescribeSc
     return DescribeScheduledAuditOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [ScheduledAuditName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/audit/scheduledaudits/";
-  ss << request.GetScheduledAuditName();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/audit/scheduledaudits/");
+  uri.AddPathSegment(request.GetScheduledAuditName());
   return DescribeScheduledAuditOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -3435,10 +3245,8 @@ DescribeSecurityProfileOutcome IoTClient::DescribeSecurityProfile(const Describe
     return DescribeSecurityProfileOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [SecurityProfileName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/security-profiles/";
-  ss << request.GetSecurityProfileName();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/security-profiles/");
+  uri.AddPathSegment(request.GetSecurityProfileName());
   return DescribeSecurityProfileOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -3468,10 +3276,8 @@ DescribeStreamOutcome IoTClient::DescribeStream(const DescribeStreamRequest& req
     return DescribeStreamOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [StreamId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/streams/";
-  ss << request.GetStreamId();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/streams/");
+  uri.AddPathSegment(request.GetStreamId());
   return DescribeStreamOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -3501,10 +3307,8 @@ DescribeThingOutcome IoTClient::DescribeThing(const DescribeThingRequest& reques
     return DescribeThingOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [ThingName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/things/";
-  ss << request.GetThingName();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/things/");
+  uri.AddPathSegment(request.GetThingName());
   return DescribeThingOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -3534,10 +3338,8 @@ DescribeThingGroupOutcome IoTClient::DescribeThingGroup(const DescribeThingGroup
     return DescribeThingGroupOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [ThingGroupName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/thing-groups/";
-  ss << request.GetThingGroupName();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/thing-groups/");
+  uri.AddPathSegment(request.GetThingGroupName());
   return DescribeThingGroupOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -3567,10 +3369,8 @@ DescribeThingRegistrationTaskOutcome IoTClient::DescribeThingRegistrationTask(co
     return DescribeThingRegistrationTaskOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [TaskId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/thing-registration-tasks/";
-  ss << request.GetTaskId();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/thing-registration-tasks/");
+  uri.AddPathSegment(request.GetTaskId());
   return DescribeThingRegistrationTaskOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -3600,10 +3400,8 @@ DescribeThingTypeOutcome IoTClient::DescribeThingType(const DescribeThingTypeReq
     return DescribeThingTypeOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [ThingTypeName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/thing-types/";
-  ss << request.GetThingTypeName();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/thing-types/");
+  uri.AddPathSegment(request.GetThingTypeName());
   return DescribeThingTypeOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -3633,10 +3431,8 @@ DetachPolicyOutcome IoTClient::DetachPolicy(const DetachPolicyRequest& request) 
     return DetachPolicyOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [PolicyName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/target-policies/";
-  ss << request.GetPolicyName();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/target-policies/");
+  uri.AddPathSegment(request.GetPolicyName());
   return DetachPolicyOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -3671,11 +3467,9 @@ DetachSecurityProfileOutcome IoTClient::DetachSecurityProfile(const DetachSecuri
     return DetachSecurityProfileOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [SecurityProfileTargetArn]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/security-profiles/";
-  ss << request.GetSecurityProfileName();
-  ss << "/targets";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/security-profiles/");
+  uri.AddPathSegment(request.GetSecurityProfileName());
+  uri.AddPathSegments("/targets");
   return DetachSecurityProfileOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_DELETE, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -3710,11 +3504,9 @@ DetachThingPrincipalOutcome IoTClient::DetachThingPrincipal(const DetachThingPri
     return DetachThingPrincipalOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [Principal]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/things/";
-  ss << request.GetThingName();
-  ss << "/principals";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/things/");
+  uri.AddPathSegment(request.GetThingName());
+  uri.AddPathSegments("/principals");
   return DetachThingPrincipalOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_DELETE, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -3744,11 +3536,9 @@ DisableTopicRuleOutcome IoTClient::DisableTopicRule(const DisableTopicRuleReques
     return DisableTopicRuleOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [RuleName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/rules/";
-  ss << request.GetRuleName();
-  ss << "/disable";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/rules/");
+  uri.AddPathSegment(request.GetRuleName());
+  uri.AddPathSegments("/disable");
   return DisableTopicRuleOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -3778,11 +3568,9 @@ EnableTopicRuleOutcome IoTClient::EnableTopicRule(const EnableTopicRuleRequest& 
     return EnableTopicRuleOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [RuleName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/rules/";
-  ss << request.GetRuleName();
-  ss << "/enable";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/rules/");
+  uri.AddPathSegment(request.GetRuleName());
+  uri.AddPathSegments("/enable");
   return EnableTopicRuleOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -3807,9 +3595,7 @@ void IoTClient::EnableTopicRuleAsyncHelper(const EnableTopicRuleRequest& request
 GetBehaviorModelTrainingSummariesOutcome IoTClient::GetBehaviorModelTrainingSummaries(const GetBehaviorModelTrainingSummariesRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/behavior-model-training/summaries";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/behavior-model-training/summaries");
   return GetBehaviorModelTrainingSummariesOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -3834,9 +3620,7 @@ void IoTClient::GetBehaviorModelTrainingSummariesAsyncHelper(const GetBehaviorMo
 GetCardinalityOutcome IoTClient::GetCardinality(const GetCardinalityRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/indices/cardinality";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/indices/cardinality");
   return GetCardinalityOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -3861,9 +3645,7 @@ void IoTClient::GetCardinalityAsyncHelper(const GetCardinalityRequest& request, 
 GetEffectivePoliciesOutcome IoTClient::GetEffectivePolicies(const GetEffectivePoliciesRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/effective-policies";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/effective-policies");
   return GetEffectivePoliciesOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -3888,9 +3670,7 @@ void IoTClient::GetEffectivePoliciesAsyncHelper(const GetEffectivePoliciesReques
 GetIndexingConfigurationOutcome IoTClient::GetIndexingConfiguration(const GetIndexingConfigurationRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/indexing/config";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/indexing/config");
   return GetIndexingConfigurationOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -3920,11 +3700,9 @@ GetJobDocumentOutcome IoTClient::GetJobDocument(const GetJobDocumentRequest& req
     return GetJobDocumentOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [JobId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/jobs/";
-  ss << request.GetJobId();
-  ss << "/job-document";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/jobs/");
+  uri.AddPathSegment(request.GetJobId());
+  uri.AddPathSegments("/job-document");
   return GetJobDocumentOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -3949,9 +3727,7 @@ void IoTClient::GetJobDocumentAsyncHelper(const GetJobDocumentRequest& request, 
 GetLoggingOptionsOutcome IoTClient::GetLoggingOptions(const GetLoggingOptionsRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/loggingOptions";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/loggingOptions");
   return GetLoggingOptionsOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -3981,10 +3757,8 @@ GetOTAUpdateOutcome IoTClient::GetOTAUpdate(const GetOTAUpdateRequest& request) 
     return GetOTAUpdateOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [OtaUpdateId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/otaUpdates/";
-  ss << request.GetOtaUpdateId();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/otaUpdates/");
+  uri.AddPathSegment(request.GetOtaUpdateId());
   return GetOTAUpdateOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -4009,9 +3783,7 @@ void IoTClient::GetOTAUpdateAsyncHelper(const GetOTAUpdateRequest& request, cons
 GetPercentilesOutcome IoTClient::GetPercentiles(const GetPercentilesRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/indices/percentiles";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/indices/percentiles");
   return GetPercentilesOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -4041,10 +3813,8 @@ GetPolicyOutcome IoTClient::GetPolicy(const GetPolicyRequest& request) const
     return GetPolicyOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [PolicyName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/policies/";
-  ss << request.GetPolicyName();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/policies/");
+  uri.AddPathSegment(request.GetPolicyName());
   return GetPolicyOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -4079,12 +3849,10 @@ GetPolicyVersionOutcome IoTClient::GetPolicyVersion(const GetPolicyVersionReques
     return GetPolicyVersionOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [PolicyVersionId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/policies/";
-  ss << request.GetPolicyName();
-  ss << "/version/";
-  ss << request.GetPolicyVersionId();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/policies/");
+  uri.AddPathSegment(request.GetPolicyName());
+  uri.AddPathSegments("/version/");
+  uri.AddPathSegment(request.GetPolicyVersionId());
   return GetPolicyVersionOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -4109,9 +3877,7 @@ void IoTClient::GetPolicyVersionAsyncHelper(const GetPolicyVersionRequest& reque
 GetRegistrationCodeOutcome IoTClient::GetRegistrationCode(const GetRegistrationCodeRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/registrationcode";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/registrationcode");
   return GetRegistrationCodeOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -4136,9 +3902,7 @@ void IoTClient::GetRegistrationCodeAsyncHelper(const GetRegistrationCodeRequest&
 GetStatisticsOutcome IoTClient::GetStatistics(const GetStatisticsRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/indices/statistics";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/indices/statistics");
   return GetStatisticsOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -4168,10 +3932,8 @@ GetTopicRuleOutcome IoTClient::GetTopicRule(const GetTopicRuleRequest& request) 
     return GetTopicRuleOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [RuleName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/rules/";
-  ss << request.GetRuleName();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/rules/");
+  uri.AddPathSegment(request.GetRuleName());
   return GetTopicRuleOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -4201,10 +3963,8 @@ GetTopicRuleDestinationOutcome IoTClient::GetTopicRuleDestination(const GetTopic
     return GetTopicRuleDestinationOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [Arn]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/destinations/";
-  ss << request.GetArn();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/destinations/");
+  uri.AddPathSegment(request.GetArn());
   return GetTopicRuleDestinationOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -4229,9 +3989,7 @@ void IoTClient::GetTopicRuleDestinationAsyncHelper(const GetTopicRuleDestination
 GetV2LoggingOptionsOutcome IoTClient::GetV2LoggingOptions(const GetV2LoggingOptionsRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/v2LoggingOptions";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/v2LoggingOptions");
   return GetV2LoggingOptionsOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -4256,9 +4014,7 @@ void IoTClient::GetV2LoggingOptionsAsyncHelper(const GetV2LoggingOptionsRequest&
 ListActiveViolationsOutcome IoTClient::ListActiveViolations(const ListActiveViolationsRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/active-violations";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/active-violations");
   return ListActiveViolationsOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -4288,10 +4044,8 @@ ListAttachedPoliciesOutcome IoTClient::ListAttachedPolicies(const ListAttachedPo
     return ListAttachedPoliciesOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [Target]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/attached-policies/";
-  ss << request.GetTarget();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/attached-policies/");
+  uri.AddPathSegment(request.GetTarget());
   return ListAttachedPoliciesOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -4316,9 +4070,7 @@ void IoTClient::ListAttachedPoliciesAsyncHelper(const ListAttachedPoliciesReques
 ListAuditFindingsOutcome IoTClient::ListAuditFindings(const ListAuditFindingsRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/audit/findings";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/audit/findings");
   return ListAuditFindingsOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -4353,9 +4105,7 @@ ListAuditMitigationActionsExecutionsOutcome IoTClient::ListAuditMitigationAction
     return ListAuditMitigationActionsExecutionsOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [FindingId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/audit/mitigationactions/executions";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/audit/mitigationactions/executions");
   return ListAuditMitigationActionsExecutionsOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -4390,9 +4140,7 @@ ListAuditMitigationActionsTasksOutcome IoTClient::ListAuditMitigationActionsTask
     return ListAuditMitigationActionsTasksOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [EndTime]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/audit/mitigationactions/tasks";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/audit/mitigationactions/tasks");
   return ListAuditMitigationActionsTasksOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -4417,9 +4165,7 @@ void IoTClient::ListAuditMitigationActionsTasksAsyncHelper(const ListAuditMitiga
 ListAuditSuppressionsOutcome IoTClient::ListAuditSuppressions(const ListAuditSuppressionsRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/audit/suppressions/list";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/audit/suppressions/list");
   return ListAuditSuppressionsOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -4454,9 +4200,7 @@ ListAuditTasksOutcome IoTClient::ListAuditTasks(const ListAuditTasksRequest& req
     return ListAuditTasksOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [EndTime]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/audit/tasks";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/audit/tasks");
   return ListAuditTasksOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -4481,9 +4225,7 @@ void IoTClient::ListAuditTasksAsyncHelper(const ListAuditTasksRequest& request, 
 ListAuthorizersOutcome IoTClient::ListAuthorizers(const ListAuthorizersRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/authorizers/";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/authorizers/");
   return ListAuthorizersOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -4508,9 +4250,7 @@ void IoTClient::ListAuthorizersAsyncHelper(const ListAuthorizersRequest& request
 ListBillingGroupsOutcome IoTClient::ListBillingGroups(const ListBillingGroupsRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/billing-groups";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/billing-groups");
   return ListBillingGroupsOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -4535,9 +4275,7 @@ void IoTClient::ListBillingGroupsAsyncHelper(const ListBillingGroupsRequest& req
 ListCACertificatesOutcome IoTClient::ListCACertificates(const ListCACertificatesRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/cacertificates";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/cacertificates");
   return ListCACertificatesOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -4562,9 +4300,7 @@ void IoTClient::ListCACertificatesAsyncHelper(const ListCACertificatesRequest& r
 ListCertificatesOutcome IoTClient::ListCertificates(const ListCertificatesRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/certificates";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/certificates");
   return ListCertificatesOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -4594,10 +4330,8 @@ ListCertificatesByCAOutcome IoTClient::ListCertificatesByCA(const ListCertificat
     return ListCertificatesByCAOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [CaCertificateId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/certificates-by-ca/";
-  ss << request.GetCaCertificateId();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/certificates-by-ca/");
+  uri.AddPathSegment(request.GetCaCertificateId());
   return ListCertificatesByCAOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -4622,9 +4356,7 @@ void IoTClient::ListCertificatesByCAAsyncHelper(const ListCertificatesByCAReques
 ListCustomMetricsOutcome IoTClient::ListCustomMetrics(const ListCustomMetricsRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/custom-metrics";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/custom-metrics");
   return ListCustomMetricsOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -4649,9 +4381,7 @@ void IoTClient::ListCustomMetricsAsyncHelper(const ListCustomMetricsRequest& req
 ListDetectMitigationActionsExecutionsOutcome IoTClient::ListDetectMitigationActionsExecutions(const ListDetectMitigationActionsExecutionsRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/detect/mitigationactions/executions";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/detect/mitigationactions/executions");
   return ListDetectMitigationActionsExecutionsOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -4686,9 +4416,7 @@ ListDetectMitigationActionsTasksOutcome IoTClient::ListDetectMitigationActionsTa
     return ListDetectMitigationActionsTasksOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [EndTime]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/detect/mitigationactions/tasks";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/detect/mitigationactions/tasks");
   return ListDetectMitigationActionsTasksOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -4713,9 +4441,7 @@ void IoTClient::ListDetectMitigationActionsTasksAsyncHelper(const ListDetectMiti
 ListDimensionsOutcome IoTClient::ListDimensions(const ListDimensionsRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/dimensions";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/dimensions");
   return ListDimensionsOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -4740,9 +4466,7 @@ void IoTClient::ListDimensionsAsyncHelper(const ListDimensionsRequest& request, 
 ListDomainConfigurationsOutcome IoTClient::ListDomainConfigurations(const ListDomainConfigurationsRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/domainConfigurations";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/domainConfigurations");
   return ListDomainConfigurationsOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -4767,9 +4491,7 @@ void IoTClient::ListDomainConfigurationsAsyncHelper(const ListDomainConfiguratio
 ListIndicesOutcome IoTClient::ListIndices(const ListIndicesRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/indices";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/indices");
   return ListIndicesOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -4799,11 +4521,9 @@ ListJobExecutionsForJobOutcome IoTClient::ListJobExecutionsForJob(const ListJobE
     return ListJobExecutionsForJobOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [JobId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/jobs/";
-  ss << request.GetJobId();
-  ss << "/things";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/jobs/");
+  uri.AddPathSegment(request.GetJobId());
+  uri.AddPathSegments("/things");
   return ListJobExecutionsForJobOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -4833,11 +4553,9 @@ ListJobExecutionsForThingOutcome IoTClient::ListJobExecutionsForThing(const List
     return ListJobExecutionsForThingOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [ThingName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/things/";
-  ss << request.GetThingName();
-  ss << "/jobs";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/things/");
+  uri.AddPathSegment(request.GetThingName());
+  uri.AddPathSegments("/jobs");
   return ListJobExecutionsForThingOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -4862,9 +4580,7 @@ void IoTClient::ListJobExecutionsForThingAsyncHelper(const ListJobExecutionsForT
 ListJobsOutcome IoTClient::ListJobs(const ListJobsRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/jobs";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/jobs");
   return ListJobsOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -4889,9 +4605,7 @@ void IoTClient::ListJobsAsyncHelper(const ListJobsRequest& request, const ListJo
 ListMitigationActionsOutcome IoTClient::ListMitigationActions(const ListMitigationActionsRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/mitigationactions/actions";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/mitigationactions/actions");
   return ListMitigationActionsOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -4916,9 +4630,7 @@ void IoTClient::ListMitigationActionsAsyncHelper(const ListMitigationActionsRequ
 ListOTAUpdatesOutcome IoTClient::ListOTAUpdates(const ListOTAUpdatesRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/otaUpdates";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/otaUpdates");
   return ListOTAUpdatesOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -4943,9 +4655,7 @@ void IoTClient::ListOTAUpdatesAsyncHelper(const ListOTAUpdatesRequest& request, 
 ListOutgoingCertificatesOutcome IoTClient::ListOutgoingCertificates(const ListOutgoingCertificatesRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/certificates-out-going";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/certificates-out-going");
   return ListOutgoingCertificatesOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -4970,9 +4680,7 @@ void IoTClient::ListOutgoingCertificatesAsyncHelper(const ListOutgoingCertificat
 ListPoliciesOutcome IoTClient::ListPolicies(const ListPoliciesRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/policies";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/policies");
   return ListPoliciesOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -5002,11 +4710,9 @@ ListPolicyVersionsOutcome IoTClient::ListPolicyVersions(const ListPolicyVersions
     return ListPolicyVersionsOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [PolicyName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/policies/";
-  ss << request.GetPolicyName();
-  ss << "/version";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/policies/");
+  uri.AddPathSegment(request.GetPolicyName());
+  uri.AddPathSegments("/version");
   return ListPolicyVersionsOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -5036,9 +4742,7 @@ ListPrincipalThingsOutcome IoTClient::ListPrincipalThings(const ListPrincipalThi
     return ListPrincipalThingsOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [Principal]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/principals/things";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/principals/things");
   return ListPrincipalThingsOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -5068,11 +4772,9 @@ ListProvisioningTemplateVersionsOutcome IoTClient::ListProvisioningTemplateVersi
     return ListProvisioningTemplateVersionsOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [TemplateName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/provisioning-templates/";
-  ss << request.GetTemplateName();
-  ss << "/versions";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/provisioning-templates/");
+  uri.AddPathSegment(request.GetTemplateName());
+  uri.AddPathSegments("/versions");
   return ListProvisioningTemplateVersionsOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -5097,9 +4799,7 @@ void IoTClient::ListProvisioningTemplateVersionsAsyncHelper(const ListProvisioni
 ListProvisioningTemplatesOutcome IoTClient::ListProvisioningTemplates(const ListProvisioningTemplatesRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/provisioning-templates";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/provisioning-templates");
   return ListProvisioningTemplatesOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -5124,9 +4824,7 @@ void IoTClient::ListProvisioningTemplatesAsyncHelper(const ListProvisioningTempl
 ListRoleAliasesOutcome IoTClient::ListRoleAliases(const ListRoleAliasesRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/role-aliases";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/role-aliases");
   return ListRoleAliasesOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -5151,9 +4849,7 @@ void IoTClient::ListRoleAliasesAsyncHelper(const ListRoleAliasesRequest& request
 ListScheduledAuditsOutcome IoTClient::ListScheduledAudits(const ListScheduledAuditsRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/audit/scheduledaudits";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/audit/scheduledaudits");
   return ListScheduledAuditsOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -5178,9 +4874,7 @@ void IoTClient::ListScheduledAuditsAsyncHelper(const ListScheduledAuditsRequest&
 ListSecurityProfilesOutcome IoTClient::ListSecurityProfiles(const ListSecurityProfilesRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/security-profiles";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/security-profiles");
   return ListSecurityProfilesOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -5210,9 +4904,7 @@ ListSecurityProfilesForTargetOutcome IoTClient::ListSecurityProfilesForTarget(co
     return ListSecurityProfilesForTargetOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [SecurityProfileTargetArn]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/security-profiles-for-target";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/security-profiles-for-target");
   return ListSecurityProfilesForTargetOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -5237,9 +4929,7 @@ void IoTClient::ListSecurityProfilesForTargetAsyncHelper(const ListSecurityProfi
 ListStreamsOutcome IoTClient::ListStreams(const ListStreamsRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/streams";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/streams");
   return ListStreamsOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -5269,9 +4959,7 @@ ListTagsForResourceOutcome IoTClient::ListTagsForResource(const ListTagsForResou
     return ListTagsForResourceOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [ResourceArn]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/tags";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/tags");
   return ListTagsForResourceOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -5301,10 +4989,8 @@ ListTargetsForPolicyOutcome IoTClient::ListTargetsForPolicy(const ListTargetsFor
     return ListTargetsForPolicyOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [PolicyName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/policy-targets/";
-  ss << request.GetPolicyName();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/policy-targets/");
+  uri.AddPathSegment(request.GetPolicyName());
   return ListTargetsForPolicyOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -5334,11 +5020,9 @@ ListTargetsForSecurityProfileOutcome IoTClient::ListTargetsForSecurityProfile(co
     return ListTargetsForSecurityProfileOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [SecurityProfileName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/security-profiles/";
-  ss << request.GetSecurityProfileName();
-  ss << "/targets";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/security-profiles/");
+  uri.AddPathSegment(request.GetSecurityProfileName());
+  uri.AddPathSegments("/targets");
   return ListTargetsForSecurityProfileOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -5363,9 +5047,7 @@ void IoTClient::ListTargetsForSecurityProfileAsyncHelper(const ListTargetsForSec
 ListThingGroupsOutcome IoTClient::ListThingGroups(const ListThingGroupsRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/thing-groups";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/thing-groups");
   return ListThingGroupsOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -5395,11 +5077,9 @@ ListThingGroupsForThingOutcome IoTClient::ListThingGroupsForThing(const ListThin
     return ListThingGroupsForThingOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [ThingName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/things/";
-  ss << request.GetThingName();
-  ss << "/thing-groups";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/things/");
+  uri.AddPathSegment(request.GetThingName());
+  uri.AddPathSegments("/thing-groups");
   return ListThingGroupsForThingOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -5429,11 +5109,9 @@ ListThingPrincipalsOutcome IoTClient::ListThingPrincipals(const ListThingPrincip
     return ListThingPrincipalsOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [ThingName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/things/";
-  ss << request.GetThingName();
-  ss << "/principals";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/things/");
+  uri.AddPathSegment(request.GetThingName());
+  uri.AddPathSegments("/principals");
   return ListThingPrincipalsOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -5468,11 +5146,9 @@ ListThingRegistrationTaskReportsOutcome IoTClient::ListThingRegistrationTaskRepo
     return ListThingRegistrationTaskReportsOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [ReportType]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/thing-registration-tasks/";
-  ss << request.GetTaskId();
-  ss << "/reports";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/thing-registration-tasks/");
+  uri.AddPathSegment(request.GetTaskId());
+  uri.AddPathSegments("/reports");
   return ListThingRegistrationTaskReportsOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -5497,9 +5173,7 @@ void IoTClient::ListThingRegistrationTaskReportsAsyncHelper(const ListThingRegis
 ListThingRegistrationTasksOutcome IoTClient::ListThingRegistrationTasks(const ListThingRegistrationTasksRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/thing-registration-tasks";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/thing-registration-tasks");
   return ListThingRegistrationTasksOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -5524,9 +5198,7 @@ void IoTClient::ListThingRegistrationTasksAsyncHelper(const ListThingRegistratio
 ListThingTypesOutcome IoTClient::ListThingTypes(const ListThingTypesRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/thing-types";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/thing-types");
   return ListThingTypesOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -5551,9 +5223,7 @@ void IoTClient::ListThingTypesAsyncHelper(const ListThingTypesRequest& request, 
 ListThingsOutcome IoTClient::ListThings(const ListThingsRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/things";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/things");
   return ListThingsOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -5583,11 +5253,9 @@ ListThingsInBillingGroupOutcome IoTClient::ListThingsInBillingGroup(const ListTh
     return ListThingsInBillingGroupOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [BillingGroupName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/billing-groups/";
-  ss << request.GetBillingGroupName();
-  ss << "/things";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/billing-groups/");
+  uri.AddPathSegment(request.GetBillingGroupName());
+  uri.AddPathSegments("/things");
   return ListThingsInBillingGroupOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -5617,11 +5285,9 @@ ListThingsInThingGroupOutcome IoTClient::ListThingsInThingGroup(const ListThings
     return ListThingsInThingGroupOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [ThingGroupName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/thing-groups/";
-  ss << request.GetThingGroupName();
-  ss << "/things";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/thing-groups/");
+  uri.AddPathSegment(request.GetThingGroupName());
+  uri.AddPathSegments("/things");
   return ListThingsInThingGroupOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -5646,9 +5312,7 @@ void IoTClient::ListThingsInThingGroupAsyncHelper(const ListThingsInThingGroupRe
 ListTopicRuleDestinationsOutcome IoTClient::ListTopicRuleDestinations(const ListTopicRuleDestinationsRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/destinations";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/destinations");
   return ListTopicRuleDestinationsOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -5673,9 +5337,7 @@ void IoTClient::ListTopicRuleDestinationsAsyncHelper(const ListTopicRuleDestinat
 ListTopicRulesOutcome IoTClient::ListTopicRules(const ListTopicRulesRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/rules";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/rules");
   return ListTopicRulesOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -5700,9 +5362,7 @@ void IoTClient::ListTopicRulesAsyncHelper(const ListTopicRulesRequest& request, 
 ListV2LoggingLevelsOutcome IoTClient::ListV2LoggingLevels(const ListV2LoggingLevelsRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/v2LoggingLevel";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/v2LoggingLevel");
   return ListV2LoggingLevelsOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -5737,9 +5397,7 @@ ListViolationEventsOutcome IoTClient::ListViolationEvents(const ListViolationEve
     return ListViolationEventsOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [EndTime]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/violation-events";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/violation-events");
   return ListViolationEventsOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -5764,9 +5422,7 @@ void IoTClient::ListViolationEventsAsyncHelper(const ListViolationEventsRequest&
 RegisterCACertificateOutcome IoTClient::RegisterCACertificate(const RegisterCACertificateRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/cacertificate";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/cacertificate");
   return RegisterCACertificateOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -5791,9 +5447,7 @@ void IoTClient::RegisterCACertificateAsyncHelper(const RegisterCACertificateRequ
 RegisterCertificateOutcome IoTClient::RegisterCertificate(const RegisterCertificateRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/certificate/register";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/certificate/register");
   return RegisterCertificateOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -5818,9 +5472,7 @@ void IoTClient::RegisterCertificateAsyncHelper(const RegisterCertificateRequest&
 RegisterCertificateWithoutCAOutcome IoTClient::RegisterCertificateWithoutCA(const RegisterCertificateWithoutCARequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/certificate/register-no-ca";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/certificate/register-no-ca");
   return RegisterCertificateWithoutCAOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -5845,9 +5497,7 @@ void IoTClient::RegisterCertificateWithoutCAAsyncHelper(const RegisterCertificat
 RegisterThingOutcome IoTClient::RegisterThing(const RegisterThingRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/things";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/things");
   return RegisterThingOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -5877,10 +5527,8 @@ RejectCertificateTransferOutcome IoTClient::RejectCertificateTransfer(const Reje
     return RejectCertificateTransferOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [CertificateId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/reject-certificate-transfer/";
-  ss << request.GetCertificateId();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/reject-certificate-transfer/");
+  uri.AddPathSegment(request.GetCertificateId());
   return RejectCertificateTransferOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PATCH, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -5905,9 +5553,7 @@ void IoTClient::RejectCertificateTransferAsyncHelper(const RejectCertificateTran
 RemoveThingFromBillingGroupOutcome IoTClient::RemoveThingFromBillingGroup(const RemoveThingFromBillingGroupRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/billing-groups/removeThingFromBillingGroup";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/billing-groups/removeThingFromBillingGroup");
   return RemoveThingFromBillingGroupOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PUT, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -5932,9 +5578,7 @@ void IoTClient::RemoveThingFromBillingGroupAsyncHelper(const RemoveThingFromBill
 RemoveThingFromThingGroupOutcome IoTClient::RemoveThingFromThingGroup(const RemoveThingFromThingGroupRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/thing-groups/removeThingFromThingGroup";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/thing-groups/removeThingFromThingGroup");
   return RemoveThingFromThingGroupOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PUT, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -5964,10 +5608,8 @@ ReplaceTopicRuleOutcome IoTClient::ReplaceTopicRule(const ReplaceTopicRuleReques
     return ReplaceTopicRuleOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [RuleName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/rules/";
-  ss << request.GetRuleName();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/rules/");
+  uri.AddPathSegment(request.GetRuleName());
   return ReplaceTopicRuleOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PATCH, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -5992,9 +5634,7 @@ void IoTClient::ReplaceTopicRuleAsyncHelper(const ReplaceTopicRuleRequest& reque
 SearchIndexOutcome IoTClient::SearchIndex(const SearchIndexRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/indices/search";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/indices/search");
   return SearchIndexOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -6019,9 +5659,7 @@ void IoTClient::SearchIndexAsyncHelper(const SearchIndexRequest& request, const 
 SetDefaultAuthorizerOutcome IoTClient::SetDefaultAuthorizer(const SetDefaultAuthorizerRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/default-authorizer";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/default-authorizer");
   return SetDefaultAuthorizerOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -6056,12 +5694,10 @@ SetDefaultPolicyVersionOutcome IoTClient::SetDefaultPolicyVersion(const SetDefau
     return SetDefaultPolicyVersionOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [PolicyVersionId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/policies/";
-  ss << request.GetPolicyName();
-  ss << "/version/";
-  ss << request.GetPolicyVersionId();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/policies/");
+  uri.AddPathSegment(request.GetPolicyName());
+  uri.AddPathSegments("/version/");
+  uri.AddPathSegment(request.GetPolicyVersionId());
   return SetDefaultPolicyVersionOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PATCH, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -6086,9 +5722,7 @@ void IoTClient::SetDefaultPolicyVersionAsyncHelper(const SetDefaultPolicyVersion
 SetLoggingOptionsOutcome IoTClient::SetLoggingOptions(const SetLoggingOptionsRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/loggingOptions";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/loggingOptions");
   return SetLoggingOptionsOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -6113,9 +5747,7 @@ void IoTClient::SetLoggingOptionsAsyncHelper(const SetLoggingOptionsRequest& req
 SetV2LoggingLevelOutcome IoTClient::SetV2LoggingLevel(const SetV2LoggingLevelRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/v2LoggingLevel";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/v2LoggingLevel");
   return SetV2LoggingLevelOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -6140,9 +5772,7 @@ void IoTClient::SetV2LoggingLevelAsyncHelper(const SetV2LoggingLevelRequest& req
 SetV2LoggingOptionsOutcome IoTClient::SetV2LoggingOptions(const SetV2LoggingOptionsRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/v2LoggingOptions";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/v2LoggingOptions");
   return SetV2LoggingOptionsOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -6172,10 +5802,8 @@ StartAuditMitigationActionsTaskOutcome IoTClient::StartAuditMitigationActionsTas
     return StartAuditMitigationActionsTaskOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [TaskId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/audit/mitigationactions/tasks/";
-  ss << request.GetTaskId();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/audit/mitigationactions/tasks/");
+  uri.AddPathSegment(request.GetTaskId());
   return StartAuditMitigationActionsTaskOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -6205,10 +5833,8 @@ StartDetectMitigationActionsTaskOutcome IoTClient::StartDetectMitigationActionsT
     return StartDetectMitigationActionsTaskOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [TaskId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/detect/mitigationactions/tasks/";
-  ss << request.GetTaskId();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/detect/mitigationactions/tasks/");
+  uri.AddPathSegment(request.GetTaskId());
   return StartDetectMitigationActionsTaskOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PUT, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -6233,9 +5859,7 @@ void IoTClient::StartDetectMitigationActionsTaskAsyncHelper(const StartDetectMit
 StartOnDemandAuditTaskOutcome IoTClient::StartOnDemandAuditTask(const StartOnDemandAuditTaskRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/audit/tasks";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/audit/tasks");
   return StartOnDemandAuditTaskOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -6260,9 +5884,7 @@ void IoTClient::StartOnDemandAuditTaskAsyncHelper(const StartOnDemandAuditTaskRe
 StartThingRegistrationTaskOutcome IoTClient::StartThingRegistrationTask(const StartThingRegistrationTaskRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/thing-registration-tasks";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/thing-registration-tasks");
   return StartThingRegistrationTaskOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -6292,11 +5914,9 @@ StopThingRegistrationTaskOutcome IoTClient::StopThingRegistrationTask(const Stop
     return StopThingRegistrationTaskOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [TaskId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/thing-registration-tasks/";
-  ss << request.GetTaskId();
-  ss << "/cancel";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/thing-registration-tasks/");
+  uri.AddPathSegment(request.GetTaskId());
+  uri.AddPathSegments("/cancel");
   return StopThingRegistrationTaskOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PUT, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -6321,9 +5941,7 @@ void IoTClient::StopThingRegistrationTaskAsyncHelper(const StopThingRegistration
 TagResourceOutcome IoTClient::TagResource(const TagResourceRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/tags";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/tags");
   return TagResourceOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -6348,9 +5966,7 @@ void IoTClient::TagResourceAsyncHelper(const TagResourceRequest& request, const 
 TestAuthorizationOutcome IoTClient::TestAuthorization(const TestAuthorizationRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/test-authorization";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/test-authorization");
   return TestAuthorizationOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -6380,11 +5996,9 @@ TestInvokeAuthorizerOutcome IoTClient::TestInvokeAuthorizer(const TestInvokeAuth
     return TestInvokeAuthorizerOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [AuthorizerName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/authorizer/";
-  ss << request.GetAuthorizerName();
-  ss << "/test";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/authorizer/");
+  uri.AddPathSegment(request.GetAuthorizerName());
+  uri.AddPathSegments("/test");
   return TestInvokeAuthorizerOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -6419,10 +6033,8 @@ TransferCertificateOutcome IoTClient::TransferCertificate(const TransferCertific
     return TransferCertificateOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [TargetAwsAccount]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/transfer-certificate/";
-  ss << request.GetCertificateId();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/transfer-certificate/");
+  uri.AddPathSegment(request.GetCertificateId());
   return TransferCertificateOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PATCH, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -6447,9 +6059,7 @@ void IoTClient::TransferCertificateAsyncHelper(const TransferCertificateRequest&
 UntagResourceOutcome IoTClient::UntagResource(const UntagResourceRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/untag";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/untag");
   return UntagResourceOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -6474,9 +6084,7 @@ void IoTClient::UntagResourceAsyncHelper(const UntagResourceRequest& request, co
 UpdateAccountAuditConfigurationOutcome IoTClient::UpdateAccountAuditConfiguration(const UpdateAccountAuditConfigurationRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/audit/configuration";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/audit/configuration");
   return UpdateAccountAuditConfigurationOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PATCH, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -6501,9 +6109,7 @@ void IoTClient::UpdateAccountAuditConfigurationAsyncHelper(const UpdateAccountAu
 UpdateAuditSuppressionOutcome IoTClient::UpdateAuditSuppression(const UpdateAuditSuppressionRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/audit/suppressions/update";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/audit/suppressions/update");
   return UpdateAuditSuppressionOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PATCH, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -6533,10 +6139,8 @@ UpdateAuthorizerOutcome IoTClient::UpdateAuthorizer(const UpdateAuthorizerReques
     return UpdateAuthorizerOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [AuthorizerName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/authorizer/";
-  ss << request.GetAuthorizerName();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/authorizer/");
+  uri.AddPathSegment(request.GetAuthorizerName());
   return UpdateAuthorizerOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PUT, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -6566,10 +6170,8 @@ UpdateBillingGroupOutcome IoTClient::UpdateBillingGroup(const UpdateBillingGroup
     return UpdateBillingGroupOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [BillingGroupName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/billing-groups/";
-  ss << request.GetBillingGroupName();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/billing-groups/");
+  uri.AddPathSegment(request.GetBillingGroupName());
   return UpdateBillingGroupOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PATCH, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -6599,10 +6201,8 @@ UpdateCACertificateOutcome IoTClient::UpdateCACertificate(const UpdateCACertific
     return UpdateCACertificateOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [CertificateId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/cacertificate/";
-  ss << request.GetCertificateId();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/cacertificate/");
+  uri.AddPathSegment(request.GetCertificateId());
   return UpdateCACertificateOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PUT, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -6637,10 +6237,8 @@ UpdateCertificateOutcome IoTClient::UpdateCertificate(const UpdateCertificateReq
     return UpdateCertificateOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [NewStatus]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/certificates/";
-  ss << request.GetCertificateId();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/certificates/");
+  uri.AddPathSegment(request.GetCertificateId());
   return UpdateCertificateOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PUT, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -6670,10 +6268,8 @@ UpdateCustomMetricOutcome IoTClient::UpdateCustomMetric(const UpdateCustomMetric
     return UpdateCustomMetricOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [MetricName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/custom-metric/";
-  ss << request.GetMetricName();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/custom-metric/");
+  uri.AddPathSegment(request.GetMetricName());
   return UpdateCustomMetricOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PATCH, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -6703,10 +6299,8 @@ UpdateDimensionOutcome IoTClient::UpdateDimension(const UpdateDimensionRequest& 
     return UpdateDimensionOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [Name]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/dimensions/";
-  ss << request.GetName();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/dimensions/");
+  uri.AddPathSegment(request.GetName());
   return UpdateDimensionOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PATCH, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -6736,10 +6330,8 @@ UpdateDomainConfigurationOutcome IoTClient::UpdateDomainConfiguration(const Upda
     return UpdateDomainConfigurationOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [DomainConfigurationName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/domainConfigurations/";
-  ss << request.GetDomainConfigurationName();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/domainConfigurations/");
+  uri.AddPathSegment(request.GetDomainConfigurationName());
   return UpdateDomainConfigurationOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PUT, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -6769,10 +6361,8 @@ UpdateDynamicThingGroupOutcome IoTClient::UpdateDynamicThingGroup(const UpdateDy
     return UpdateDynamicThingGroupOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [ThingGroupName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/dynamic-thing-groups/";
-  ss << request.GetThingGroupName();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/dynamic-thing-groups/");
+  uri.AddPathSegment(request.GetThingGroupName());
   return UpdateDynamicThingGroupOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PATCH, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -6797,9 +6387,7 @@ void IoTClient::UpdateDynamicThingGroupAsyncHelper(const UpdateDynamicThingGroup
 UpdateEventConfigurationsOutcome IoTClient::UpdateEventConfigurations(const UpdateEventConfigurationsRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/event-configurations";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/event-configurations");
   return UpdateEventConfigurationsOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PATCH, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -6824,9 +6412,7 @@ void IoTClient::UpdateEventConfigurationsAsyncHelper(const UpdateEventConfigurat
 UpdateIndexingConfigurationOutcome IoTClient::UpdateIndexingConfiguration(const UpdateIndexingConfigurationRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/indexing/config";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/indexing/config");
   return UpdateIndexingConfigurationOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -6856,10 +6442,8 @@ UpdateJobOutcome IoTClient::UpdateJob(const UpdateJobRequest& request) const
     return UpdateJobOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [JobId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/jobs/";
-  ss << request.GetJobId();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/jobs/");
+  uri.AddPathSegment(request.GetJobId());
   return UpdateJobOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PATCH, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -6889,10 +6473,8 @@ UpdateMitigationActionOutcome IoTClient::UpdateMitigationAction(const UpdateMiti
     return UpdateMitigationActionOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [ActionName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/mitigationactions/actions/";
-  ss << request.GetActionName();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/mitigationactions/actions/");
+  uri.AddPathSegment(request.GetActionName());
   return UpdateMitigationActionOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PATCH, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -6922,10 +6504,8 @@ UpdateProvisioningTemplateOutcome IoTClient::UpdateProvisioningTemplate(const Up
     return UpdateProvisioningTemplateOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [TemplateName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/provisioning-templates/";
-  ss << request.GetTemplateName();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/provisioning-templates/");
+  uri.AddPathSegment(request.GetTemplateName());
   return UpdateProvisioningTemplateOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PATCH, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -6955,10 +6535,8 @@ UpdateRoleAliasOutcome IoTClient::UpdateRoleAlias(const UpdateRoleAliasRequest& 
     return UpdateRoleAliasOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [RoleAlias]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/role-aliases/";
-  ss << request.GetRoleAlias();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/role-aliases/");
+  uri.AddPathSegment(request.GetRoleAlias());
   return UpdateRoleAliasOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PUT, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -6988,10 +6566,8 @@ UpdateScheduledAuditOutcome IoTClient::UpdateScheduledAudit(const UpdateSchedule
     return UpdateScheduledAuditOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [ScheduledAuditName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/audit/scheduledaudits/";
-  ss << request.GetScheduledAuditName();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/audit/scheduledaudits/");
+  uri.AddPathSegment(request.GetScheduledAuditName());
   return UpdateScheduledAuditOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PATCH, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -7021,10 +6597,8 @@ UpdateSecurityProfileOutcome IoTClient::UpdateSecurityProfile(const UpdateSecuri
     return UpdateSecurityProfileOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [SecurityProfileName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/security-profiles/";
-  ss << request.GetSecurityProfileName();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/security-profiles/");
+  uri.AddPathSegment(request.GetSecurityProfileName());
   return UpdateSecurityProfileOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PATCH, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -7054,10 +6628,8 @@ UpdateStreamOutcome IoTClient::UpdateStream(const UpdateStreamRequest& request) 
     return UpdateStreamOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [StreamId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/streams/";
-  ss << request.GetStreamId();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/streams/");
+  uri.AddPathSegment(request.GetStreamId());
   return UpdateStreamOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PUT, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -7087,10 +6659,8 @@ UpdateThingOutcome IoTClient::UpdateThing(const UpdateThingRequest& request) con
     return UpdateThingOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [ThingName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/things/";
-  ss << request.GetThingName();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/things/");
+  uri.AddPathSegment(request.GetThingName());
   return UpdateThingOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PATCH, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -7120,10 +6690,8 @@ UpdateThingGroupOutcome IoTClient::UpdateThingGroup(const UpdateThingGroupReques
     return UpdateThingGroupOutcome(Aws::Client::AWSError<IoTErrors>(IoTErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [ThingGroupName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/thing-groups/";
-  ss << request.GetThingGroupName();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/thing-groups/");
+  uri.AddPathSegment(request.GetThingGroupName());
   return UpdateThingGroupOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PATCH, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -7148,9 +6716,7 @@ void IoTClient::UpdateThingGroupAsyncHelper(const UpdateThingGroupRequest& reque
 UpdateThingGroupsForThingOutcome IoTClient::UpdateThingGroupsForThing(const UpdateThingGroupsForThingRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/thing-groups/updateThingGroupsForThing";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/thing-groups/updateThingGroupsForThing");
   return UpdateThingGroupsForThingOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PUT, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -7175,9 +6741,7 @@ void IoTClient::UpdateThingGroupsForThingAsyncHelper(const UpdateThingGroupsForT
 UpdateTopicRuleDestinationOutcome IoTClient::UpdateTopicRuleDestination(const UpdateTopicRuleDestinationRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/destinations";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/destinations");
   return UpdateTopicRuleDestinationOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PATCH, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -7202,9 +6766,7 @@ void IoTClient::UpdateTopicRuleDestinationAsyncHelper(const UpdateTopicRuleDesti
 ValidateSecurityProfileBehaviorsOutcome IoTClient::ValidateSecurityProfileBehaviors(const ValidateSecurityProfileBehaviorsRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/security-profile-behaviors/validate";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/security-profile-behaviors/validate");
   return ValidateSecurityProfileBehaviorsOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 

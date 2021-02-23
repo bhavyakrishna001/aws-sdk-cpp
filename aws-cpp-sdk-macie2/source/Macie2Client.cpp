@@ -148,9 +148,7 @@ void Macie2Client::OverrideEndpoint(const Aws::String& endpoint)
 AcceptInvitationOutcome Macie2Client::AcceptInvitation(const AcceptInvitationRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/invitations/accept";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/invitations/accept");
   return AcceptInvitationOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -175,9 +173,7 @@ void Macie2Client::AcceptInvitationAsyncHelper(const AcceptInvitationRequest& re
 BatchGetCustomDataIdentifiersOutcome Macie2Client::BatchGetCustomDataIdentifiers(const BatchGetCustomDataIdentifiersRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/custom-data-identifiers/get";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/custom-data-identifiers/get");
   return BatchGetCustomDataIdentifiersOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -202,9 +198,7 @@ void Macie2Client::BatchGetCustomDataIdentifiersAsyncHelper(const BatchGetCustom
 CreateClassificationJobOutcome Macie2Client::CreateClassificationJob(const CreateClassificationJobRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/jobs";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/jobs");
   return CreateClassificationJobOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -229,9 +223,7 @@ void Macie2Client::CreateClassificationJobAsyncHelper(const CreateClassification
 CreateCustomDataIdentifierOutcome Macie2Client::CreateCustomDataIdentifier(const CreateCustomDataIdentifierRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/custom-data-identifiers";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/custom-data-identifiers");
   return CreateCustomDataIdentifierOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -256,9 +248,7 @@ void Macie2Client::CreateCustomDataIdentifierAsyncHelper(const CreateCustomDataI
 CreateFindingsFilterOutcome Macie2Client::CreateFindingsFilter(const CreateFindingsFilterRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/findingsfilters";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/findingsfilters");
   return CreateFindingsFilterOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -283,9 +273,7 @@ void Macie2Client::CreateFindingsFilterAsyncHelper(const CreateFindingsFilterReq
 CreateInvitationsOutcome Macie2Client::CreateInvitations(const CreateInvitationsRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/invitations";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/invitations");
   return CreateInvitationsOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -310,9 +298,7 @@ void Macie2Client::CreateInvitationsAsyncHelper(const CreateInvitationsRequest& 
 CreateMemberOutcome Macie2Client::CreateMember(const CreateMemberRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/members";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/members");
   return CreateMemberOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -337,9 +323,7 @@ void Macie2Client::CreateMemberAsyncHelper(const CreateMemberRequest& request, c
 CreateSampleFindingsOutcome Macie2Client::CreateSampleFindings(const CreateSampleFindingsRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/findings/sample";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/findings/sample");
   return CreateSampleFindingsOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -364,9 +348,7 @@ void Macie2Client::CreateSampleFindingsAsyncHelper(const CreateSampleFindingsReq
 DeclineInvitationsOutcome Macie2Client::DeclineInvitations(const DeclineInvitationsRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/invitations/decline";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/invitations/decline");
   return DeclineInvitationsOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -396,10 +378,8 @@ DeleteCustomDataIdentifierOutcome Macie2Client::DeleteCustomDataIdentifier(const
     return DeleteCustomDataIdentifierOutcome(Aws::Client::AWSError<Macie2Errors>(Macie2Errors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [Id]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/custom-data-identifiers/";
-  ss << request.GetId();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/custom-data-identifiers/");
+  uri.AddPathSegment(request.GetId());
   return DeleteCustomDataIdentifierOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_DELETE, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -429,10 +409,8 @@ DeleteFindingsFilterOutcome Macie2Client::DeleteFindingsFilter(const DeleteFindi
     return DeleteFindingsFilterOutcome(Aws::Client::AWSError<Macie2Errors>(Macie2Errors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [Id]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/findingsfilters/";
-  ss << request.GetId();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/findingsfilters/");
+  uri.AddPathSegment(request.GetId());
   return DeleteFindingsFilterOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_DELETE, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -457,9 +435,7 @@ void Macie2Client::DeleteFindingsFilterAsyncHelper(const DeleteFindingsFilterReq
 DeleteInvitationsOutcome Macie2Client::DeleteInvitations(const DeleteInvitationsRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/invitations/delete";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/invitations/delete");
   return DeleteInvitationsOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -489,10 +465,8 @@ DeleteMemberOutcome Macie2Client::DeleteMember(const DeleteMemberRequest& reques
     return DeleteMemberOutcome(Aws::Client::AWSError<Macie2Errors>(Macie2Errors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [Id]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/members/";
-  ss << request.GetId();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/members/");
+  uri.AddPathSegment(request.GetId());
   return DeleteMemberOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_DELETE, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -517,9 +491,7 @@ void Macie2Client::DeleteMemberAsyncHelper(const DeleteMemberRequest& request, c
 DescribeBucketsOutcome Macie2Client::DescribeBuckets(const DescribeBucketsRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/datasources/s3";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/datasources/s3");
   return DescribeBucketsOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -549,10 +521,8 @@ DescribeClassificationJobOutcome Macie2Client::DescribeClassificationJob(const D
     return DescribeClassificationJobOutcome(Aws::Client::AWSError<Macie2Errors>(Macie2Errors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [JobId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/jobs/";
-  ss << request.GetJobId();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/jobs/");
+  uri.AddPathSegment(request.GetJobId());
   return DescribeClassificationJobOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -577,9 +547,7 @@ void Macie2Client::DescribeClassificationJobAsyncHelper(const DescribeClassifica
 DescribeOrganizationConfigurationOutcome Macie2Client::DescribeOrganizationConfiguration(const DescribeOrganizationConfigurationRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/admin/configuration";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/admin/configuration");
   return DescribeOrganizationConfigurationOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -604,9 +572,7 @@ void Macie2Client::DescribeOrganizationConfigurationAsyncHelper(const DescribeOr
 DisableMacieOutcome Macie2Client::DisableMacie(const DisableMacieRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/macie";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/macie");
   return DisableMacieOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_DELETE, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -636,9 +602,7 @@ DisableOrganizationAdminAccountOutcome Macie2Client::DisableOrganizationAdminAcc
     return DisableOrganizationAdminAccountOutcome(Aws::Client::AWSError<Macie2Errors>(Macie2Errors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [AdminAccountId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/admin";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/admin");
   return DisableOrganizationAdminAccountOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_DELETE, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -663,9 +627,7 @@ void Macie2Client::DisableOrganizationAdminAccountAsyncHelper(const DisableOrgan
 DisassociateFromMasterAccountOutcome Macie2Client::DisassociateFromMasterAccount(const DisassociateFromMasterAccountRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/master/disassociate";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/master/disassociate");
   return DisassociateFromMasterAccountOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -695,10 +657,8 @@ DisassociateMemberOutcome Macie2Client::DisassociateMember(const DisassociateMem
     return DisassociateMemberOutcome(Aws::Client::AWSError<Macie2Errors>(Macie2Errors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [Id]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/members/disassociate/";
-  ss << request.GetId();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/members/disassociate/");
+  uri.AddPathSegment(request.GetId());
   return DisassociateMemberOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -723,9 +683,7 @@ void Macie2Client::DisassociateMemberAsyncHelper(const DisassociateMemberRequest
 EnableMacieOutcome Macie2Client::EnableMacie(const EnableMacieRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/macie";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/macie");
   return EnableMacieOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -750,9 +708,7 @@ void Macie2Client::EnableMacieAsyncHelper(const EnableMacieRequest& request, con
 EnableOrganizationAdminAccountOutcome Macie2Client::EnableOrganizationAdminAccount(const EnableOrganizationAdminAccountRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/admin";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/admin");
   return EnableOrganizationAdminAccountOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -777,9 +733,7 @@ void Macie2Client::EnableOrganizationAdminAccountAsyncHelper(const EnableOrganiz
 GetBucketStatisticsOutcome Macie2Client::GetBucketStatistics(const GetBucketStatisticsRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/datasources/s3/statistics";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/datasources/s3/statistics");
   return GetBucketStatisticsOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -804,9 +758,7 @@ void Macie2Client::GetBucketStatisticsAsyncHelper(const GetBucketStatisticsReque
 GetClassificationExportConfigurationOutcome Macie2Client::GetClassificationExportConfiguration(const GetClassificationExportConfigurationRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/classification-export-configuration";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/classification-export-configuration");
   return GetClassificationExportConfigurationOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -836,10 +788,8 @@ GetCustomDataIdentifierOutcome Macie2Client::GetCustomDataIdentifier(const GetCu
     return GetCustomDataIdentifierOutcome(Aws::Client::AWSError<Macie2Errors>(Macie2Errors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [Id]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/custom-data-identifiers/";
-  ss << request.GetId();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/custom-data-identifiers/");
+  uri.AddPathSegment(request.GetId());
   return GetCustomDataIdentifierOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -864,9 +814,7 @@ void Macie2Client::GetCustomDataIdentifierAsyncHelper(const GetCustomDataIdentif
 GetFindingStatisticsOutcome Macie2Client::GetFindingStatistics(const GetFindingStatisticsRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/findings/statistics";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/findings/statistics");
   return GetFindingStatisticsOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -891,9 +839,7 @@ void Macie2Client::GetFindingStatisticsAsyncHelper(const GetFindingStatisticsReq
 GetFindingsOutcome Macie2Client::GetFindings(const GetFindingsRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/findings/describe";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/findings/describe");
   return GetFindingsOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -923,10 +869,8 @@ GetFindingsFilterOutcome Macie2Client::GetFindingsFilter(const GetFindingsFilter
     return GetFindingsFilterOutcome(Aws::Client::AWSError<Macie2Errors>(Macie2Errors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [Id]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/findingsfilters/";
-  ss << request.GetId();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/findingsfilters/");
+  uri.AddPathSegment(request.GetId());
   return GetFindingsFilterOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -951,9 +895,7 @@ void Macie2Client::GetFindingsFilterAsyncHelper(const GetFindingsFilterRequest& 
 GetInvitationsCountOutcome Macie2Client::GetInvitationsCount(const GetInvitationsCountRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/invitations/count";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/invitations/count");
   return GetInvitationsCountOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -978,9 +920,7 @@ void Macie2Client::GetInvitationsCountAsyncHelper(const GetInvitationsCountReque
 GetMacieSessionOutcome Macie2Client::GetMacieSession(const GetMacieSessionRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/macie";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/macie");
   return GetMacieSessionOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1005,9 +945,7 @@ void Macie2Client::GetMacieSessionAsyncHelper(const GetMacieSessionRequest& requ
 GetMasterAccountOutcome Macie2Client::GetMasterAccount(const GetMasterAccountRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/master";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/master");
   return GetMasterAccountOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1037,10 +975,8 @@ GetMemberOutcome Macie2Client::GetMember(const GetMemberRequest& request) const
     return GetMemberOutcome(Aws::Client::AWSError<Macie2Errors>(Macie2Errors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [Id]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/members/";
-  ss << request.GetId();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/members/");
+  uri.AddPathSegment(request.GetId());
   return GetMemberOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1065,9 +1001,7 @@ void Macie2Client::GetMemberAsyncHelper(const GetMemberRequest& request, const G
 GetUsageStatisticsOutcome Macie2Client::GetUsageStatistics(const GetUsageStatisticsRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/usage/statistics";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/usage/statistics");
   return GetUsageStatisticsOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1092,9 +1026,7 @@ void Macie2Client::GetUsageStatisticsAsyncHelper(const GetUsageStatisticsRequest
 GetUsageTotalsOutcome Macie2Client::GetUsageTotals(const GetUsageTotalsRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/usage";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/usage");
   return GetUsageTotalsOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1119,9 +1051,7 @@ void Macie2Client::GetUsageTotalsAsyncHelper(const GetUsageTotalsRequest& reques
 ListClassificationJobsOutcome Macie2Client::ListClassificationJobs(const ListClassificationJobsRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/jobs/list";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/jobs/list");
   return ListClassificationJobsOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1146,9 +1076,7 @@ void Macie2Client::ListClassificationJobsAsyncHelper(const ListClassificationJob
 ListCustomDataIdentifiersOutcome Macie2Client::ListCustomDataIdentifiers(const ListCustomDataIdentifiersRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/custom-data-identifiers/list";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/custom-data-identifiers/list");
   return ListCustomDataIdentifiersOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1173,9 +1101,7 @@ void Macie2Client::ListCustomDataIdentifiersAsyncHelper(const ListCustomDataIden
 ListFindingsOutcome Macie2Client::ListFindings(const ListFindingsRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/findings";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/findings");
   return ListFindingsOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1200,9 +1126,7 @@ void Macie2Client::ListFindingsAsyncHelper(const ListFindingsRequest& request, c
 ListFindingsFiltersOutcome Macie2Client::ListFindingsFilters(const ListFindingsFiltersRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/findingsfilters";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/findingsfilters");
   return ListFindingsFiltersOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1227,9 +1151,7 @@ void Macie2Client::ListFindingsFiltersAsyncHelper(const ListFindingsFiltersReque
 ListInvitationsOutcome Macie2Client::ListInvitations(const ListInvitationsRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/invitations";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/invitations");
   return ListInvitationsOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1254,9 +1176,7 @@ void Macie2Client::ListInvitationsAsyncHelper(const ListInvitationsRequest& requ
 ListMembersOutcome Macie2Client::ListMembers(const ListMembersRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/members";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/members");
   return ListMembersOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1281,9 +1201,7 @@ void Macie2Client::ListMembersAsyncHelper(const ListMembersRequest& request, con
 ListOrganizationAdminAccountsOutcome Macie2Client::ListOrganizationAdminAccounts(const ListOrganizationAdminAccountsRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/admin";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/admin");
   return ListOrganizationAdminAccountsOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1313,10 +1231,8 @@ ListTagsForResourceOutcome Macie2Client::ListTagsForResource(const ListTagsForRe
     return ListTagsForResourceOutcome(Aws::Client::AWSError<Macie2Errors>(Macie2Errors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [ResourceArn]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/tags/";
-  ss << request.GetResourceArn();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/tags/");
+  uri.AddPathSegment(request.GetResourceArn());
   return ListTagsForResourceOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1341,9 +1257,7 @@ void Macie2Client::ListTagsForResourceAsyncHelper(const ListTagsForResourceReque
 PutClassificationExportConfigurationOutcome Macie2Client::PutClassificationExportConfiguration(const PutClassificationExportConfigurationRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/classification-export-configuration";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/classification-export-configuration");
   return PutClassificationExportConfigurationOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PUT, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1373,10 +1287,8 @@ TagResourceOutcome Macie2Client::TagResource(const TagResourceRequest& request) 
     return TagResourceOutcome(Aws::Client::AWSError<Macie2Errors>(Macie2Errors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [ResourceArn]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/tags/";
-  ss << request.GetResourceArn();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/tags/");
+  uri.AddPathSegment(request.GetResourceArn());
   return TagResourceOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1401,9 +1313,7 @@ void Macie2Client::TagResourceAsyncHelper(const TagResourceRequest& request, con
 TestCustomDataIdentifierOutcome Macie2Client::TestCustomDataIdentifier(const TestCustomDataIdentifierRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/custom-data-identifiers/test";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/custom-data-identifiers/test");
   return TestCustomDataIdentifierOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1438,10 +1348,8 @@ UntagResourceOutcome Macie2Client::UntagResource(const UntagResourceRequest& req
     return UntagResourceOutcome(Aws::Client::AWSError<Macie2Errors>(Macie2Errors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [TagKeys]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/tags/";
-  ss << request.GetResourceArn();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/tags/");
+  uri.AddPathSegment(request.GetResourceArn());
   return UntagResourceOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_DELETE, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1471,10 +1379,8 @@ UpdateClassificationJobOutcome Macie2Client::UpdateClassificationJob(const Updat
     return UpdateClassificationJobOutcome(Aws::Client::AWSError<Macie2Errors>(Macie2Errors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [JobId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/jobs/";
-  ss << request.GetJobId();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/jobs/");
+  uri.AddPathSegment(request.GetJobId());
   return UpdateClassificationJobOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PATCH, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1504,10 +1410,8 @@ UpdateFindingsFilterOutcome Macie2Client::UpdateFindingsFilter(const UpdateFindi
     return UpdateFindingsFilterOutcome(Aws::Client::AWSError<Macie2Errors>(Macie2Errors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [Id]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/findingsfilters/";
-  ss << request.GetId();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/findingsfilters/");
+  uri.AddPathSegment(request.GetId());
   return UpdateFindingsFilterOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PATCH, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1532,9 +1436,7 @@ void Macie2Client::UpdateFindingsFilterAsyncHelper(const UpdateFindingsFilterReq
 UpdateMacieSessionOutcome Macie2Client::UpdateMacieSession(const UpdateMacieSessionRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/macie";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/macie");
   return UpdateMacieSessionOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PATCH, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1564,10 +1466,8 @@ UpdateMemberSessionOutcome Macie2Client::UpdateMemberSession(const UpdateMemberS
     return UpdateMemberSessionOutcome(Aws::Client::AWSError<Macie2Errors>(Macie2Errors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [Id]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/macie/members/";
-  ss << request.GetId();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/macie/members/");
+  uri.AddPathSegment(request.GetId());
   return UpdateMemberSessionOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PATCH, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1592,9 +1492,7 @@ void Macie2Client::UpdateMemberSessionAsyncHelper(const UpdateMemberSessionReque
 UpdateOrganizationConfigurationOutcome Macie2Client::UpdateOrganizationConfiguration(const UpdateOrganizationConfigurationRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/admin/configuration";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/admin/configuration");
   return UpdateOrganizationConfigurationOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PATCH, Aws::Auth::SIGV4_SIGNER));
 }
 

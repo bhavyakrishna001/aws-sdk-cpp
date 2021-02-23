@@ -48,11 +48,11 @@ ${operation.name}Outcome ${className}::${operation.name}(const ${operation.reque
 #set($queryStart = true)
 #set($pathAndQuery = $operation.http.splitUriPartIntoPathAndQuery($uriPartString))
 #if(!$pathAndQuery.get(0).isEmpty())
-  uri.AddPathSegment("${pathAndQuery.get(0)}");
+  uri.AddPathSegments("${pathAndQuery.get(0)}");
 #end
   ss.str("${pathAndQuery.get(1)}");
 #elseif(!$uriPartString.equals("/"))
-  uri.AddPathSegment("$uriPartString");
+  uri.AddPathSegments("$uriPartString");
 #end
 #foreach($var in $uriVars)
 #set($varIndex = $partIndex - 1)
@@ -73,11 +73,11 @@ ${operation.name}Outcome ${className}::${operation.name}(const ${operation.reque
 #set($queryStart = true)
 #set($pathAndQuery = $operation.http.splitUriPartIntoPathAndQuery($uriPartString))
 #if(!$pathAndQuery.get(0).isEmpty())
-  uri.AddPathSegment("${pathAndQuery.get(0)}");
+  uri.AddPathSegments("${pathAndQuery.get(0)}");
 #end
   ss.str("${pathAndQuery.get(1)}");
 #elseif(!$uriPartString.equals("/"))
-  uri.AddPathSegment("$uriPartString");
+  uri.AddPathSegments("$uriPartString");
 #end
 #end
 #set($partIndex = $partIndex + 1)

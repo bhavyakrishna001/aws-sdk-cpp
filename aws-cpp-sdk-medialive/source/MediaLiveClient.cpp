@@ -157,11 +157,9 @@ AcceptInputDeviceTransferOutcome MediaLiveClient::AcceptInputDeviceTransfer(cons
     return AcceptInputDeviceTransferOutcome(Aws::Client::AWSError<MediaLiveErrors>(MediaLiveErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [InputDeviceId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/prod/inputDevices/";
-  ss << request.GetInputDeviceId();
-  ss << "/accept";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/prod/inputDevices/");
+  uri.AddPathSegment(request.GetInputDeviceId());
+  uri.AddPathSegments("/accept");
   return AcceptInputDeviceTransferOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -186,9 +184,7 @@ void MediaLiveClient::AcceptInputDeviceTransferAsyncHelper(const AcceptInputDevi
 BatchDeleteOutcome MediaLiveClient::BatchDelete(const BatchDeleteRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/prod/batch/delete";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/prod/batch/delete");
   return BatchDeleteOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -213,9 +209,7 @@ void MediaLiveClient::BatchDeleteAsyncHelper(const BatchDeleteRequest& request, 
 BatchStartOutcome MediaLiveClient::BatchStart(const BatchStartRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/prod/batch/start";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/prod/batch/start");
   return BatchStartOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -240,9 +234,7 @@ void MediaLiveClient::BatchStartAsyncHelper(const BatchStartRequest& request, co
 BatchStopOutcome MediaLiveClient::BatchStop(const BatchStopRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/prod/batch/stop";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/prod/batch/stop");
   return BatchStopOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -272,11 +264,9 @@ BatchUpdateScheduleOutcome MediaLiveClient::BatchUpdateSchedule(const BatchUpdat
     return BatchUpdateScheduleOutcome(Aws::Client::AWSError<MediaLiveErrors>(MediaLiveErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [ChannelId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/prod/channels/";
-  ss << request.GetChannelId();
-  ss << "/schedule";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/prod/channels/");
+  uri.AddPathSegment(request.GetChannelId());
+  uri.AddPathSegments("/schedule");
   return BatchUpdateScheduleOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PUT, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -306,11 +296,9 @@ CancelInputDeviceTransferOutcome MediaLiveClient::CancelInputDeviceTransfer(cons
     return CancelInputDeviceTransferOutcome(Aws::Client::AWSError<MediaLiveErrors>(MediaLiveErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [InputDeviceId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/prod/inputDevices/";
-  ss << request.GetInputDeviceId();
-  ss << "/cancel";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/prod/inputDevices/");
+  uri.AddPathSegment(request.GetInputDeviceId());
+  uri.AddPathSegments("/cancel");
   return CancelInputDeviceTransferOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -335,9 +323,7 @@ void MediaLiveClient::CancelInputDeviceTransferAsyncHelper(const CancelInputDevi
 CreateChannelOutcome MediaLiveClient::CreateChannel(const CreateChannelRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/prod/channels";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/prod/channels");
   return CreateChannelOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -362,9 +348,7 @@ void MediaLiveClient::CreateChannelAsyncHelper(const CreateChannelRequest& reque
 CreateInputOutcome MediaLiveClient::CreateInput(const CreateInputRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/prod/inputs";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/prod/inputs");
   return CreateInputOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -389,9 +373,7 @@ void MediaLiveClient::CreateInputAsyncHelper(const CreateInputRequest& request, 
 CreateInputSecurityGroupOutcome MediaLiveClient::CreateInputSecurityGroup(const CreateInputSecurityGroupRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/prod/inputSecurityGroups";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/prod/inputSecurityGroups");
   return CreateInputSecurityGroupOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -416,9 +398,7 @@ void MediaLiveClient::CreateInputSecurityGroupAsyncHelper(const CreateInputSecur
 CreateMultiplexOutcome MediaLiveClient::CreateMultiplex(const CreateMultiplexRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/prod/multiplexes";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/prod/multiplexes");
   return CreateMultiplexOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -448,11 +428,9 @@ CreateMultiplexProgramOutcome MediaLiveClient::CreateMultiplexProgram(const Crea
     return CreateMultiplexProgramOutcome(Aws::Client::AWSError<MediaLiveErrors>(MediaLiveErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [MultiplexId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/prod/multiplexes/";
-  ss << request.GetMultiplexId();
-  ss << "/programs";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/prod/multiplexes/");
+  uri.AddPathSegment(request.GetMultiplexId());
+  uri.AddPathSegments("/programs");
   return CreateMultiplexProgramOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -482,10 +460,8 @@ CreateTagsOutcome MediaLiveClient::CreateTags(const CreateTagsRequest& request) 
     return CreateTagsOutcome(Aws::Client::AWSError<MediaLiveErrors>(MediaLiveErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [ResourceArn]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/prod/tags/";
-  ss << request.GetResourceArn();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/prod/tags/");
+  uri.AddPathSegment(request.GetResourceArn());
   return CreateTagsOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -515,10 +491,8 @@ DeleteChannelOutcome MediaLiveClient::DeleteChannel(const DeleteChannelRequest& 
     return DeleteChannelOutcome(Aws::Client::AWSError<MediaLiveErrors>(MediaLiveErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [ChannelId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/prod/channels/";
-  ss << request.GetChannelId();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/prod/channels/");
+  uri.AddPathSegment(request.GetChannelId());
   return DeleteChannelOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_DELETE, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -548,10 +522,8 @@ DeleteInputOutcome MediaLiveClient::DeleteInput(const DeleteInputRequest& reques
     return DeleteInputOutcome(Aws::Client::AWSError<MediaLiveErrors>(MediaLiveErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [InputId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/prod/inputs/";
-  ss << request.GetInputId();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/prod/inputs/");
+  uri.AddPathSegment(request.GetInputId());
   return DeleteInputOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_DELETE, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -581,10 +553,8 @@ DeleteInputSecurityGroupOutcome MediaLiveClient::DeleteInputSecurityGroup(const 
     return DeleteInputSecurityGroupOutcome(Aws::Client::AWSError<MediaLiveErrors>(MediaLiveErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [InputSecurityGroupId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/prod/inputSecurityGroups/";
-  ss << request.GetInputSecurityGroupId();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/prod/inputSecurityGroups/");
+  uri.AddPathSegment(request.GetInputSecurityGroupId());
   return DeleteInputSecurityGroupOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_DELETE, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -614,10 +584,8 @@ DeleteMultiplexOutcome MediaLiveClient::DeleteMultiplex(const DeleteMultiplexReq
     return DeleteMultiplexOutcome(Aws::Client::AWSError<MediaLiveErrors>(MediaLiveErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [MultiplexId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/prod/multiplexes/";
-  ss << request.GetMultiplexId();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/prod/multiplexes/");
+  uri.AddPathSegment(request.GetMultiplexId());
   return DeleteMultiplexOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_DELETE, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -652,12 +620,10 @@ DeleteMultiplexProgramOutcome MediaLiveClient::DeleteMultiplexProgram(const Dele
     return DeleteMultiplexProgramOutcome(Aws::Client::AWSError<MediaLiveErrors>(MediaLiveErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [ProgramName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/prod/multiplexes/";
-  ss << request.GetMultiplexId();
-  ss << "/programs/";
-  ss << request.GetProgramName();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/prod/multiplexes/");
+  uri.AddPathSegment(request.GetMultiplexId());
+  uri.AddPathSegments("/programs/");
+  uri.AddPathSegment(request.GetProgramName());
   return DeleteMultiplexProgramOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_DELETE, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -687,10 +653,8 @@ DeleteReservationOutcome MediaLiveClient::DeleteReservation(const DeleteReservat
     return DeleteReservationOutcome(Aws::Client::AWSError<MediaLiveErrors>(MediaLiveErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [ReservationId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/prod/reservations/";
-  ss << request.GetReservationId();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/prod/reservations/");
+  uri.AddPathSegment(request.GetReservationId());
   return DeleteReservationOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_DELETE, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -720,11 +684,9 @@ DeleteScheduleOutcome MediaLiveClient::DeleteSchedule(const DeleteScheduleReques
     return DeleteScheduleOutcome(Aws::Client::AWSError<MediaLiveErrors>(MediaLiveErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [ChannelId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/prod/channels/";
-  ss << request.GetChannelId();
-  ss << "/schedule";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/prod/channels/");
+  uri.AddPathSegment(request.GetChannelId());
+  uri.AddPathSegments("/schedule");
   return DeleteScheduleOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_DELETE, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -759,10 +721,8 @@ DeleteTagsOutcome MediaLiveClient::DeleteTags(const DeleteTagsRequest& request) 
     return DeleteTagsOutcome(Aws::Client::AWSError<MediaLiveErrors>(MediaLiveErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [TagKeys]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/prod/tags/";
-  ss << request.GetResourceArn();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/prod/tags/");
+  uri.AddPathSegment(request.GetResourceArn());
   return DeleteTagsOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_DELETE, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -792,10 +752,8 @@ DescribeChannelOutcome MediaLiveClient::DescribeChannel(const DescribeChannelReq
     return DescribeChannelOutcome(Aws::Client::AWSError<MediaLiveErrors>(MediaLiveErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [ChannelId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/prod/channels/";
-  ss << request.GetChannelId();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/prod/channels/");
+  uri.AddPathSegment(request.GetChannelId());
   return DescribeChannelOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -825,10 +783,8 @@ DescribeInputOutcome MediaLiveClient::DescribeInput(const DescribeInputRequest& 
     return DescribeInputOutcome(Aws::Client::AWSError<MediaLiveErrors>(MediaLiveErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [InputId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/prod/inputs/";
-  ss << request.GetInputId();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/prod/inputs/");
+  uri.AddPathSegment(request.GetInputId());
   return DescribeInputOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -858,10 +814,8 @@ DescribeInputDeviceOutcome MediaLiveClient::DescribeInputDevice(const DescribeIn
     return DescribeInputDeviceOutcome(Aws::Client::AWSError<MediaLiveErrors>(MediaLiveErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [InputDeviceId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/prod/inputDevices/";
-  ss << request.GetInputDeviceId();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/prod/inputDevices/");
+  uri.AddPathSegment(request.GetInputDeviceId());
   return DescribeInputDeviceOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -896,11 +850,9 @@ DescribeInputDeviceThumbnailOutcome MediaLiveClient::DescribeInputDeviceThumbnai
     return DescribeInputDeviceThumbnailOutcome(Aws::Client::AWSError<MediaLiveErrors>(MediaLiveErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [Accept]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/prod/inputDevices/";
-  ss << request.GetInputDeviceId();
-  ss << "/thumbnailData";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/prod/inputDevices/");
+  uri.AddPathSegment(request.GetInputDeviceId());
+  uri.AddPathSegments("/thumbnailData");
   return DescribeInputDeviceThumbnailOutcome(MakeRequestWithUnparsedResponse(uri, request, Aws::Http::HttpMethod::HTTP_GET));
 }
 
@@ -930,10 +882,8 @@ DescribeInputSecurityGroupOutcome MediaLiveClient::DescribeInputSecurityGroup(co
     return DescribeInputSecurityGroupOutcome(Aws::Client::AWSError<MediaLiveErrors>(MediaLiveErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [InputSecurityGroupId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/prod/inputSecurityGroups/";
-  ss << request.GetInputSecurityGroupId();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/prod/inputSecurityGroups/");
+  uri.AddPathSegment(request.GetInputSecurityGroupId());
   return DescribeInputSecurityGroupOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -963,10 +913,8 @@ DescribeMultiplexOutcome MediaLiveClient::DescribeMultiplex(const DescribeMultip
     return DescribeMultiplexOutcome(Aws::Client::AWSError<MediaLiveErrors>(MediaLiveErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [MultiplexId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/prod/multiplexes/";
-  ss << request.GetMultiplexId();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/prod/multiplexes/");
+  uri.AddPathSegment(request.GetMultiplexId());
   return DescribeMultiplexOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1001,12 +949,10 @@ DescribeMultiplexProgramOutcome MediaLiveClient::DescribeMultiplexProgram(const 
     return DescribeMultiplexProgramOutcome(Aws::Client::AWSError<MediaLiveErrors>(MediaLiveErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [ProgramName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/prod/multiplexes/";
-  ss << request.GetMultiplexId();
-  ss << "/programs/";
-  ss << request.GetProgramName();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/prod/multiplexes/");
+  uri.AddPathSegment(request.GetMultiplexId());
+  uri.AddPathSegments("/programs/");
+  uri.AddPathSegment(request.GetProgramName());
   return DescribeMultiplexProgramOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1036,10 +982,8 @@ DescribeOfferingOutcome MediaLiveClient::DescribeOffering(const DescribeOffering
     return DescribeOfferingOutcome(Aws::Client::AWSError<MediaLiveErrors>(MediaLiveErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [OfferingId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/prod/offerings/";
-  ss << request.GetOfferingId();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/prod/offerings/");
+  uri.AddPathSegment(request.GetOfferingId());
   return DescribeOfferingOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1069,10 +1013,8 @@ DescribeReservationOutcome MediaLiveClient::DescribeReservation(const DescribeRe
     return DescribeReservationOutcome(Aws::Client::AWSError<MediaLiveErrors>(MediaLiveErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [ReservationId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/prod/reservations/";
-  ss << request.GetReservationId();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/prod/reservations/");
+  uri.AddPathSegment(request.GetReservationId());
   return DescribeReservationOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1102,11 +1044,9 @@ DescribeScheduleOutcome MediaLiveClient::DescribeSchedule(const DescribeSchedule
     return DescribeScheduleOutcome(Aws::Client::AWSError<MediaLiveErrors>(MediaLiveErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [ChannelId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/prod/channels/";
-  ss << request.GetChannelId();
-  ss << "/schedule";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/prod/channels/");
+  uri.AddPathSegment(request.GetChannelId());
+  uri.AddPathSegments("/schedule");
   return DescribeScheduleOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1131,9 +1071,7 @@ void MediaLiveClient::DescribeScheduleAsyncHelper(const DescribeScheduleRequest&
 ListChannelsOutcome MediaLiveClient::ListChannels(const ListChannelsRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/prod/channels";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/prod/channels");
   return ListChannelsOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1163,9 +1101,7 @@ ListInputDeviceTransfersOutcome MediaLiveClient::ListInputDeviceTransfers(const 
     return ListInputDeviceTransfersOutcome(Aws::Client::AWSError<MediaLiveErrors>(MediaLiveErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [TransferType]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/prod/inputDeviceTransfers";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/prod/inputDeviceTransfers");
   return ListInputDeviceTransfersOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1190,9 +1126,7 @@ void MediaLiveClient::ListInputDeviceTransfersAsyncHelper(const ListInputDeviceT
 ListInputDevicesOutcome MediaLiveClient::ListInputDevices(const ListInputDevicesRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/prod/inputDevices";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/prod/inputDevices");
   return ListInputDevicesOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1217,9 +1151,7 @@ void MediaLiveClient::ListInputDevicesAsyncHelper(const ListInputDevicesRequest&
 ListInputSecurityGroupsOutcome MediaLiveClient::ListInputSecurityGroups(const ListInputSecurityGroupsRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/prod/inputSecurityGroups";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/prod/inputSecurityGroups");
   return ListInputSecurityGroupsOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1244,9 +1176,7 @@ void MediaLiveClient::ListInputSecurityGroupsAsyncHelper(const ListInputSecurity
 ListInputsOutcome MediaLiveClient::ListInputs(const ListInputsRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/prod/inputs";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/prod/inputs");
   return ListInputsOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1276,11 +1206,9 @@ ListMultiplexProgramsOutcome MediaLiveClient::ListMultiplexPrograms(const ListMu
     return ListMultiplexProgramsOutcome(Aws::Client::AWSError<MediaLiveErrors>(MediaLiveErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [MultiplexId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/prod/multiplexes/";
-  ss << request.GetMultiplexId();
-  ss << "/programs";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/prod/multiplexes/");
+  uri.AddPathSegment(request.GetMultiplexId());
+  uri.AddPathSegments("/programs");
   return ListMultiplexProgramsOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1305,9 +1233,7 @@ void MediaLiveClient::ListMultiplexProgramsAsyncHelper(const ListMultiplexProgra
 ListMultiplexesOutcome MediaLiveClient::ListMultiplexes(const ListMultiplexesRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/prod/multiplexes";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/prod/multiplexes");
   return ListMultiplexesOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1332,9 +1258,7 @@ void MediaLiveClient::ListMultiplexesAsyncHelper(const ListMultiplexesRequest& r
 ListOfferingsOutcome MediaLiveClient::ListOfferings(const ListOfferingsRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/prod/offerings";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/prod/offerings");
   return ListOfferingsOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1359,9 +1283,7 @@ void MediaLiveClient::ListOfferingsAsyncHelper(const ListOfferingsRequest& reque
 ListReservationsOutcome MediaLiveClient::ListReservations(const ListReservationsRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/prod/reservations";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/prod/reservations");
   return ListReservationsOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1391,10 +1313,8 @@ ListTagsForResourceOutcome MediaLiveClient::ListTagsForResource(const ListTagsFo
     return ListTagsForResourceOutcome(Aws::Client::AWSError<MediaLiveErrors>(MediaLiveErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [ResourceArn]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/prod/tags/";
-  ss << request.GetResourceArn();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/prod/tags/");
+  uri.AddPathSegment(request.GetResourceArn());
   return ListTagsForResourceOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1424,11 +1344,9 @@ PurchaseOfferingOutcome MediaLiveClient::PurchaseOffering(const PurchaseOffering
     return PurchaseOfferingOutcome(Aws::Client::AWSError<MediaLiveErrors>(MediaLiveErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [OfferingId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/prod/offerings/";
-  ss << request.GetOfferingId();
-  ss << "/purchase";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/prod/offerings/");
+  uri.AddPathSegment(request.GetOfferingId());
+  uri.AddPathSegments("/purchase");
   return PurchaseOfferingOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1458,11 +1376,9 @@ RejectInputDeviceTransferOutcome MediaLiveClient::RejectInputDeviceTransfer(cons
     return RejectInputDeviceTransferOutcome(Aws::Client::AWSError<MediaLiveErrors>(MediaLiveErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [InputDeviceId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/prod/inputDevices/";
-  ss << request.GetInputDeviceId();
-  ss << "/reject";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/prod/inputDevices/");
+  uri.AddPathSegment(request.GetInputDeviceId());
+  uri.AddPathSegments("/reject");
   return RejectInputDeviceTransferOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1492,11 +1408,9 @@ StartChannelOutcome MediaLiveClient::StartChannel(const StartChannelRequest& req
     return StartChannelOutcome(Aws::Client::AWSError<MediaLiveErrors>(MediaLiveErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [ChannelId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/prod/channels/";
-  ss << request.GetChannelId();
-  ss << "/start";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/prod/channels/");
+  uri.AddPathSegment(request.GetChannelId());
+  uri.AddPathSegments("/start");
   return StartChannelOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1526,11 +1440,9 @@ StartMultiplexOutcome MediaLiveClient::StartMultiplex(const StartMultiplexReques
     return StartMultiplexOutcome(Aws::Client::AWSError<MediaLiveErrors>(MediaLiveErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [MultiplexId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/prod/multiplexes/";
-  ss << request.GetMultiplexId();
-  ss << "/start";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/prod/multiplexes/");
+  uri.AddPathSegment(request.GetMultiplexId());
+  uri.AddPathSegments("/start");
   return StartMultiplexOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1560,11 +1472,9 @@ StopChannelOutcome MediaLiveClient::StopChannel(const StopChannelRequest& reques
     return StopChannelOutcome(Aws::Client::AWSError<MediaLiveErrors>(MediaLiveErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [ChannelId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/prod/channels/";
-  ss << request.GetChannelId();
-  ss << "/stop";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/prod/channels/");
+  uri.AddPathSegment(request.GetChannelId());
+  uri.AddPathSegments("/stop");
   return StopChannelOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1594,11 +1504,9 @@ StopMultiplexOutcome MediaLiveClient::StopMultiplex(const StopMultiplexRequest& 
     return StopMultiplexOutcome(Aws::Client::AWSError<MediaLiveErrors>(MediaLiveErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [MultiplexId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/prod/multiplexes/";
-  ss << request.GetMultiplexId();
-  ss << "/stop";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/prod/multiplexes/");
+  uri.AddPathSegment(request.GetMultiplexId());
+  uri.AddPathSegments("/stop");
   return StopMultiplexOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1628,11 +1536,9 @@ TransferInputDeviceOutcome MediaLiveClient::TransferInputDevice(const TransferIn
     return TransferInputDeviceOutcome(Aws::Client::AWSError<MediaLiveErrors>(MediaLiveErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [InputDeviceId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/prod/inputDevices/";
-  ss << request.GetInputDeviceId();
-  ss << "/transfer";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/prod/inputDevices/");
+  uri.AddPathSegment(request.GetInputDeviceId());
+  uri.AddPathSegments("/transfer");
   return TransferInputDeviceOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1662,10 +1568,8 @@ UpdateChannelOutcome MediaLiveClient::UpdateChannel(const UpdateChannelRequest& 
     return UpdateChannelOutcome(Aws::Client::AWSError<MediaLiveErrors>(MediaLiveErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [ChannelId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/prod/channels/";
-  ss << request.GetChannelId();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/prod/channels/");
+  uri.AddPathSegment(request.GetChannelId());
   return UpdateChannelOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PUT, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1695,11 +1599,9 @@ UpdateChannelClassOutcome MediaLiveClient::UpdateChannelClass(const UpdateChanne
     return UpdateChannelClassOutcome(Aws::Client::AWSError<MediaLiveErrors>(MediaLiveErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [ChannelId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/prod/channels/";
-  ss << request.GetChannelId();
-  ss << "/channelClass";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/prod/channels/");
+  uri.AddPathSegment(request.GetChannelId());
+  uri.AddPathSegments("/channelClass");
   return UpdateChannelClassOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PUT, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1729,10 +1631,8 @@ UpdateInputOutcome MediaLiveClient::UpdateInput(const UpdateInputRequest& reques
     return UpdateInputOutcome(Aws::Client::AWSError<MediaLiveErrors>(MediaLiveErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [InputId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/prod/inputs/";
-  ss << request.GetInputId();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/prod/inputs/");
+  uri.AddPathSegment(request.GetInputId());
   return UpdateInputOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PUT, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1762,10 +1662,8 @@ UpdateInputDeviceOutcome MediaLiveClient::UpdateInputDevice(const UpdateInputDev
     return UpdateInputDeviceOutcome(Aws::Client::AWSError<MediaLiveErrors>(MediaLiveErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [InputDeviceId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/prod/inputDevices/";
-  ss << request.GetInputDeviceId();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/prod/inputDevices/");
+  uri.AddPathSegment(request.GetInputDeviceId());
   return UpdateInputDeviceOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PUT, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1795,10 +1693,8 @@ UpdateInputSecurityGroupOutcome MediaLiveClient::UpdateInputSecurityGroup(const 
     return UpdateInputSecurityGroupOutcome(Aws::Client::AWSError<MediaLiveErrors>(MediaLiveErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [InputSecurityGroupId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/prod/inputSecurityGroups/";
-  ss << request.GetInputSecurityGroupId();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/prod/inputSecurityGroups/");
+  uri.AddPathSegment(request.GetInputSecurityGroupId());
   return UpdateInputSecurityGroupOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PUT, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1828,10 +1724,8 @@ UpdateMultiplexOutcome MediaLiveClient::UpdateMultiplex(const UpdateMultiplexReq
     return UpdateMultiplexOutcome(Aws::Client::AWSError<MediaLiveErrors>(MediaLiveErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [MultiplexId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/prod/multiplexes/";
-  ss << request.GetMultiplexId();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/prod/multiplexes/");
+  uri.AddPathSegment(request.GetMultiplexId());
   return UpdateMultiplexOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PUT, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1866,12 +1760,10 @@ UpdateMultiplexProgramOutcome MediaLiveClient::UpdateMultiplexProgram(const Upda
     return UpdateMultiplexProgramOutcome(Aws::Client::AWSError<MediaLiveErrors>(MediaLiveErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [ProgramName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/prod/multiplexes/";
-  ss << request.GetMultiplexId();
-  ss << "/programs/";
-  ss << request.GetProgramName();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/prod/multiplexes/");
+  uri.AddPathSegment(request.GetMultiplexId());
+  uri.AddPathSegments("/programs/");
+  uri.AddPathSegment(request.GetProgramName());
   return UpdateMultiplexProgramOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PUT, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1901,10 +1793,8 @@ UpdateReservationOutcome MediaLiveClient::UpdateReservation(const UpdateReservat
     return UpdateReservationOutcome(Aws::Client::AWSError<MediaLiveErrors>(MediaLiveErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [ReservationId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/prod/reservations/";
-  ss << request.GetReservationId();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/prod/reservations/");
+  uri.AddPathSegment(request.GetReservationId());
   return UpdateReservationOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PUT, Aws::Auth::SIGV4_SIGNER));
 }
 

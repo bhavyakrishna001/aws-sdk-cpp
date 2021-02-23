@@ -26,17 +26,17 @@ ${operation.name}Outcome ${className}::${operation.name}(${constText}${operation
 #set($queryStart = true)
 #set($pathAndQuery = $operation.http.splitUriPartIntoPathAndQuery($uriPartString))
 #if(!$pathAndQuery.get(0).isEmpty())
-  uri.AddPathSegment("${pathAndQuery.get(0)}");
+  uri.AddPathSegments("${pathAndQuery.get(0)}");
 #end
   ss.str("${pathAndQuery.get(1)}");
 #elseif(!$uriPartString.equals("/"))
-  uri.AddPathSegment("$uriPartString");
+  uri.AddPathSegments("$uriPartString");
 #end## ---------------------------- if (request uri contains query) end ------
 #foreach($var in $uriVars)## for (parameter in request uri parameters) -------
 #set($varIndex = $partIndex - 1)
 #set($partShapeMember = $operation.request.shape.getMemberByLocationName($uriVars.get($varIndex)))
 #if($partShapeMember.shape.enum)
-#set($parameter = "{partShapeMember.shape.name}Mapper::GetNameFor${partShapeMember.shape.name}(request.Get${CppViewHelper.convertToUpperCamel($operation.request.shape.getMemberNameByLocationName($uriVars.get($varIndex)))}())")
+#set($parameter = "${partShapeMember.shape.name}Mapper::GetNameFor${partShapeMember.shape.name}(request.Get${CppViewHelper.convertToUpperCamel($operation.request.shape.getMemberNameByLocationName($uriVars.get($varIndex)))}())")
 #else
 #set($parameter = "request.Get${CppViewHelper.convertToUpperCamel($operation.request.shape.getMemberNameByLocationName($uriVars.get($varIndex)))}()")
 #end
@@ -51,11 +51,11 @@ ${operation.name}Outcome ${className}::${operation.name}(${constText}${operation
 #set($queryStart = true)
 #set($pathAndQuery = $operation.http.splitUriPartIntoPathAndQuery($uriPartString))
 #if(!$pathAndQuery.get(0).isEmpty())
-  uri.AddPathSegment("${pathAndQuery.get(0)}");
+  uri.AddPathSegments("${pathAndQuery.get(0)}");
 #end
   ss.str("${pathAndQuery.get(1)}");
 #elseif(!$uriPartString.equals("/"))
-  uri.AddPathSegment("$uriPartString");
+  uri.AddPathSegments("$uriPartString");
 #end
 #end
 #set($partIndex = $partIndex + 1)

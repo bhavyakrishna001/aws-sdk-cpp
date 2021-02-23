@@ -115,9 +115,7 @@ void DevOpsGuruClient::OverrideEndpoint(const Aws::String& endpoint)
 AddNotificationChannelOutcome DevOpsGuruClient::AddNotificationChannel(const AddNotificationChannelRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/channels";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/channels");
   return AddNotificationChannelOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PUT, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -142,9 +140,7 @@ void DevOpsGuruClient::AddNotificationChannelAsyncHelper(const AddNotificationCh
 DescribeAccountHealthOutcome DevOpsGuruClient::DescribeAccountHealth(const DescribeAccountHealthRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/accounts/health";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/accounts/health");
   return DescribeAccountHealthOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -169,9 +165,7 @@ void DevOpsGuruClient::DescribeAccountHealthAsyncHelper(const DescribeAccountHea
 DescribeAccountOverviewOutcome DevOpsGuruClient::DescribeAccountOverview(const DescribeAccountOverviewRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/accounts/overview";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/accounts/overview");
   return DescribeAccountOverviewOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -201,10 +195,8 @@ DescribeAnomalyOutcome DevOpsGuruClient::DescribeAnomaly(const DescribeAnomalyRe
     return DescribeAnomalyOutcome(Aws::Client::AWSError<DevOpsGuruErrors>(DevOpsGuruErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [Id]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/anomalies/";
-  ss << request.GetId();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/anomalies/");
+  uri.AddPathSegment(request.GetId());
   return DescribeAnomalyOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -234,10 +226,8 @@ DescribeInsightOutcome DevOpsGuruClient::DescribeInsight(const DescribeInsightRe
     return DescribeInsightOutcome(Aws::Client::AWSError<DevOpsGuruErrors>(DevOpsGuruErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [Id]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/insights/";
-  ss << request.GetId();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/insights/");
+  uri.AddPathSegment(request.GetId());
   return DescribeInsightOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -267,10 +257,8 @@ DescribeResourceCollectionHealthOutcome DevOpsGuruClient::DescribeResourceCollec
     return DescribeResourceCollectionHealthOutcome(Aws::Client::AWSError<DevOpsGuruErrors>(DevOpsGuruErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [ResourceCollectionType]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/accounts/health/resource-collection/";
-  ss << ResourceCollectionTypeMapper::GetNameForResourceCollectionType(request.GetResourceCollectionType());
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/accounts/health/resource-collection/");
+  uri.AddPathSegment(ResourceCollectionTypeMapper::GetNameForResourceCollectionType(request.GetResourceCollectionType()));
   return DescribeResourceCollectionHealthOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -295,9 +283,7 @@ void DevOpsGuruClient::DescribeResourceCollectionHealthAsyncHelper(const Describ
 DescribeServiceIntegrationOutcome DevOpsGuruClient::DescribeServiceIntegration(const DescribeServiceIntegrationRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/service-integrations";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/service-integrations");
   return DescribeServiceIntegrationOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -327,10 +313,8 @@ GetResourceCollectionOutcome DevOpsGuruClient::GetResourceCollection(const GetRe
     return GetResourceCollectionOutcome(Aws::Client::AWSError<DevOpsGuruErrors>(DevOpsGuruErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [ResourceCollectionType]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/resource-collections/";
-  ss << ResourceCollectionTypeMapper::GetNameForResourceCollectionType(request.GetResourceCollectionType());
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/resource-collections/");
+  uri.AddPathSegment(ResourceCollectionTypeMapper::GetNameForResourceCollectionType(request.GetResourceCollectionType()));
   return GetResourceCollectionOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -360,10 +344,8 @@ ListAnomaliesForInsightOutcome DevOpsGuruClient::ListAnomaliesForInsight(const L
     return ListAnomaliesForInsightOutcome(Aws::Client::AWSError<DevOpsGuruErrors>(DevOpsGuruErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [InsightId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/anomalies/insight/";
-  ss << request.GetInsightId();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/anomalies/insight/");
+  uri.AddPathSegment(request.GetInsightId());
   return ListAnomaliesForInsightOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -388,9 +370,7 @@ void DevOpsGuruClient::ListAnomaliesForInsightAsyncHelper(const ListAnomaliesFor
 ListEventsOutcome DevOpsGuruClient::ListEvents(const ListEventsRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/events";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/events");
   return ListEventsOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -415,9 +395,7 @@ void DevOpsGuruClient::ListEventsAsyncHelper(const ListEventsRequest& request, c
 ListInsightsOutcome DevOpsGuruClient::ListInsights(const ListInsightsRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/insights";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/insights");
   return ListInsightsOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -442,9 +420,7 @@ void DevOpsGuruClient::ListInsightsAsyncHelper(const ListInsightsRequest& reques
 ListNotificationChannelsOutcome DevOpsGuruClient::ListNotificationChannels(const ListNotificationChannelsRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/channels";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/channels");
   return ListNotificationChannelsOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -469,9 +445,7 @@ void DevOpsGuruClient::ListNotificationChannelsAsyncHelper(const ListNotificatio
 ListRecommendationsOutcome DevOpsGuruClient::ListRecommendations(const ListRecommendationsRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/recommendations";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/recommendations");
   return ListRecommendationsOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -496,9 +470,7 @@ void DevOpsGuruClient::ListRecommendationsAsyncHelper(const ListRecommendationsR
 PutFeedbackOutcome DevOpsGuruClient::PutFeedback(const PutFeedbackRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/feedback";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/feedback");
   return PutFeedbackOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PUT, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -528,10 +500,8 @@ RemoveNotificationChannelOutcome DevOpsGuruClient::RemoveNotificationChannel(con
     return RemoveNotificationChannelOutcome(Aws::Client::AWSError<DevOpsGuruErrors>(DevOpsGuruErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [Id]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/channels/";
-  ss << request.GetId();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/channels/");
+  uri.AddPathSegment(request.GetId());
   return RemoveNotificationChannelOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_DELETE, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -556,9 +526,7 @@ void DevOpsGuruClient::RemoveNotificationChannelAsyncHelper(const RemoveNotifica
 SearchInsightsOutcome DevOpsGuruClient::SearchInsights(const SearchInsightsRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/insights/search";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/insights/search");
   return SearchInsightsOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -583,9 +551,7 @@ void DevOpsGuruClient::SearchInsightsAsyncHelper(const SearchInsightsRequest& re
 UpdateResourceCollectionOutcome DevOpsGuruClient::UpdateResourceCollection(const UpdateResourceCollectionRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/resource-collections";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/resource-collections");
   return UpdateResourceCollectionOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PUT, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -610,9 +576,7 @@ void DevOpsGuruClient::UpdateResourceCollectionAsyncHelper(const UpdateResourceC
 UpdateServiceIntegrationOutcome DevOpsGuruClient::UpdateServiceIntegration(const UpdateServiceIntegrationRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/service-integrations";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/service-integrations");
   return UpdateServiceIntegrationOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PUT, Aws::Auth::SIGV4_SIGNER));
 }
 

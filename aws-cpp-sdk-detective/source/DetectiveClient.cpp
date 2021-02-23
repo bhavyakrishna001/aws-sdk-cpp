@@ -108,9 +108,7 @@ void DetectiveClient::OverrideEndpoint(const Aws::String& endpoint)
 AcceptInvitationOutcome DetectiveClient::AcceptInvitation(const AcceptInvitationRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/invitation";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/invitation");
   return AcceptInvitationOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PUT, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -160,9 +158,7 @@ void DetectiveClient::CreateGraphAsyncHelper(const CreateGraphResponseReceivedHa
 CreateMembersOutcome DetectiveClient::CreateMembers(const CreateMembersRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/graph/members";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/graph/members");
   return CreateMembersOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -187,9 +183,7 @@ void DetectiveClient::CreateMembersAsyncHelper(const CreateMembersRequest& reque
 DeleteGraphOutcome DetectiveClient::DeleteGraph(const DeleteGraphRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/graph/removal";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/graph/removal");
   return DeleteGraphOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -214,9 +208,7 @@ void DetectiveClient::DeleteGraphAsyncHelper(const DeleteGraphRequest& request, 
 DeleteMembersOutcome DetectiveClient::DeleteMembers(const DeleteMembersRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/graph/members/removal";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/graph/members/removal");
   return DeleteMembersOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -241,9 +233,7 @@ void DetectiveClient::DeleteMembersAsyncHelper(const DeleteMembersRequest& reque
 DisassociateMembershipOutcome DetectiveClient::DisassociateMembership(const DisassociateMembershipRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/membership/removal";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/membership/removal");
   return DisassociateMembershipOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -268,9 +258,7 @@ void DetectiveClient::DisassociateMembershipAsyncHelper(const DisassociateMember
 GetMembersOutcome DetectiveClient::GetMembers(const GetMembersRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/graph/members/get";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/graph/members/get");
   return GetMembersOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -295,9 +283,7 @@ void DetectiveClient::GetMembersAsyncHelper(const GetMembersRequest& request, co
 ListGraphsOutcome DetectiveClient::ListGraphs(const ListGraphsRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/graphs/list";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/graphs/list");
   return ListGraphsOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -322,9 +308,7 @@ void DetectiveClient::ListGraphsAsyncHelper(const ListGraphsRequest& request, co
 ListInvitationsOutcome DetectiveClient::ListInvitations(const ListInvitationsRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/invitations/list";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/invitations/list");
   return ListInvitationsOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -349,9 +333,7 @@ void DetectiveClient::ListInvitationsAsyncHelper(const ListInvitationsRequest& r
 ListMembersOutcome DetectiveClient::ListMembers(const ListMembersRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/graph/members/list";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/graph/members/list");
   return ListMembersOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -376,9 +358,7 @@ void DetectiveClient::ListMembersAsyncHelper(const ListMembersRequest& request, 
 RejectInvitationOutcome DetectiveClient::RejectInvitation(const RejectInvitationRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/invitation/removal";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/invitation/removal");
   return RejectInvitationOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -403,9 +383,7 @@ void DetectiveClient::RejectInvitationAsyncHelper(const RejectInvitationRequest&
 StartMonitoringMemberOutcome DetectiveClient::StartMonitoringMember(const StartMonitoringMemberRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/graph/member/monitoringstate";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/graph/member/monitoringstate");
   return StartMonitoringMemberOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 

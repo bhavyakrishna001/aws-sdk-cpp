@@ -152,15 +152,12 @@ BuildBotLocaleOutcome LexModelsV2Client::BuildBotLocale(const BuildBotLocaleRequ
     return BuildBotLocaleOutcome(Aws::Client::AWSError<LexModelsV2Errors>(LexModelsV2Errors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [LocaleId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/bots/";
-  ss << request.GetBotId();
-  ss << "/botversions/";
-  ss << request.GetBotVersion();
-  ss << "/botlocales/";
-  ss << request.GetLocaleId();
-  ss << "/";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/bots/");
+  uri.AddPathSegment(request.GetBotId());
+  uri.AddPathSegments("/botversions/");
+  uri.AddPathSegment(request.GetBotVersion());
+  uri.AddPathSegments("/botlocales/");
+  uri.AddPathSegment(request.GetLocaleId());
   return BuildBotLocaleOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -185,9 +182,7 @@ void LexModelsV2Client::BuildBotLocaleAsyncHelper(const BuildBotLocaleRequest& r
 CreateBotOutcome LexModelsV2Client::CreateBot(const CreateBotRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/bots/";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/bots/");
   return CreateBotOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PUT, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -217,11 +212,9 @@ CreateBotAliasOutcome LexModelsV2Client::CreateBotAlias(const CreateBotAliasRequ
     return CreateBotAliasOutcome(Aws::Client::AWSError<LexModelsV2Errors>(LexModelsV2Errors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [BotId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/bots/";
-  ss << request.GetBotId();
-  ss << "/botaliases/";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/bots/");
+  uri.AddPathSegment(request.GetBotId());
+  uri.AddPathSegments("/botaliases/");
   return CreateBotAliasOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PUT, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -256,13 +249,11 @@ CreateBotLocaleOutcome LexModelsV2Client::CreateBotLocale(const CreateBotLocaleR
     return CreateBotLocaleOutcome(Aws::Client::AWSError<LexModelsV2Errors>(LexModelsV2Errors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [BotVersion]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/bots/";
-  ss << request.GetBotId();
-  ss << "/botversions/";
-  ss << request.GetBotVersion();
-  ss << "/botlocales/";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/bots/");
+  uri.AddPathSegment(request.GetBotId());
+  uri.AddPathSegments("/botversions/");
+  uri.AddPathSegment(request.GetBotVersion());
+  uri.AddPathSegments("/botlocales/");
   return CreateBotLocaleOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PUT, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -292,11 +283,9 @@ CreateBotVersionOutcome LexModelsV2Client::CreateBotVersion(const CreateBotVersi
     return CreateBotVersionOutcome(Aws::Client::AWSError<LexModelsV2Errors>(LexModelsV2Errors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [BotId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/bots/";
-  ss << request.GetBotId();
-  ss << "/botversions/";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/bots/");
+  uri.AddPathSegment(request.GetBotId());
+  uri.AddPathSegments("/botversions/");
   return CreateBotVersionOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PUT, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -336,15 +325,13 @@ CreateIntentOutcome LexModelsV2Client::CreateIntent(const CreateIntentRequest& r
     return CreateIntentOutcome(Aws::Client::AWSError<LexModelsV2Errors>(LexModelsV2Errors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [LocaleId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/bots/";
-  ss << request.GetBotId();
-  ss << "/botversions/";
-  ss << request.GetBotVersion();
-  ss << "/botlocales/";
-  ss << request.GetLocaleId();
-  ss << "/intents/";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/bots/");
+  uri.AddPathSegment(request.GetBotId());
+  uri.AddPathSegments("/botversions/");
+  uri.AddPathSegment(request.GetBotVersion());
+  uri.AddPathSegments("/botlocales/");
+  uri.AddPathSegment(request.GetLocaleId());
+  uri.AddPathSegments("/intents/");
   return CreateIntentOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PUT, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -389,17 +376,15 @@ CreateSlotOutcome LexModelsV2Client::CreateSlot(const CreateSlotRequest& request
     return CreateSlotOutcome(Aws::Client::AWSError<LexModelsV2Errors>(LexModelsV2Errors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [IntentId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/bots/";
-  ss << request.GetBotId();
-  ss << "/botversions/";
-  ss << request.GetBotVersion();
-  ss << "/botlocales/";
-  ss << request.GetLocaleId();
-  ss << "/intents/";
-  ss << request.GetIntentId();
-  ss << "/slots/";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/bots/");
+  uri.AddPathSegment(request.GetBotId());
+  uri.AddPathSegments("/botversions/");
+  uri.AddPathSegment(request.GetBotVersion());
+  uri.AddPathSegments("/botlocales/");
+  uri.AddPathSegment(request.GetLocaleId());
+  uri.AddPathSegments("/intents/");
+  uri.AddPathSegment(request.GetIntentId());
+  uri.AddPathSegments("/slots/");
   return CreateSlotOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PUT, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -439,15 +424,13 @@ CreateSlotTypeOutcome LexModelsV2Client::CreateSlotType(const CreateSlotTypeRequ
     return CreateSlotTypeOutcome(Aws::Client::AWSError<LexModelsV2Errors>(LexModelsV2Errors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [LocaleId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/bots/";
-  ss << request.GetBotId();
-  ss << "/botversions/";
-  ss << request.GetBotVersion();
-  ss << "/botlocales/";
-  ss << request.GetLocaleId();
-  ss << "/slottypes/";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/bots/");
+  uri.AddPathSegment(request.GetBotId());
+  uri.AddPathSegments("/botversions/");
+  uri.AddPathSegment(request.GetBotVersion());
+  uri.AddPathSegments("/botlocales/");
+  uri.AddPathSegment(request.GetLocaleId());
+  uri.AddPathSegments("/slottypes/");
   return CreateSlotTypeOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PUT, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -477,11 +460,8 @@ DeleteBotOutcome LexModelsV2Client::DeleteBot(const DeleteBotRequest& request) c
     return DeleteBotOutcome(Aws::Client::AWSError<LexModelsV2Errors>(LexModelsV2Errors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [BotId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/bots/";
-  ss << request.GetBotId();
-  ss << "/";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/bots/");
+  uri.AddPathSegment(request.GetBotId());
   return DeleteBotOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_DELETE, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -516,13 +496,10 @@ DeleteBotAliasOutcome LexModelsV2Client::DeleteBotAlias(const DeleteBotAliasRequ
     return DeleteBotAliasOutcome(Aws::Client::AWSError<LexModelsV2Errors>(LexModelsV2Errors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [BotId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/bots/";
-  ss << request.GetBotId();
-  ss << "/botaliases/";
-  ss << request.GetBotAliasId();
-  ss << "/";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/bots/");
+  uri.AddPathSegment(request.GetBotId());
+  uri.AddPathSegments("/botaliases/");
+  uri.AddPathSegment(request.GetBotAliasId());
   return DeleteBotAliasOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_DELETE, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -562,15 +539,12 @@ DeleteBotLocaleOutcome LexModelsV2Client::DeleteBotLocale(const DeleteBotLocaleR
     return DeleteBotLocaleOutcome(Aws::Client::AWSError<LexModelsV2Errors>(LexModelsV2Errors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [LocaleId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/bots/";
-  ss << request.GetBotId();
-  ss << "/botversions/";
-  ss << request.GetBotVersion();
-  ss << "/botlocales/";
-  ss << request.GetLocaleId();
-  ss << "/";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/bots/");
+  uri.AddPathSegment(request.GetBotId());
+  uri.AddPathSegments("/botversions/");
+  uri.AddPathSegment(request.GetBotVersion());
+  uri.AddPathSegments("/botlocales/");
+  uri.AddPathSegment(request.GetLocaleId());
   return DeleteBotLocaleOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_DELETE, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -605,13 +579,10 @@ DeleteBotVersionOutcome LexModelsV2Client::DeleteBotVersion(const DeleteBotVersi
     return DeleteBotVersionOutcome(Aws::Client::AWSError<LexModelsV2Errors>(LexModelsV2Errors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [BotVersion]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/bots/";
-  ss << request.GetBotId();
-  ss << "/botversions/";
-  ss << request.GetBotVersion();
-  ss << "/";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/bots/");
+  uri.AddPathSegment(request.GetBotId());
+  uri.AddPathSegments("/botversions/");
+  uri.AddPathSegment(request.GetBotVersion());
   return DeleteBotVersionOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_DELETE, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -656,17 +627,14 @@ DeleteIntentOutcome LexModelsV2Client::DeleteIntent(const DeleteIntentRequest& r
     return DeleteIntentOutcome(Aws::Client::AWSError<LexModelsV2Errors>(LexModelsV2Errors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [LocaleId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/bots/";
-  ss << request.GetBotId();
-  ss << "/botversions/";
-  ss << request.GetBotVersion();
-  ss << "/botlocales/";
-  ss << request.GetLocaleId();
-  ss << "/intents/";
-  ss << request.GetIntentId();
-  ss << "/";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/bots/");
+  uri.AddPathSegment(request.GetBotId());
+  uri.AddPathSegments("/botversions/");
+  uri.AddPathSegment(request.GetBotVersion());
+  uri.AddPathSegments("/botlocales/");
+  uri.AddPathSegment(request.GetLocaleId());
+  uri.AddPathSegments("/intents/");
+  uri.AddPathSegment(request.GetIntentId());
   return DeleteIntentOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_DELETE, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -716,19 +684,16 @@ DeleteSlotOutcome LexModelsV2Client::DeleteSlot(const DeleteSlotRequest& request
     return DeleteSlotOutcome(Aws::Client::AWSError<LexModelsV2Errors>(LexModelsV2Errors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [IntentId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/bots/";
-  ss << request.GetBotId();
-  ss << "/botversions/";
-  ss << request.GetBotVersion();
-  ss << "/botlocales/";
-  ss << request.GetLocaleId();
-  ss << "/intents/";
-  ss << request.GetIntentId();
-  ss << "/slots/";
-  ss << request.GetSlotId();
-  ss << "/";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/bots/");
+  uri.AddPathSegment(request.GetBotId());
+  uri.AddPathSegments("/botversions/");
+  uri.AddPathSegment(request.GetBotVersion());
+  uri.AddPathSegments("/botlocales/");
+  uri.AddPathSegment(request.GetLocaleId());
+  uri.AddPathSegments("/intents/");
+  uri.AddPathSegment(request.GetIntentId());
+  uri.AddPathSegments("/slots/");
+  uri.AddPathSegment(request.GetSlotId());
   return DeleteSlotOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_DELETE, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -773,17 +738,14 @@ DeleteSlotTypeOutcome LexModelsV2Client::DeleteSlotType(const DeleteSlotTypeRequ
     return DeleteSlotTypeOutcome(Aws::Client::AWSError<LexModelsV2Errors>(LexModelsV2Errors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [LocaleId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/bots/";
-  ss << request.GetBotId();
-  ss << "/botversions/";
-  ss << request.GetBotVersion();
-  ss << "/botlocales/";
-  ss << request.GetLocaleId();
-  ss << "/slottypes/";
-  ss << request.GetSlotTypeId();
-  ss << "/";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/bots/");
+  uri.AddPathSegment(request.GetBotId());
+  uri.AddPathSegments("/botversions/");
+  uri.AddPathSegment(request.GetBotVersion());
+  uri.AddPathSegments("/botlocales/");
+  uri.AddPathSegment(request.GetLocaleId());
+  uri.AddPathSegments("/slottypes/");
+  uri.AddPathSegment(request.GetSlotTypeId());
   return DeleteSlotTypeOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_DELETE, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -813,11 +775,8 @@ DescribeBotOutcome LexModelsV2Client::DescribeBot(const DescribeBotRequest& requ
     return DescribeBotOutcome(Aws::Client::AWSError<LexModelsV2Errors>(LexModelsV2Errors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [BotId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/bots/";
-  ss << request.GetBotId();
-  ss << "/";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/bots/");
+  uri.AddPathSegment(request.GetBotId());
   return DescribeBotOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -852,13 +811,10 @@ DescribeBotAliasOutcome LexModelsV2Client::DescribeBotAlias(const DescribeBotAli
     return DescribeBotAliasOutcome(Aws::Client::AWSError<LexModelsV2Errors>(LexModelsV2Errors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [BotId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/bots/";
-  ss << request.GetBotId();
-  ss << "/botaliases/";
-  ss << request.GetBotAliasId();
-  ss << "/";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/bots/");
+  uri.AddPathSegment(request.GetBotId());
+  uri.AddPathSegments("/botaliases/");
+  uri.AddPathSegment(request.GetBotAliasId());
   return DescribeBotAliasOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -898,15 +854,12 @@ DescribeBotLocaleOutcome LexModelsV2Client::DescribeBotLocale(const DescribeBotL
     return DescribeBotLocaleOutcome(Aws::Client::AWSError<LexModelsV2Errors>(LexModelsV2Errors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [LocaleId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/bots/";
-  ss << request.GetBotId();
-  ss << "/botversions/";
-  ss << request.GetBotVersion();
-  ss << "/botlocales/";
-  ss << request.GetLocaleId();
-  ss << "/";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/bots/");
+  uri.AddPathSegment(request.GetBotId());
+  uri.AddPathSegments("/botversions/");
+  uri.AddPathSegment(request.GetBotVersion());
+  uri.AddPathSegments("/botlocales/");
+  uri.AddPathSegment(request.GetLocaleId());
   return DescribeBotLocaleOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -941,13 +894,10 @@ DescribeBotVersionOutcome LexModelsV2Client::DescribeBotVersion(const DescribeBo
     return DescribeBotVersionOutcome(Aws::Client::AWSError<LexModelsV2Errors>(LexModelsV2Errors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [BotVersion]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/bots/";
-  ss << request.GetBotId();
-  ss << "/botversions/";
-  ss << request.GetBotVersion();
-  ss << "/";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/bots/");
+  uri.AddPathSegment(request.GetBotId());
+  uri.AddPathSegments("/botversions/");
+  uri.AddPathSegment(request.GetBotVersion());
   return DescribeBotVersionOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -992,17 +942,14 @@ DescribeIntentOutcome LexModelsV2Client::DescribeIntent(const DescribeIntentRequ
     return DescribeIntentOutcome(Aws::Client::AWSError<LexModelsV2Errors>(LexModelsV2Errors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [LocaleId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/bots/";
-  ss << request.GetBotId();
-  ss << "/botversions/";
-  ss << request.GetBotVersion();
-  ss << "/botlocales/";
-  ss << request.GetLocaleId();
-  ss << "/intents/";
-  ss << request.GetIntentId();
-  ss << "/";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/bots/");
+  uri.AddPathSegment(request.GetBotId());
+  uri.AddPathSegments("/botversions/");
+  uri.AddPathSegment(request.GetBotVersion());
+  uri.AddPathSegments("/botlocales/");
+  uri.AddPathSegment(request.GetLocaleId());
+  uri.AddPathSegments("/intents/");
+  uri.AddPathSegment(request.GetIntentId());
   return DescribeIntentOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1052,19 +999,16 @@ DescribeSlotOutcome LexModelsV2Client::DescribeSlot(const DescribeSlotRequest& r
     return DescribeSlotOutcome(Aws::Client::AWSError<LexModelsV2Errors>(LexModelsV2Errors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [IntentId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/bots/";
-  ss << request.GetBotId();
-  ss << "/botversions/";
-  ss << request.GetBotVersion();
-  ss << "/botlocales/";
-  ss << request.GetLocaleId();
-  ss << "/intents/";
-  ss << request.GetIntentId();
-  ss << "/slots/";
-  ss << request.GetSlotId();
-  ss << "/";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/bots/");
+  uri.AddPathSegment(request.GetBotId());
+  uri.AddPathSegments("/botversions/");
+  uri.AddPathSegment(request.GetBotVersion());
+  uri.AddPathSegments("/botlocales/");
+  uri.AddPathSegment(request.GetLocaleId());
+  uri.AddPathSegments("/intents/");
+  uri.AddPathSegment(request.GetIntentId());
+  uri.AddPathSegments("/slots/");
+  uri.AddPathSegment(request.GetSlotId());
   return DescribeSlotOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1109,17 +1053,14 @@ DescribeSlotTypeOutcome LexModelsV2Client::DescribeSlotType(const DescribeSlotTy
     return DescribeSlotTypeOutcome(Aws::Client::AWSError<LexModelsV2Errors>(LexModelsV2Errors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [LocaleId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/bots/";
-  ss << request.GetBotId();
-  ss << "/botversions/";
-  ss << request.GetBotVersion();
-  ss << "/botlocales/";
-  ss << request.GetLocaleId();
-  ss << "/slottypes/";
-  ss << request.GetSlotTypeId();
-  ss << "/";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/bots/");
+  uri.AddPathSegment(request.GetBotId());
+  uri.AddPathSegments("/botversions/");
+  uri.AddPathSegment(request.GetBotVersion());
+  uri.AddPathSegments("/botlocales/");
+  uri.AddPathSegment(request.GetLocaleId());
+  uri.AddPathSegments("/slottypes/");
+  uri.AddPathSegment(request.GetSlotTypeId());
   return DescribeSlotTypeOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1149,11 +1090,9 @@ ListBotAliasesOutcome LexModelsV2Client::ListBotAliases(const ListBotAliasesRequ
     return ListBotAliasesOutcome(Aws::Client::AWSError<LexModelsV2Errors>(LexModelsV2Errors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [BotId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/bots/";
-  ss << request.GetBotId();
-  ss << "/botaliases/";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/bots/");
+  uri.AddPathSegment(request.GetBotId());
+  uri.AddPathSegments("/botaliases/");
   return ListBotAliasesOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1188,13 +1127,11 @@ ListBotLocalesOutcome LexModelsV2Client::ListBotLocales(const ListBotLocalesRequ
     return ListBotLocalesOutcome(Aws::Client::AWSError<LexModelsV2Errors>(LexModelsV2Errors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [BotVersion]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/bots/";
-  ss << request.GetBotId();
-  ss << "/botversions/";
-  ss << request.GetBotVersion();
-  ss << "/botlocales/";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/bots/");
+  uri.AddPathSegment(request.GetBotId());
+  uri.AddPathSegments("/botversions/");
+  uri.AddPathSegment(request.GetBotVersion());
+  uri.AddPathSegments("/botlocales/");
   return ListBotLocalesOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1224,11 +1161,9 @@ ListBotVersionsOutcome LexModelsV2Client::ListBotVersions(const ListBotVersionsR
     return ListBotVersionsOutcome(Aws::Client::AWSError<LexModelsV2Errors>(LexModelsV2Errors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [BotId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/bots/";
-  ss << request.GetBotId();
-  ss << "/botversions/";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/bots/");
+  uri.AddPathSegment(request.GetBotId());
+  uri.AddPathSegments("/botversions/");
   return ListBotVersionsOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1253,9 +1188,7 @@ void LexModelsV2Client::ListBotVersionsAsyncHelper(const ListBotVersionsRequest&
 ListBotsOutcome LexModelsV2Client::ListBots(const ListBotsRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/bots/";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/bots/");
   return ListBotsOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1285,11 +1218,9 @@ ListBuiltInIntentsOutcome LexModelsV2Client::ListBuiltInIntents(const ListBuiltI
     return ListBuiltInIntentsOutcome(Aws::Client::AWSError<LexModelsV2Errors>(LexModelsV2Errors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [LocaleId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/builtins/locales/";
-  ss << request.GetLocaleId();
-  ss << "/intents/";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/builtins/locales/");
+  uri.AddPathSegment(request.GetLocaleId());
+  uri.AddPathSegments("/intents/");
   return ListBuiltInIntentsOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1319,11 +1250,9 @@ ListBuiltInSlotTypesOutcome LexModelsV2Client::ListBuiltInSlotTypes(const ListBu
     return ListBuiltInSlotTypesOutcome(Aws::Client::AWSError<LexModelsV2Errors>(LexModelsV2Errors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [LocaleId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/builtins/locales/";
-  ss << request.GetLocaleId();
-  ss << "/slottypes/";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/builtins/locales/");
+  uri.AddPathSegment(request.GetLocaleId());
+  uri.AddPathSegments("/slottypes/");
   return ListBuiltInSlotTypesOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1363,15 +1292,13 @@ ListIntentsOutcome LexModelsV2Client::ListIntents(const ListIntentsRequest& requ
     return ListIntentsOutcome(Aws::Client::AWSError<LexModelsV2Errors>(LexModelsV2Errors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [LocaleId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/bots/";
-  ss << request.GetBotId();
-  ss << "/botversions/";
-  ss << request.GetBotVersion();
-  ss << "/botlocales/";
-  ss << request.GetLocaleId();
-  ss << "/intents/";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/bots/");
+  uri.AddPathSegment(request.GetBotId());
+  uri.AddPathSegments("/botversions/");
+  uri.AddPathSegment(request.GetBotVersion());
+  uri.AddPathSegments("/botlocales/");
+  uri.AddPathSegment(request.GetLocaleId());
+  uri.AddPathSegments("/intents/");
   return ListIntentsOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1411,15 +1338,13 @@ ListSlotTypesOutcome LexModelsV2Client::ListSlotTypes(const ListSlotTypesRequest
     return ListSlotTypesOutcome(Aws::Client::AWSError<LexModelsV2Errors>(LexModelsV2Errors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [LocaleId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/bots/";
-  ss << request.GetBotId();
-  ss << "/botversions/";
-  ss << request.GetBotVersion();
-  ss << "/botlocales/";
-  ss << request.GetLocaleId();
-  ss << "/slottypes/";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/bots/");
+  uri.AddPathSegment(request.GetBotId());
+  uri.AddPathSegments("/botversions/");
+  uri.AddPathSegment(request.GetBotVersion());
+  uri.AddPathSegments("/botlocales/");
+  uri.AddPathSegment(request.GetLocaleId());
+  uri.AddPathSegments("/slottypes/");
   return ListSlotTypesOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1464,17 +1389,15 @@ ListSlotsOutcome LexModelsV2Client::ListSlots(const ListSlotsRequest& request) c
     return ListSlotsOutcome(Aws::Client::AWSError<LexModelsV2Errors>(LexModelsV2Errors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [IntentId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/bots/";
-  ss << request.GetBotId();
-  ss << "/botversions/";
-  ss << request.GetBotVersion();
-  ss << "/botlocales/";
-  ss << request.GetLocaleId();
-  ss << "/intents/";
-  ss << request.GetIntentId();
-  ss << "/slots/";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/bots/");
+  uri.AddPathSegment(request.GetBotId());
+  uri.AddPathSegments("/botversions/");
+  uri.AddPathSegment(request.GetBotVersion());
+  uri.AddPathSegments("/botlocales/");
+  uri.AddPathSegment(request.GetLocaleId());
+  uri.AddPathSegments("/intents/");
+  uri.AddPathSegment(request.GetIntentId());
+  uri.AddPathSegments("/slots/");
   return ListSlotsOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1504,10 +1427,8 @@ ListTagsForResourceOutcome LexModelsV2Client::ListTagsForResource(const ListTags
     return ListTagsForResourceOutcome(Aws::Client::AWSError<LexModelsV2Errors>(LexModelsV2Errors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [ResourceARN]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/tags/";
-  ss << request.GetResourceARN();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/tags/");
+  uri.AddPathSegment(request.GetResourceARN());
   return ListTagsForResourceOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1537,10 +1458,8 @@ TagResourceOutcome LexModelsV2Client::TagResource(const TagResourceRequest& requ
     return TagResourceOutcome(Aws::Client::AWSError<LexModelsV2Errors>(LexModelsV2Errors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [ResourceARN]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/tags/";
-  ss << request.GetResourceARN();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/tags/");
+  uri.AddPathSegment(request.GetResourceARN());
   return TagResourceOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1575,10 +1494,8 @@ UntagResourceOutcome LexModelsV2Client::UntagResource(const UntagResourceRequest
     return UntagResourceOutcome(Aws::Client::AWSError<LexModelsV2Errors>(LexModelsV2Errors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [TagKeys]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/tags/";
-  ss << request.GetResourceARN();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/tags/");
+  uri.AddPathSegment(request.GetResourceARN());
   return UntagResourceOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_DELETE, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1608,11 +1525,8 @@ UpdateBotOutcome LexModelsV2Client::UpdateBot(const UpdateBotRequest& request) c
     return UpdateBotOutcome(Aws::Client::AWSError<LexModelsV2Errors>(LexModelsV2Errors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [BotId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/bots/";
-  ss << request.GetBotId();
-  ss << "/";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/bots/");
+  uri.AddPathSegment(request.GetBotId());
   return UpdateBotOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PUT, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1647,13 +1561,10 @@ UpdateBotAliasOutcome LexModelsV2Client::UpdateBotAlias(const UpdateBotAliasRequ
     return UpdateBotAliasOutcome(Aws::Client::AWSError<LexModelsV2Errors>(LexModelsV2Errors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [BotId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/bots/";
-  ss << request.GetBotId();
-  ss << "/botaliases/";
-  ss << request.GetBotAliasId();
-  ss << "/";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/bots/");
+  uri.AddPathSegment(request.GetBotId());
+  uri.AddPathSegments("/botaliases/");
+  uri.AddPathSegment(request.GetBotAliasId());
   return UpdateBotAliasOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PUT, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1693,15 +1604,12 @@ UpdateBotLocaleOutcome LexModelsV2Client::UpdateBotLocale(const UpdateBotLocaleR
     return UpdateBotLocaleOutcome(Aws::Client::AWSError<LexModelsV2Errors>(LexModelsV2Errors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [LocaleId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/bots/";
-  ss << request.GetBotId();
-  ss << "/botversions/";
-  ss << request.GetBotVersion();
-  ss << "/botlocales/";
-  ss << request.GetLocaleId();
-  ss << "/";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/bots/");
+  uri.AddPathSegment(request.GetBotId());
+  uri.AddPathSegments("/botversions/");
+  uri.AddPathSegment(request.GetBotVersion());
+  uri.AddPathSegments("/botlocales/");
+  uri.AddPathSegment(request.GetLocaleId());
   return UpdateBotLocaleOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PUT, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1746,17 +1654,14 @@ UpdateIntentOutcome LexModelsV2Client::UpdateIntent(const UpdateIntentRequest& r
     return UpdateIntentOutcome(Aws::Client::AWSError<LexModelsV2Errors>(LexModelsV2Errors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [LocaleId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/bots/";
-  ss << request.GetBotId();
-  ss << "/botversions/";
-  ss << request.GetBotVersion();
-  ss << "/botlocales/";
-  ss << request.GetLocaleId();
-  ss << "/intents/";
-  ss << request.GetIntentId();
-  ss << "/";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/bots/");
+  uri.AddPathSegment(request.GetBotId());
+  uri.AddPathSegments("/botversions/");
+  uri.AddPathSegment(request.GetBotVersion());
+  uri.AddPathSegments("/botlocales/");
+  uri.AddPathSegment(request.GetLocaleId());
+  uri.AddPathSegments("/intents/");
+  uri.AddPathSegment(request.GetIntentId());
   return UpdateIntentOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PUT, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1806,19 +1711,16 @@ UpdateSlotOutcome LexModelsV2Client::UpdateSlot(const UpdateSlotRequest& request
     return UpdateSlotOutcome(Aws::Client::AWSError<LexModelsV2Errors>(LexModelsV2Errors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [IntentId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/bots/";
-  ss << request.GetBotId();
-  ss << "/botversions/";
-  ss << request.GetBotVersion();
-  ss << "/botlocales/";
-  ss << request.GetLocaleId();
-  ss << "/intents/";
-  ss << request.GetIntentId();
-  ss << "/slots/";
-  ss << request.GetSlotId();
-  ss << "/";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/bots/");
+  uri.AddPathSegment(request.GetBotId());
+  uri.AddPathSegments("/botversions/");
+  uri.AddPathSegment(request.GetBotVersion());
+  uri.AddPathSegments("/botlocales/");
+  uri.AddPathSegment(request.GetLocaleId());
+  uri.AddPathSegments("/intents/");
+  uri.AddPathSegment(request.GetIntentId());
+  uri.AddPathSegments("/slots/");
+  uri.AddPathSegment(request.GetSlotId());
   return UpdateSlotOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PUT, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -1863,17 +1765,14 @@ UpdateSlotTypeOutcome LexModelsV2Client::UpdateSlotType(const UpdateSlotTypeRequ
     return UpdateSlotTypeOutcome(Aws::Client::AWSError<LexModelsV2Errors>(LexModelsV2Errors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [LocaleId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/bots/";
-  ss << request.GetBotId();
-  ss << "/botversions/";
-  ss << request.GetBotVersion();
-  ss << "/botlocales/";
-  ss << request.GetLocaleId();
-  ss << "/slottypes/";
-  ss << request.GetSlotTypeId();
-  ss << "/";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/bots/");
+  uri.AddPathSegment(request.GetBotId());
+  uri.AddPathSegments("/botversions/");
+  uri.AddPathSegment(request.GetBotVersion());
+  uri.AddPathSegments("/botlocales/");
+  uri.AddPathSegment(request.GetLocaleId());
+  uri.AddPathSegments("/slottypes/");
+  uri.AddPathSegment(request.GetSlotTypeId());
   return UpdateSlotTypeOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PUT, Aws::Auth::SIGV4_SIGNER));
 }
 

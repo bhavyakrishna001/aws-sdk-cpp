@@ -113,9 +113,7 @@ void IoTEventsClient::OverrideEndpoint(const Aws::String& endpoint)
 CreateDetectorModelOutcome IoTEventsClient::CreateDetectorModel(const CreateDetectorModelRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/detector-models";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/detector-models");
   return CreateDetectorModelOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -140,9 +138,7 @@ void IoTEventsClient::CreateDetectorModelAsyncHelper(const CreateDetectorModelRe
 CreateInputOutcome IoTEventsClient::CreateInput(const CreateInputRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/inputs";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/inputs");
   return CreateInputOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -172,10 +168,8 @@ DeleteDetectorModelOutcome IoTEventsClient::DeleteDetectorModel(const DeleteDete
     return DeleteDetectorModelOutcome(Aws::Client::AWSError<IoTEventsErrors>(IoTEventsErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [DetectorModelName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/detector-models/";
-  ss << request.GetDetectorModelName();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/detector-models/");
+  uri.AddPathSegment(request.GetDetectorModelName());
   return DeleteDetectorModelOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_DELETE, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -205,10 +199,8 @@ DeleteInputOutcome IoTEventsClient::DeleteInput(const DeleteInputRequest& reques
     return DeleteInputOutcome(Aws::Client::AWSError<IoTEventsErrors>(IoTEventsErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [InputName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/inputs/";
-  ss << request.GetInputName();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/inputs/");
+  uri.AddPathSegment(request.GetInputName());
   return DeleteInputOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_DELETE, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -238,10 +230,8 @@ DescribeDetectorModelOutcome IoTEventsClient::DescribeDetectorModel(const Descri
     return DescribeDetectorModelOutcome(Aws::Client::AWSError<IoTEventsErrors>(IoTEventsErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [DetectorModelName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/detector-models/";
-  ss << request.GetDetectorModelName();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/detector-models/");
+  uri.AddPathSegment(request.GetDetectorModelName());
   return DescribeDetectorModelOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -271,10 +261,8 @@ DescribeInputOutcome IoTEventsClient::DescribeInput(const DescribeInputRequest& 
     return DescribeInputOutcome(Aws::Client::AWSError<IoTEventsErrors>(IoTEventsErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [InputName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/inputs/";
-  ss << request.GetInputName();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/inputs/");
+  uri.AddPathSegment(request.GetInputName());
   return DescribeInputOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -299,9 +287,7 @@ void IoTEventsClient::DescribeInputAsyncHelper(const DescribeInputRequest& reque
 DescribeLoggingOptionsOutcome IoTEventsClient::DescribeLoggingOptions(const DescribeLoggingOptionsRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/logging";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/logging");
   return DescribeLoggingOptionsOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -331,11 +317,9 @@ ListDetectorModelVersionsOutcome IoTEventsClient::ListDetectorModelVersions(cons
     return ListDetectorModelVersionsOutcome(Aws::Client::AWSError<IoTEventsErrors>(IoTEventsErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [DetectorModelName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/detector-models/";
-  ss << request.GetDetectorModelName();
-  ss << "/versions";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/detector-models/");
+  uri.AddPathSegment(request.GetDetectorModelName());
+  uri.AddPathSegments("/versions");
   return ListDetectorModelVersionsOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -360,9 +344,7 @@ void IoTEventsClient::ListDetectorModelVersionsAsyncHelper(const ListDetectorMod
 ListDetectorModelsOutcome IoTEventsClient::ListDetectorModels(const ListDetectorModelsRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/detector-models";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/detector-models");
   return ListDetectorModelsOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -387,9 +369,7 @@ void IoTEventsClient::ListDetectorModelsAsyncHelper(const ListDetectorModelsRequ
 ListInputsOutcome IoTEventsClient::ListInputs(const ListInputsRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/inputs";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/inputs");
   return ListInputsOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -419,9 +399,7 @@ ListTagsForResourceOutcome IoTEventsClient::ListTagsForResource(const ListTagsFo
     return ListTagsForResourceOutcome(Aws::Client::AWSError<IoTEventsErrors>(IoTEventsErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [ResourceArn]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/tags";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/tags");
   return ListTagsForResourceOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -446,9 +424,7 @@ void IoTEventsClient::ListTagsForResourceAsyncHelper(const ListTagsForResourceRe
 PutLoggingOptionsOutcome IoTEventsClient::PutLoggingOptions(const PutLoggingOptionsRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/logging";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/logging");
   return PutLoggingOptionsOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PUT, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -478,9 +454,7 @@ TagResourceOutcome IoTEventsClient::TagResource(const TagResourceRequest& reques
     return TagResourceOutcome(Aws::Client::AWSError<IoTEventsErrors>(IoTEventsErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [ResourceArn]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/tags";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/tags");
   return TagResourceOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -515,9 +489,7 @@ UntagResourceOutcome IoTEventsClient::UntagResource(const UntagResourceRequest& 
     return UntagResourceOutcome(Aws::Client::AWSError<IoTEventsErrors>(IoTEventsErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [TagKeys]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/tags";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/tags");
   return UntagResourceOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_DELETE, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -547,10 +519,8 @@ UpdateDetectorModelOutcome IoTEventsClient::UpdateDetectorModel(const UpdateDete
     return UpdateDetectorModelOutcome(Aws::Client::AWSError<IoTEventsErrors>(IoTEventsErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [DetectorModelName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/detector-models/";
-  ss << request.GetDetectorModelName();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/detector-models/");
+  uri.AddPathSegment(request.GetDetectorModelName());
   return UpdateDetectorModelOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -580,10 +550,8 @@ UpdateInputOutcome IoTEventsClient::UpdateInput(const UpdateInputRequest& reques
     return UpdateInputOutcome(Aws::Client::AWSError<IoTEventsErrors>(IoTEventsErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [InputName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/inputs/";
-  ss << request.GetInputName();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/inputs/");
+  uri.AddPathSegment(request.GetInputName());
   return UpdateInputOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PUT, Aws::Auth::SIGV4_SIGNER));
 }
 

@@ -5,8 +5,6 @@
 
 #include <aws/core/http/URI.h>
 
-#include <aws/core/utils/StringUtils.h>
-#include <aws/core/utils/memory/stl/AWSStringStream.h>
 #include <aws/core/utils/memory/stl/AWSSet.h>
 
 #include <cstdlib>
@@ -258,14 +256,6 @@ void URI::SetPath(const Aws::String& value)
 {
     const Aws::Vector<Aws::String> pathParts = StringUtils::Split(value, '/');
     m_pathSegments = std::move(pathParts);
-}
-
-void URI::AddPathSegment(const Aws::String& pathSegment)
-{
-    Aws::String segment = pathSegment;
-    segment.erase(0, segment.find_first_not_of('/'));
-    segment.erase(segment.find_last_not_of('/') + 1);
-    m_pathSegments.push_back(segment);
 }
 
 //ugh, this isn't even part of the canonicalization spec. It is part of how our services have implemented their signers though....

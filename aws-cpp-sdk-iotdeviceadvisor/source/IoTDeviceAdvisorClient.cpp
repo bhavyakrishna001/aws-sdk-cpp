@@ -110,9 +110,7 @@ void IoTDeviceAdvisorClient::OverrideEndpoint(const Aws::String& endpoint)
 CreateSuiteDefinitionOutcome IoTDeviceAdvisorClient::CreateSuiteDefinition(const CreateSuiteDefinitionRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/suiteDefinitions";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/suiteDefinitions");
   return CreateSuiteDefinitionOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -142,10 +140,8 @@ DeleteSuiteDefinitionOutcome IoTDeviceAdvisorClient::DeleteSuiteDefinition(const
     return DeleteSuiteDefinitionOutcome(Aws::Client::AWSError<IoTDeviceAdvisorErrors>(IoTDeviceAdvisorErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [SuiteDefinitionId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/suiteDefinitions/";
-  ss << request.GetSuiteDefinitionId();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/suiteDefinitions/");
+  uri.AddPathSegment(request.GetSuiteDefinitionId());
   return DeleteSuiteDefinitionOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_DELETE, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -175,10 +171,8 @@ GetSuiteDefinitionOutcome IoTDeviceAdvisorClient::GetSuiteDefinition(const GetSu
     return GetSuiteDefinitionOutcome(Aws::Client::AWSError<IoTDeviceAdvisorErrors>(IoTDeviceAdvisorErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [SuiteDefinitionId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/suiteDefinitions/";
-  ss << request.GetSuiteDefinitionId();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/suiteDefinitions/");
+  uri.AddPathSegment(request.GetSuiteDefinitionId());
   return GetSuiteDefinitionOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -213,12 +207,10 @@ GetSuiteRunOutcome IoTDeviceAdvisorClient::GetSuiteRun(const GetSuiteRunRequest&
     return GetSuiteRunOutcome(Aws::Client::AWSError<IoTDeviceAdvisorErrors>(IoTDeviceAdvisorErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [SuiteRunId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/suiteDefinitions/";
-  ss << request.GetSuiteDefinitionId();
-  ss << "/suiteRuns/";
-  ss << request.GetSuiteRunId();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/suiteDefinitions/");
+  uri.AddPathSegment(request.GetSuiteDefinitionId());
+  uri.AddPathSegments("/suiteRuns/");
+  uri.AddPathSegment(request.GetSuiteRunId());
   return GetSuiteRunOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -253,13 +245,11 @@ GetSuiteRunReportOutcome IoTDeviceAdvisorClient::GetSuiteRunReport(const GetSuit
     return GetSuiteRunReportOutcome(Aws::Client::AWSError<IoTDeviceAdvisorErrors>(IoTDeviceAdvisorErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [SuiteRunId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/suiteDefinitions/";
-  ss << request.GetSuiteDefinitionId();
-  ss << "/suiteRuns/";
-  ss << request.GetSuiteRunId();
-  ss << "/report";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/suiteDefinitions/");
+  uri.AddPathSegment(request.GetSuiteDefinitionId());
+  uri.AddPathSegments("/suiteRuns/");
+  uri.AddPathSegment(request.GetSuiteRunId());
+  uri.AddPathSegments("/report");
   return GetSuiteRunReportOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -284,9 +274,7 @@ void IoTDeviceAdvisorClient::GetSuiteRunReportAsyncHelper(const GetSuiteRunRepor
 ListSuiteDefinitionsOutcome IoTDeviceAdvisorClient::ListSuiteDefinitions(const ListSuiteDefinitionsRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/suiteDefinitions";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/suiteDefinitions");
   return ListSuiteDefinitionsOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -311,9 +299,7 @@ void IoTDeviceAdvisorClient::ListSuiteDefinitionsAsyncHelper(const ListSuiteDefi
 ListSuiteRunsOutcome IoTDeviceAdvisorClient::ListSuiteRuns(const ListSuiteRunsRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/suiteRuns";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/suiteRuns");
   return ListSuiteRunsOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -343,10 +329,8 @@ ListTagsForResourceOutcome IoTDeviceAdvisorClient::ListTagsForResource(const Lis
     return ListTagsForResourceOutcome(Aws::Client::AWSError<IoTDeviceAdvisorErrors>(IoTDeviceAdvisorErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [ResourceArn]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/tags/";
-  ss << request.GetResourceArn();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/tags/");
+  uri.AddPathSegment(request.GetResourceArn());
   return ListTagsForResourceOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -371,9 +355,7 @@ void IoTDeviceAdvisorClient::ListTagsForResourceAsyncHelper(const ListTagsForRes
 ListTestCasesOutcome IoTDeviceAdvisorClient::ListTestCases(const ListTestCasesRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/testCases";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/testCases");
   return ListTestCasesOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -403,11 +385,9 @@ StartSuiteRunOutcome IoTDeviceAdvisorClient::StartSuiteRun(const StartSuiteRunRe
     return StartSuiteRunOutcome(Aws::Client::AWSError<IoTDeviceAdvisorErrors>(IoTDeviceAdvisorErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [SuiteDefinitionId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/suiteDefinitions/";
-  ss << request.GetSuiteDefinitionId();
-  ss << "/suiteRuns";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/suiteDefinitions/");
+  uri.AddPathSegment(request.GetSuiteDefinitionId());
+  uri.AddPathSegments("/suiteRuns");
   return StartSuiteRunOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -437,10 +417,8 @@ TagResourceOutcome IoTDeviceAdvisorClient::TagResource(const TagResourceRequest&
     return TagResourceOutcome(Aws::Client::AWSError<IoTDeviceAdvisorErrors>(IoTDeviceAdvisorErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [ResourceArn]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/tags/";
-  ss << request.GetResourceArn();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/tags/");
+  uri.AddPathSegment(request.GetResourceArn());
   return TagResourceOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -475,10 +453,8 @@ UntagResourceOutcome IoTDeviceAdvisorClient::UntagResource(const UntagResourceRe
     return UntagResourceOutcome(Aws::Client::AWSError<IoTDeviceAdvisorErrors>(IoTDeviceAdvisorErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [TagKeys]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/tags/";
-  ss << request.GetResourceArn();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/tags/");
+  uri.AddPathSegment(request.GetResourceArn());
   return UntagResourceOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_DELETE, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -508,10 +484,8 @@ UpdateSuiteDefinitionOutcome IoTDeviceAdvisorClient::UpdateSuiteDefinition(const
     return UpdateSuiteDefinitionOutcome(Aws::Client::AWSError<IoTDeviceAdvisorErrors>(IoTDeviceAdvisorErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [SuiteDefinitionId]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/suiteDefinitions/";
-  ss << request.GetSuiteDefinitionId();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/suiteDefinitions/");
+  uri.AddPathSegment(request.GetSuiteDefinitionId());
   return UpdateSuiteDefinitionOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PATCH, Aws::Auth::SIGV4_SIGNER));
 }
 

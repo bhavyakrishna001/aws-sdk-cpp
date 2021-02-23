@@ -116,9 +116,7 @@ void AccessAnalyzerClient::OverrideEndpoint(const Aws::String& endpoint)
 ApplyArchiveRuleOutcome AccessAnalyzerClient::ApplyArchiveRule(const ApplyArchiveRuleRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/archive-rule";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/archive-rule");
   return ApplyArchiveRuleOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PUT, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -143,9 +141,7 @@ void AccessAnalyzerClient::ApplyArchiveRuleAsyncHelper(const ApplyArchiveRuleReq
 CreateAnalyzerOutcome AccessAnalyzerClient::CreateAnalyzer(const CreateAnalyzerRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/analyzer";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/analyzer");
   return CreateAnalyzerOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PUT, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -175,11 +171,9 @@ CreateArchiveRuleOutcome AccessAnalyzerClient::CreateArchiveRule(const CreateArc
     return CreateArchiveRuleOutcome(Aws::Client::AWSError<AccessAnalyzerErrors>(AccessAnalyzerErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [AnalyzerName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/analyzer/";
-  ss << request.GetAnalyzerName();
-  ss << "/archive-rule";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/analyzer/");
+  uri.AddPathSegment(request.GetAnalyzerName());
+  uri.AddPathSegments("/archive-rule");
   return CreateArchiveRuleOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PUT, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -209,10 +203,8 @@ DeleteAnalyzerOutcome AccessAnalyzerClient::DeleteAnalyzer(const DeleteAnalyzerR
     return DeleteAnalyzerOutcome(Aws::Client::AWSError<AccessAnalyzerErrors>(AccessAnalyzerErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [AnalyzerName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/analyzer/";
-  ss << request.GetAnalyzerName();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/analyzer/");
+  uri.AddPathSegment(request.GetAnalyzerName());
   return DeleteAnalyzerOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_DELETE, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -247,12 +239,10 @@ DeleteArchiveRuleOutcome AccessAnalyzerClient::DeleteArchiveRule(const DeleteArc
     return DeleteArchiveRuleOutcome(Aws::Client::AWSError<AccessAnalyzerErrors>(AccessAnalyzerErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [RuleName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/analyzer/";
-  ss << request.GetAnalyzerName();
-  ss << "/archive-rule/";
-  ss << request.GetRuleName();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/analyzer/");
+  uri.AddPathSegment(request.GetAnalyzerName());
+  uri.AddPathSegments("/archive-rule/");
+  uri.AddPathSegment(request.GetRuleName());
   return DeleteArchiveRuleOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_DELETE, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -287,9 +277,7 @@ GetAnalyzedResourceOutcome AccessAnalyzerClient::GetAnalyzedResource(const GetAn
     return GetAnalyzedResourceOutcome(Aws::Client::AWSError<AccessAnalyzerErrors>(AccessAnalyzerErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [ResourceArn]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/analyzed-resource";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/analyzed-resource");
   return GetAnalyzedResourceOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -319,10 +307,8 @@ GetAnalyzerOutcome AccessAnalyzerClient::GetAnalyzer(const GetAnalyzerRequest& r
     return GetAnalyzerOutcome(Aws::Client::AWSError<AccessAnalyzerErrors>(AccessAnalyzerErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [AnalyzerName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/analyzer/";
-  ss << request.GetAnalyzerName();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/analyzer/");
+  uri.AddPathSegment(request.GetAnalyzerName());
   return GetAnalyzerOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -357,12 +343,10 @@ GetArchiveRuleOutcome AccessAnalyzerClient::GetArchiveRule(const GetArchiveRuleR
     return GetArchiveRuleOutcome(Aws::Client::AWSError<AccessAnalyzerErrors>(AccessAnalyzerErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [RuleName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/analyzer/";
-  ss << request.GetAnalyzerName();
-  ss << "/archive-rule/";
-  ss << request.GetRuleName();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/analyzer/");
+  uri.AddPathSegment(request.GetAnalyzerName());
+  uri.AddPathSegments("/archive-rule/");
+  uri.AddPathSegment(request.GetRuleName());
   return GetArchiveRuleOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -397,10 +381,8 @@ GetFindingOutcome AccessAnalyzerClient::GetFinding(const GetFindingRequest& requ
     return GetFindingOutcome(Aws::Client::AWSError<AccessAnalyzerErrors>(AccessAnalyzerErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [Id]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/finding/";
-  ss << request.GetId();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/finding/");
+  uri.AddPathSegment(request.GetId());
   return GetFindingOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -425,9 +407,7 @@ void AccessAnalyzerClient::GetFindingAsyncHelper(const GetFindingRequest& reques
 ListAnalyzedResourcesOutcome AccessAnalyzerClient::ListAnalyzedResources(const ListAnalyzedResourcesRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/analyzed-resource";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/analyzed-resource");
   return ListAnalyzedResourcesOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -452,9 +432,7 @@ void AccessAnalyzerClient::ListAnalyzedResourcesAsyncHelper(const ListAnalyzedRe
 ListAnalyzersOutcome AccessAnalyzerClient::ListAnalyzers(const ListAnalyzersRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/analyzer";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/analyzer");
   return ListAnalyzersOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -484,11 +462,9 @@ ListArchiveRulesOutcome AccessAnalyzerClient::ListArchiveRules(const ListArchive
     return ListArchiveRulesOutcome(Aws::Client::AWSError<AccessAnalyzerErrors>(AccessAnalyzerErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [AnalyzerName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/analyzer/";
-  ss << request.GetAnalyzerName();
-  ss << "/archive-rule";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/analyzer/");
+  uri.AddPathSegment(request.GetAnalyzerName());
+  uri.AddPathSegments("/archive-rule");
   return ListArchiveRulesOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -513,9 +489,7 @@ void AccessAnalyzerClient::ListArchiveRulesAsyncHelper(const ListArchiveRulesReq
 ListFindingsOutcome AccessAnalyzerClient::ListFindings(const ListFindingsRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/finding";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/finding");
   return ListFindingsOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -545,10 +519,8 @@ ListTagsForResourceOutcome AccessAnalyzerClient::ListTagsForResource(const ListT
     return ListTagsForResourceOutcome(Aws::Client::AWSError<AccessAnalyzerErrors>(AccessAnalyzerErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [ResourceArn]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/tags/";
-  ss << request.GetResourceArn();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/tags/");
+  uri.AddPathSegment(request.GetResourceArn());
   return ListTagsForResourceOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_GET, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -573,9 +545,7 @@ void AccessAnalyzerClient::ListTagsForResourceAsyncHelper(const ListTagsForResou
 StartResourceScanOutcome AccessAnalyzerClient::StartResourceScan(const StartResourceScanRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/resource/scan";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/resource/scan");
   return StartResourceScanOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -605,10 +575,8 @@ TagResourceOutcome AccessAnalyzerClient::TagResource(const TagResourceRequest& r
     return TagResourceOutcome(Aws::Client::AWSError<AccessAnalyzerErrors>(AccessAnalyzerErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [ResourceArn]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/tags/";
-  ss << request.GetResourceArn();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/tags/");
+  uri.AddPathSegment(request.GetResourceArn());
   return TagResourceOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_POST, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -643,10 +611,8 @@ UntagResourceOutcome AccessAnalyzerClient::UntagResource(const UntagResourceRequ
     return UntagResourceOutcome(Aws::Client::AWSError<AccessAnalyzerErrors>(AccessAnalyzerErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [TagKeys]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/tags/";
-  ss << request.GetResourceArn();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/tags/");
+  uri.AddPathSegment(request.GetResourceArn());
   return UntagResourceOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_DELETE, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -681,12 +647,10 @@ UpdateArchiveRuleOutcome AccessAnalyzerClient::UpdateArchiveRule(const UpdateArc
     return UpdateArchiveRuleOutcome(Aws::Client::AWSError<AccessAnalyzerErrors>(AccessAnalyzerErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [RuleName]", false));
   }
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/analyzer/";
-  ss << request.GetAnalyzerName();
-  ss << "/archive-rule/";
-  ss << request.GetRuleName();
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/analyzer/");
+  uri.AddPathSegment(request.GetAnalyzerName());
+  uri.AddPathSegments("/archive-rule/");
+  uri.AddPathSegment(request.GetRuleName());
   return UpdateArchiveRuleOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PUT, Aws::Auth::SIGV4_SIGNER));
 }
 
@@ -711,9 +675,7 @@ void AccessAnalyzerClient::UpdateArchiveRuleAsyncHelper(const UpdateArchiveRuleR
 UpdateFindingsOutcome AccessAnalyzerClient::UpdateFindings(const UpdateFindingsRequest& request) const
 {
   Aws::Http::URI uri = m_uri;
-  Aws::StringStream ss;
-  ss << "/finding";
-  uri.SetPath(uri.GetPath() + ss.str());
+  uri.AddPathSegments("/finding");
   return UpdateFindingsOutcome(MakeRequest(uri, request, Aws::Http::HttpMethod::HTTP_PUT, Aws::Auth::SIGV4_SIGNER));
 }
 

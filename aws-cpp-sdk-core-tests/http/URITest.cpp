@@ -62,6 +62,52 @@ TEST(URITest, TestSetPath)
     EXPECT_EQ(path, uri.GetPath());
 }
 
+TEST(URITest, TestAddPathSegments)
+{
+    URI uri;
+
+    uri.AddPathSegment("//");
+    EXPECT_STREQ("/", uri.GetPath().c_str());
+    EXPECT_STREQ("/", uri.GetURLEncodedPath().c_str());
+
+    uri.SetPath("");
+    uri.AddPathSegment("/path/");
+    EXPECT_STREQ("/path", uri.GetPath().c_str());
+    EXPECT_STREQ("/path", uri.GetURLEncodedPath().c_str());
+
+    uri.SetPath("");
+    uri.AddPathSegment("/path/");
+    uri.AddPathSegment("to");
+    uri.AddPathSegment("/some");
+    uri.AddPathSegment("resource/");
+    EXPECT_STREQ("/path/to/some/resource", uri.GetPath().c_str());
+    EXPECT_STREQ("/path/to/some/resource", uri.GetURLEncodedPath().c_str());
+
+    uri.SetPath("");
+    uri.AddPathSegment("/int");
+    uri.AddPathSegment(10);
+    uri.AddPathSegment("float");
+    uri.AddPathSegment(12.34);
+    EXPECT_STREQ("/int/10/float/12.34", uri.GetPath().c_str());
+    EXPECT_STREQ("/int/10/float/12.34", uri.GetURLEncodedPath().c_str());
+
+    uri.SetPath("");
+    // There is no way to tell the differences between slashes in path segment and slashed as delimiters before encoding.
+    uri.AddPathSegment("/path/segment/");
+    EXPECT_STREQ("/path/segment", uri.GetPath().c_str());
+    EXPECT_STREQ("/path%2Fsegment", uri.GetURLEncodedPath().c_str());
+
+    uri.SetPath("");
+    uri.AddPathSegments("//");
+    EXPECT_STREQ("/", uri.GetPath().c_str());
+    EXPECT_STREQ("/", uri.GetURLEncodedPath().c_str());
+
+    uri.SetPath("");
+    uri.AddPathSegments("//path/to//resource/");
+    EXPECT_STREQ("/path/to/resource", uri.GetPath().c_str());
+    EXPECT_STREQ("/path/to/resource", uri.GetURLEncodedPath().c_str());
+}
+
 TEST(URITest, TestAddQueryStringParameters)
 {
     URI uri;

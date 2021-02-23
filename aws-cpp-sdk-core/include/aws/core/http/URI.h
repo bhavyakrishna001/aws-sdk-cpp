@@ -9,8 +9,7 @@
 
 #include <aws/core/http/Scheme.h>
 #include <aws/core/utils/memory/stl/AWSMap.h>
-#include <aws/core/utils/memory/stl/AWSString.h>
-#include <aws/core/utils/memory/stl/AWSVector.h>
+#include <aws/core/utils/StringUtils.h>
 
 #include <stdint.h>
 
@@ -110,7 +109,30 @@ namespace Aws
             /**
              * Add a path segment to the uri.
              */
-            void AddPathSegment(const Aws::String& pathSegment);
+            template<typename T>
+            inline void AddPathSegment(T pathSegment)
+            {
+                Aws::StringStream ss;
+                ss << pathSegment;
+                Aws::String segment = ss.str();
+                segment.erase(0, segment.find_first_not_of('/'));
+                segment.erase(segment.find_last_not_of('/') + 1);
+                m_pathSegments.push_back(segment);
+            }
+
+            /**
+             * Add path segments to the uri.
+             */
+            template<typename T>
+            inline void AddPathSegments(T pathSegments)
+            {
+                Aws::StringStream ss;
+                ss << pathSegments;
+                for (const auto& segment : Aws::Utils::StringUtils::Split(ss.str(), '/'))
+                {
+                    m_pathSegments.push_back(segment);
+                }
+            }
 
             /**
             * Gets the raw query string including the ?
